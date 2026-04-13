@@ -4,142 +4,281 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HyperU</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#1a1a1a;--border:#2a2a2a;--border2:#333;--text:#f0f0f0;--text2:#888;--text3:#555;--accent:#c8f135;--accent2:#a8d020;--danger:#ff4444;--radius:12px}
+:root{
+  --bg:#f8f7f4;--bg2:#ffffff;--bg3:#f0ede8;
+  --border:#e8e5df;--border2:#d1cec7;
+  --text:#1a1a2e;--text2:#6b7280;--text3:#9ca3af;
+  --blue:#2563a8;--blue-light:#eff6ff;--blue-mid:#bfdbfe;
+  --green:#5b7a3d;--green-light:#f0f7eb;--green-mid:#c6ddb0;
+  --amber:#d97706;--amber-light:#fffbeb;--amber-mid:#fde68a;
+  --danger:#dc2626;--danger-light:#fef2f2;
+  --purple:#7c3aed;--purple-light:#f5f3ff;
+  --radius:12px;--radius-sm:8px;
+}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 .app{display:flex;flex-direction:column;min-height:100vh}
-.screen{display:none;flex-direction:column;min-height:100vh;animation:fadeIn 0.3s ease}
+.screen{display:none;flex-direction:column;min-height:100vh;animation:fadeIn 0.25s ease}
 .screen.active{display:flex}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.header{padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border)}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px}
-.logo span{color:var(--accent)}
-.back-btn{background:none;border:0.5px solid var(--border2);color:var(--text2);padding:6px 14px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:13px;cursor:pointer;transition:all 0.15s}
-.back-btn:hover{border-color:var(--text2);color:var(--text)}
-.home-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;max-width:700px;margin:0 auto;width:100%}
-.home-eyebrow{font-size:12px;letter-spacing:3px;color:var(--accent);font-weight:500;margin-bottom:20px;text-transform:uppercase}
-.home-title{font-family:'Syne',sans-serif;font-size:52px;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:16px;text-align:center}
-.home-title span{color:var(--accent)}
-.home-sub{color:var(--text2);text-align:center;max-width:420px;margin-bottom:32px;font-size:16px}
-.guide-box{width:100%;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px}
-.guide-label{font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.guide-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.guide-field{background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;padding:10px 12px;cursor:pointer;transition:all 0.15s}
-.guide-field:hover{border-color:var(--accent)}
-.guide-field-label{font-size:10px;color:var(--accent);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:1px}
-.guide-field-ex{font-size:11px;color:var(--text2);line-height:1.4;font-style:italic}
-.topic-form{width:100%;margin-bottom:12px}
-.topic-input-wrap{position:relative;width:100%}
-.topic-input{width:100%;padding:18px 120px 18px 20px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color 0.15s}
-.topic-input::placeholder{color:var(--text3)}
-.topic-input:focus{border-color:var(--accent)}
-.topic-go{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--accent);color:#0a0a0a;border:none;padding:10px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
-.topic-go:hover{background:var(--accent2)}
-.input-hint{font-size:11px;color:var(--text3);margin-bottom:28px;padding-left:2px}
-.input-hint span{color:var(--text2)}
-.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
-.mode-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px 16px;cursor:pointer;transition:all 0.2s;text-align:left}
-.mode-card:hover,.mode-card.selected{border-color:var(--accent);background:var(--bg3)}
-.mode-card.selected .mode-name{color:var(--accent)}
-.mode-icon{font-size:22px;margin-bottom:10px;display:block}
-.mode-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px}
-.mode-desc{font-size:12px;color:var(--text2);line-height:1.4}
-.mode-tag{display:inline-block;font-size:10px;padding:2px 8px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:10px;color:var(--text2);margin-top:8px;font-weight:500}
-.suggested{width:100%;margin-top:32px}
-.suggested-label{font-size:11px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:12px}
-.suggested-pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{padding:8px 14px;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s}
-.pill:hover{border-color:var(--accent);color:var(--accent)}
-.calib-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;max-width:600px;margin:0 auto;width:100%}
-.h-avatar{width:56px;height:56px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#0a0a0a;margin-bottom:24px;flex-shrink:0}
-.calib-bubble{background:var(--bg2);border:0.5px solid var(--border2);border-radius:16px;border-top-left-radius:4px;padding:20px 24px;margin-bottom:24px;width:100%;line-height:1.7}
-.calib-input{width:100%;padding:14px 16px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:80px}
-.calib-input:focus{border-color:var(--accent)}
-.calib-input::placeholder{color:var(--text3)}
-.calib-send{width:100%;margin-top:12px;padding:14px;background:var(--accent);color:#0a0a0a;border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.15s}
-.calib-send:hover{background:var(--accent2)}
-.calib-send:disabled{opacity:0.4;cursor:not-allowed}
-.curriculum-body{flex:1;display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 65px)}
-.sidebar{background:var(--bg2);border-right:0.5px solid var(--border);padding:24px;overflow-y:auto}
-.sidebar-course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.3;margin-bottom:6px}
-.sidebar-meta{font-size:12px;color:var(--text2);margin-bottom:24px}
-.sidebar-label{font-size:10px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
-.module-list{display:flex;flex-direction:column;gap:4px}
-.module-item{padding:10px 12px;border-radius:8px;cursor:pointer;transition:all 0.15s;border:0.5px solid transparent;display:flex;align-items:flex-start;gap:10px}
-.module-item:hover{background:var(--bg3);border-color:var(--border)}
-.module-item.active{background:var(--bg3);border-color:var(--accent)}
-.module-item.active .module-num{color:var(--accent)}
-.module-num{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--text3);min-width:18px;margin-top:2px}
-.module-name{font-size:13px;color:var(--text2);line-height:1.4}
-.module-item.active .module-name{color:var(--text)}
-.sidebar-test-btn{width:100%;margin-top:24px;padding:12px;background:transparent;border:0.5px solid var(--accent);color:var(--accent);border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
-.sidebar-test-btn:hover{background:var(--accent);color:#0a0a0a}
-.lesson-area{display:flex;flex-direction:column;overflow:hidden}
-.lesson-content{flex:1;overflow-y:auto;padding:32px 40px;display:flex;flex-direction:column;gap:20px}
-.h-row{display:flex;align-items:flex-start;gap:14px}
-.h-avatar-sm{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#0a0a0a;flex-shrink:0;margin-top:2px}
-.message-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:16px 20px;max-width:100%;line-height:1.75;color:var(--text)}
-.message-bubble strong{color:var(--accent);font-weight:500}
-.message-bubble em{color:var(--text2);font-style:italic}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* HEADER */
+.header{padding:16px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);background:var(--bg2);flex-shrink:0}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
+.logo span{color:var(--blue)}
+.header-actions{display:flex;gap:8px;align-items:center}
+.btn-ghost{background:none;border:0.5px solid var(--border2);color:var(--text2);padding:5px 12px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;transition:all 0.15s}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-blue{background:var(--blue);color:white;border:none;padding:6px 14px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s}
+.btn-blue:hover{background:#1a4a8a}
+.btn-blue:disabled{opacity:0.4;cursor:not-allowed}
+.btn-amber{background:var(--amber);color:white;border:none;padding:6px 14px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s}
+.btn-amber:hover{background:#b45309}
+
+/* HOME */
+.home-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 24px 32px;max-width:700px;margin:0 auto;width:100%}
+.home-eyebrow{font-size:11px;letter-spacing:3px;color:var(--blue);font-weight:500;margin-bottom:14px;text-transform:uppercase}
+.home-title{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:10px;text-align:center}
+.home-title span{color:var(--blue)}
+.home-sub{color:var(--text2);text-align:center;max-width:400px;margin-bottom:32px;font-size:14px}
+
+/* ELO BADGE */
+.elo-badge{display:flex;align-items:center;gap:10px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:24px;width:100%}
+.elo-score{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--blue);letter-spacing:-1px}
+.elo-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+.elo-status{font-size:13px;font-weight:500;color:var(--text)}
+.elo-divider{width:0.5px;height:36px;background:var(--border);margin:0 4px}
+.elo-history{flex:1;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.elo-history-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.elo-history-pills{display:flex;gap:4px;flex-wrap:wrap}
+.elo-pill{font-size:10px;padding:2px 8px;background:var(--blue-light);color:var(--blue);border-radius:10px;font-weight:500}
+
+/* INPUTS */
+.calib-box{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.calib-box-label{font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;font-weight:500;margin-bottom:16px}
+.calib-field{margin-bottom:12px}
+.calib-field:last-of-type{margin-bottom:0}
+.calib-field-label{font-size:12px;font-weight:500;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.field-num{width:18px;height:18px;border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.field-input{width:100%;padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border-color 0.15s}
+.field-input:focus{border-color:var(--blue)}
+.field-input::placeholder{color:var(--text3)}
+
+/* WEB SEARCH TOGGLE */
+.search-toggle{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm);margin-top:14px;cursor:pointer;border:0.5px solid var(--border);transition:all 0.15s}
+.search-toggle.active{background:var(--amber-light);border-color:var(--amber-mid)}
+.toggle-dot{width:32px;height:18px;border-radius:9px;background:var(--border2);position:relative;transition:all 0.2s;flex-shrink:0}
+.toggle-dot::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:white;top:2px;left:2px;transition:all 0.2s}
+.search-toggle.active .toggle-dot{background:var(--amber)}
+.search-toggle.active .toggle-dot::after{left:16px}
+.toggle-label{font-size:12px;color:var(--text2);flex:1}
+.search-toggle.active .toggle-label{color:var(--amber)}
+.toggle-icon{font-size:14px}
+
+.calib-go{width:100%;margin-top:14px;padding:13px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.15s}
+.calib-go:hover{background:#1a4a8a}
+
+/* MODES */
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:24px}
+.mode-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 12px;cursor:pointer;transition:all 0.2s}
+.mode-card:hover,.mode-card.selected{border-color:var(--blue);background:var(--blue-light)}
+.mode-card.selected .mode-name{color:var(--blue)}
+.mode-icon{font-size:20px;margin-bottom:8px;display:block}
+.mode-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:3px;color:var(--text)}
+.mode-desc{font-size:11px;color:var(--text2);line-height:1.4}
+.mode-tag{display:inline-block;font-size:10px;padding:2px 8px;background:var(--bg3);border:0.5px solid var(--border);border-radius:10px;color:var(--text3);margin-top:6px}
+
+/* PILLS */
+.suggested-label{font-size:10px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:8px;width:100%}
+.pills{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.pill{padding:6px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2);cursor:pointer;transition:all 0.15s}
+.pill:hover{border-color:var(--blue);color:var(--blue)}
+
+/* GENERATING */
+.gen-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px}
+.gen-avatar{width:60px;height:60px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:white}
+.gen-msg{font-size:16px;font-weight:500;color:var(--text);text-align:center}
+.gen-sub{font-size:13px;color:var(--text2);text-align:center}
+.gen-dots{display:flex;gap:6px}
+.gen-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-mid);animation:genPulse 1.4s infinite}
+.gen-dot:nth-child(2){animation-delay:0.2s}
+.gen-dot:nth-child(3){animation-delay:0.4s}
+@keyframes genPulse{0%,80%,100%{opacity:0.3;transform:scale(0.8)}40%{opacity:1;transform:scale(1)}}
+
+/* CURRICULUM LAYOUT */
+.curriculum-body{flex:1;display:flex;overflow:hidden;min-height:0}
+.sidebar{width:256px;flex-shrink:0;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-top{padding:16px;border-bottom:0.5px solid var(--border)}
+.sidebar-course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.3;margin-bottom:3px;color:var(--text)}
+.sidebar-meta{font-size:11px;color:var(--text2);margin-bottom:10px}
+.progress-wrap{margin-bottom:0}
+.progress-top{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px}
+.progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.4s ease}
+.sidebar-mods{flex:1;overflow-y:auto;padding:10px}
+.sidebar-section-label{font-size:9px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;padding:4px;margin-bottom:6px;margin-top:8px}
+.sidebar-section-label:first-child{margin-top:0}
+.mod-item{display:flex;gap:8px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;border:0.5px solid transparent;transition:all 0.15s;margin-bottom:2px;align-items:flex-start}
+.mod-item:hover{background:var(--bg3)}
+.mod-item.active{background:var(--blue-light);border-color:var(--blue-mid)}
+.mod-item.active .mod-num{color:var(--blue)}
+.mod-item.active .mod-name{color:var(--blue)}
+.mod-item.completed .mod-check{display:flex}
+.mod-num{font-size:10px;font-weight:500;color:var(--text3);min-width:16px;margin-top:1px}
+.mod-name{font-size:12px;color:var(--text2);line-height:1.3;flex:1}
+.mod-check{display:none;width:14px;height:14px;border-radius:50%;background:var(--green-light);align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.mod-check::after{content:'✓';font-size:8px;color:var(--green)}
+.sidebar-bottom{padding:12px;border-top:0.5px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.sidebar-elo{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--blue-light);border-radius:var(--radius-sm)}
+.sidebar-elo-num{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--blue)}
+.sidebar-elo-label{font-size:10px;color:var(--blue);opacity:0.7}
+.test-btn{width:100%;padding:9px;background:transparent;border:0.5px solid var(--blue);color:var(--blue);border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s}
+.test-btn:hover{background:var(--blue);color:white}
+
+/* LESSON */
+.lesson-area{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg);overflow:hidden}
+.lesson-content{flex:1;overflow-y:auto;padding:24px 32px;display:flex;flex-direction:column;gap:14px}
+.mod-header{padding-bottom:12px;border-bottom:0.5px solid var(--border);margin-bottom:4px}
+.mod-header-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.mod-header-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+
+/* BRIEF CARD */
+.brief-card{background:var(--amber-light);border:0.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;line-height:1.6}
+.brief-card-label{font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.brief-card p{color:var(--text);margin-bottom:4px}
+.brief-card p:last-child{margin-bottom:0}
+
+/* MESSAGES */
+.h-row{display:flex;gap:10px;align-items:flex-start}
+.h-avatar-sm{width:28px;height:28px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:10px;color:white;flex-shrink:0;margin-top:2px}
+.msg-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:14px 18px;flex:1;line-height:1.75;color:var(--text);font-size:13px;position:relative}
+.msg-bubble strong{color:var(--blue);font-weight:500}
+.msg-bubble em{color:var(--green);font-style:italic}
+.msg-bubble .source-tag{display:inline-block;font-size:10px;padding:3px 8px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:10px;color:var(--text3);margin-top:8px}
+.aha-btn{position:absolute;top:10px;right:10px;background:none;border:0.5px solid var(--border);border-radius:20px;padding:3px 8px;font-size:10px;color:var(--text3);cursor:pointer;transition:all 0.15s}
+.aha-btn:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-light)}
+.aha-btn.marked{border-color:var(--amber);color:var(--amber);background:var(--amber-light)}
 .user-row{display:flex;justify-content:flex-end}
-.user-bubble{background:var(--bg3);border:0.5px solid var(--border2);border-radius:14px;border-top-right-radius:4px;padding:12px 16px;max-width:75%;color:var(--text2);line-height:1.6}
-.typing-wrap{display:flex;align-items:center;gap:6px;padding:16px 20px;background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;width:fit-content}
-.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
+.user-bubble{background:var(--blue-light);border:0.5px solid var(--blue-mid);border-radius:14px;border-top-right-radius:4px;padding:10px 14px;max-width:75%;color:var(--text2);font-size:13px;line-height:1.6}
+.typing-row{display:flex;gap:10px;align-items:flex-start}
+.typing-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:12px 16px;display:flex;gap:5px;align-items:center}
+.typing-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
 .typing-dot:nth-child(2){animation-delay:0.2s}
 .typing-dot:nth-child(3){animation-delay:0.4s}
 @keyframes blink{0%,80%,100%{opacity:0.3}40%{opacity:1}}
-.lesson-input-area{padding:16px 24px;border-top:0.5px solid var(--border);background:var(--bg);display:flex;gap:10px;align-items:flex-end}
-.lesson-input{flex:1;padding:12px 16px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);font-family:'Instrument Sans',sans-serif;font-size:14px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;max-height:120px;min-height:44px}
-.lesson-input:focus{border-color:var(--accent)}
+
+/* LESSON ACTIONS */
+.lesson-actions{padding:10px 20px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0}
+.next-btn{padding:9px 18px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+.next-btn:hover{background:#1a4a8a}
+.next-btn.test{background:var(--green);border-color:var(--green)}
+.next-btn.test:hover{background:#3d5229}
+.cmds{display:flex;gap:5px;flex-wrap:wrap;flex:1}
+.cmd{padding:5px 10px;background:transparent;border:0.5px solid var(--border2);border-radius:20px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s;font-family:'Instrument Sans',sans-serif;white-space:nowrap}
+.cmd:hover{border-color:var(--blue);color:var(--blue)}
+.cmd.lost{border-color:var(--danger);color:var(--danger)}
+.cmd.lost:hover{background:var(--danger-light)}
+.lesson-input-area{padding:10px 20px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;gap:8px;flex-shrink:0}
+.lesson-input{flex:1;padding:9px 12px;background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:38px;max-height:100px}
+.lesson-input:focus{border-color:var(--blue)}
 .lesson-input::placeholder{color:var(--text3)}
-.lesson-send{padding:12px 16px;background:var(--accent);color:#0a0a0a;border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s;white-space:nowrap;height:44px}
-.lesson-send:hover{background:var(--accent2)}
+.lesson-send{padding:9px 14px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:all 0.15s;flex-shrink:0}
+.lesson-send:hover{background:#1a4a8a}
 .lesson-send:disabled{opacity:0.4;cursor:not-allowed}
-.commands-row{padding:8px 24px;display:flex;gap:6px;flex-wrap:wrap;border-top:0.5px solid var(--border)}
-.cmd{padding:4px 10px;background:transparent;border:0.5px solid var(--border2);border-radius:12px;font-size:11px;color:var(--text3);cursor:pointer;transition:all 0.15s;font-family:'Instrument Sans',sans-serif}
-.cmd:hover{border-color:var(--text2);color:var(--text2)}
-.test-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 32px;max-width:680px;margin:0 auto;width:100%}
-.test-header{width:100%;margin-bottom:32px}
-.test-title{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;letter-spacing:-1px;margin-bottom:8px}
-.escalera{display:flex;gap:4px;align-items:flex-end;margin-bottom:8px}
-.escalon{width:20px;border-radius:3px;background:var(--border);transition:all 0.3s}
-.escalon.done{background:var(--accent)}
-.escalon.current{background:var(--accent);opacity:0.5;animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:0.9}}
-.test-meta{font-size:13px;color:var(--text2)}
-.test-meta span{color:var(--accent);font-weight:500}
-.fallos-row{display:flex;gap:6px;align-items:center;margin-top:8px}
-.fallo-dot{width:10px;height:10px;border-radius:50%;background:var(--border2);transition:all 0.3s}
+
+/* AHA PANEL */
+.aha-panel{background:var(--amber-light);border-left:3px solid var(--amber);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-top:8px}
+.aha-panel-label{font-size:10px;color:var(--amber);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.aha-item{font-size:12px;color:var(--text);line-height:1.5;padding:4px 0;border-bottom:0.5px solid var(--amber-mid)}
+.aha-item:last-child{border-bottom:none}
+
+/* TEST */
+.test-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px;max-width:680px;margin:0 auto;width:100%;overflow-y:auto}
+.test-header{width:100%;margin-bottom:20px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:18px}
+.test-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px;margin-bottom:4px;color:var(--text)}
+.test-cycle{font-size:11px;color:var(--text3);margin-bottom:14px}
+.escalera{display:flex;gap:2px;align-items:flex-end;margin-bottom:10px;flex-wrap:wrap;gap:3px}
+.escalon{border-radius:3px;background:var(--border2);transition:all 0.3s;flex-shrink:0}
+.escalon.done{background:var(--blue)}
+.escalon.current{background:var(--blue);opacity:0.5;animation:pulse 1s infinite}
+.escalon.beyond{background:var(--purple);opacity:0.3}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
+.test-stats{display:flex;gap:16px;margin-bottom:8px}
+.test-stat{font-size:12px;color:var(--text2)}
+.test-stat span{color:var(--blue);font-weight:500}
+.fallos-row{display:flex;gap:5px;align-items:center}
+.fallo-dot{width:9px;height:9px;border-radius:50%;background:var(--border2);transition:all 0.3s}
 .fallo-dot.active{background:var(--danger)}
-.fallos-label{font-size:12px;color:var(--text3);margin-left:4px}
-.test-chat{width:100%;flex:1;overflow-y:auto;margin-bottom:16px;display:flex;flex-direction:column;gap:16px}
-.test-input-area{width:100%;display:flex;gap:10px;align-items:flex-end}
-.test-input{flex:1;padding:14px 16px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:56px}
-.test-input:focus{border-color:var(--accent)}
+.fallos-label{font-size:11px;color:var(--text3);margin-left:4px}
+.test-chat{width:100%;overflow-y:auto;margin-bottom:14px;display:flex;flex-direction:column;gap:12px;min-height:240px;max-height:340px}
+.test-input-area{width:100%;display:flex;gap:8px}
+.test-input{flex:1;padding:11px 14px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:14px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:50px}
+.test-input:focus{border-color:var(--blue)}
 .test-input::placeholder{color:var(--text3)}
-.test-send{padding:14px 20px;background:var(--accent);color:#0a0a0a;border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.15s;height:56px}
-.test-send:hover{background:var(--accent2)}
+.test-send{padding:11px 18px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s}
+.test-send:hover{background:#1a4a8a}
 .test-send:disabled{opacity:0.4;cursor:not-allowed}
-.result-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;max-width:580px;margin:0 auto;width:100%;text-align:center}
-.score-circle{width:160px;height:160px;border-radius:50%;border:2px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 32px}
-.score-num{font-family:'Syne',sans-serif;font-weight:800;font-size:52px;color:var(--accent);line-height:1;letter-spacing:-2px}
-.score-max{font-size:13px;color:var(--text3);margin-top:2px}
-.result-status{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;letter-spacing:-1px;margin-bottom:8px}
-.result-status-sub{color:var(--text2);margin-bottom:32px;font-size:15px}
-.result-breakdown{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:24px;text-align:left}
-.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid var(--border)}
+
+/* RESULT */
+.result-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;max-width:580px;margin:0 auto;width:100%;text-align:center;overflow-y:auto}
+.result-elo{display:flex;align-items:baseline;gap:8px;justify-content:center;margin-bottom:6px}
+.result-elo-num{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;color:var(--blue);letter-spacing:-3px;line-height:1}
+.result-elo-delta{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--green);letter-spacing:-0.5px}
+.result-elo-label{font-size:12px;color:var(--text3);margin-bottom:6px}
+.result-status{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-1px;margin-bottom:4px;color:var(--text)}
+.result-sub{color:var(--text2);margin-bottom:24px;font-size:13px}
+.result-breakdown{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left}
+.breakdown-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:13px}
 .breakdown-row:last-child{border-bottom:none}
-.breakdown-label{font-size:13px;color:var(--text2)}
-.breakdown-val{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--text)}
-.result-actions{display:flex;gap:10px;width:100%}
-.result-btn{flex:1;padding:14px;border-radius:var(--radius);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.15s}
-.result-btn.primary{background:var(--accent);color:#0a0a0a;border:none}
-.result-btn.primary:hover{background:var(--accent2)}
+.breakdown-label{color:var(--text2)}
+.breakdown-val{font-weight:500;color:var(--text)}
+
+/* ADAPTIVE COURSE CARD */
+.adaptive-card{width:100%;background:var(--green-light);border:0.5px solid var(--green-mid);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left}
+.adaptive-label{font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.adaptive-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.adaptive-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px}
+.adaptive-mods{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.adaptive-mod{font-size:12px;color:var(--text);padding:6px 10px;background:var(--bg2);border-radius:var(--radius-sm);border:0.5px solid var(--border)}
+
+/* AHA SUMMARY */
+.aha-summary{width:100%;background:var(--amber-light);border:0.5px solid var(--amber-mid);border-radius:var(--radius);padding:14px;margin-bottom:16px;text-align:left}
+.aha-summary-label{font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+
+.result-actions{display:flex;gap:8px;width:100%;flex-wrap:wrap}
+.result-btn{flex:1;min-width:120px;padding:12px;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.result-btn.primary{background:var(--blue);color:white;border:none}
+.result-btn.primary:hover{background:#1a4a8a}
 .result-btn.secondary{background:transparent;border:0.5px solid var(--border2);color:var(--text2)}
 .result-btn.secondary:hover{border-color:var(--text2);color:var(--text)}
+.result-btn.green{background:var(--green);color:white;border:none}
+.result-btn.green:hover{background:#3d5229}
+
+/* SHARE CARD */
+.share-card{width:100%;background:var(--blue);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left;color:white}
+.share-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.share-logo{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;opacity:0.7}
+.share-score{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px}
+.share-topic{font-size:12px;opacity:0.7;margin-bottom:4px}
+.share-status{font-size:14px;font-weight:500}
+.share-btn{width:100%;padding:8px;background:rgba(255,255,255,0.2);border:0.5px solid rgba(255,255,255,0.3);color:white;border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;margin-top:10px;transition:all 0.15s}
+.share-btn:hover{background:rgba(255,255,255,0.3)}
+
+@media(max-width:640px){
+  .header{padding:12px 16px}
+  .home-title{font-size:30px}
+  .home-body{padding:28px 16px 24px}
+  .curriculum-body{flex-direction:column}
+  .sidebar{width:100%;border-right:none;border-bottom:0.5px solid var(--border);max-height:180px}
+  .sidebar-mods{flex-direction:row;overflow-x:auto;padding:8px}
+  .mod-item{min-width:110px;flex-shrink:0;margin-bottom:0;margin-right:4px}
+  .sidebar-section-label{display:none}
+  .lesson-content{padding:16px}
+  .lesson-actions{padding:8px 12px}
+}
 </style>
 </head>
 <body>
@@ -149,87 +288,87 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen active" id="screen-home">
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
-    <span style="font-size:13px;color:var(--text3)">Tu universidad personal</span>
+    <span style="font-size:12px;color:var(--text3)">Tu universidad personal</span>
   </div>
   <div class="home-body">
     <div class="home-eyebrow">powered by H</div>
     <div class="home-title">Aprende cualquier cosa.<br><span>En serio.</span></div>
-    <div class="home-sub">Dile a H qué quieres aprender y desde dónde arrancas.</div>
+    <div class="home-sub">Cuéntale a H qué quieres aprender y desde dónde arrancas.</div>
 
-    <div class="guide-box">
-      <div class="guide-label">Cómo escribir tu tema — mejor entrada = mejor curso</div>
-      <div class="guide-fields">
-        <div class="guide-field" onclick="insertGuide('nivel')">
-          <div class="guide-field-label">1. Tu nivel honesto</div>
-          <div class="guide-field-ex">Ej: "no sé nada", "sé lo básico", "algo he leído"</div>
-        </div>
-        <div class="guide-field" onclick="insertGuide('interes')">
-          <div class="guide-field-label">2. Por qué te interesa</div>
-          <div class="guide-field-ex">Ej: "para entender las noticias", "me afecta en mi negocio"</div>
-        </div>
-        <div class="guide-field" onclick="insertGuide('angulo')">
-          <div class="guide-field-label">3. El ángulo que más te llama</div>
-          <div class="guide-field-ex">Ej: "las decisiones detrás", "cómo aplica hoy"</div>
-        </div>
+    <div class="elo-badge" id="elo-badge" style="display:none">
+      <div>
+        <div class="elo-label">Score maestro</div>
+        <div class="elo-score" id="home-elo-score">0</div>
+      </div>
+      <div class="elo-divider"></div>
+      <div class="elo-history">
+        <div class="elo-history-label">Cursos completados</div>
+        <div class="elo-history-pills" id="elo-history-pills"></div>
       </div>
     </div>
 
-    <div class="topic-form">
-      <div class="topic-input-wrap">
-        <input class="topic-input" id="topic-input" placeholder="Ej: la guerra fría — sé lo básico, quiero entender el mundo de hoy, especialmente las decisiones detrás..." />
-        <button class="topic-go" onclick="goToCalib()">Aprender →</button>
+    <div class="calib-box">
+      <div class="calib-box-label">Dile a H sobre el tema</div>
+      <div class="calib-field">
+        <div class="calib-field-label"><span class="field-num">1</span>¿Qué quieres aprender?</div>
+        <input class="field-input" id="f-topic" placeholder="Ej: la guerra fría, geopolítica de Medio Oriente, IA generativa..." />
       </div>
+      <div class="calib-field">
+        <div class="calib-field-label"><span class="field-num">2</span>¿Qué tanto sabes del tema?</div>
+        <input class="field-input" id="f-nivel" placeholder="Ej: no sé nada, sé lo básico, algo he leído..." />
+      </div>
+      <div class="calib-field">
+        <div class="calib-field-label"><span class="field-num">3</span>¿Por qué te interesa y qué ángulo te llama?</div>
+        <input class="field-input" id="f-angulo" placeholder="Ej: entender las noticias, aplicarlo en inversiones, el lado humano..." />
+      </div>
+      <div class="search-toggle" id="search-toggle" onclick="toggleWebSearch()">
+        <div class="toggle-dot"></div>
+        <div class="toggle-label">🔍 Búsqueda web — fuentes verificadas en tiempo real</div>
+      </div>
+      <button class="calib-go" onclick="goGenerate()">Crear mi curso →</button>
     </div>
-    <div class="input-hint">Toca cada campo de arriba para ver ejemplos &nbsp;·&nbsp; <span>Enter para arrancar</span></div>
 
     <div class="mode-grid">
       <div class="mode-card selected" onclick="selectMode(this,'flash')">
         <span class="mode-icon">⚡</span>
         <div class="mode-name">Flash</div>
-        <div class="mode-desc">Lo esencial. Rápido y al punto.</div>
-        <span class="mode-tag">~20 min · 5 preguntas</span>
+        <div class="mode-desc">Lo esencial, rápido.</div>
+        <span class="mode-tag">3 módulos · 5 preg.</span>
       </div>
       <div class="mode-card" onclick="selectMode(this,'profundo')">
         <span class="mode-icon">🔬</span>
         <div class="mode-name">Profundo</div>
-        <div class="mode-desc">Con casos, ejemplos y estructura.</div>
-        <span class="mode-tag">~90 min · 10 preguntas</span>
+        <div class="mode-desc">Casos, estructura, analogías.</div>
+        <span class="mode-tag">6 módulos · 10 preg.</span>
       </div>
       <div class="mode-card" onclick="selectMode(this,'maestro')">
         <span class="mode-icon">🎓</span>
         <div class="mode-name">Maestro</div>
-        <div class="mode-desc">Dominio real. Múltiples sesiones.</div>
-        <span class="mode-tag">varios días · 15 preguntas</span>
+        <div class="mode-desc">Dominio infinito. Evoluciona.</div>
+        <span class="mode-tag">∞ módulos · test c/6</span>
       </div>
     </div>
 
-    <div class="suggested">
-      <div class="suggested-label">Temas sugeridos</div>
-      <div class="suggested-pills">
-        <div class="pill" onclick="setSuggest('Geopolítica de Medio Oriente — no sé mucho, quiero entender por qué importa hoy, especialmente el ángulo económico')">🌍 Geopolítica de Medio Oriente</div>
-        <div class="pill" onclick="setSuggest('Cómo funciona la inteligencia artificial — algo he leído, quiero entender el impacto en negocios e inversiones')">🤖 Cómo funciona la IA</div>
-        <div class="pill" onclick="setSuggest('La guerra fría — sé lo básico, me interesa entender las decisiones y cómo explica el mundo de hoy')">🏛️ La guerra fría</div>
-        <div class="pill" onclick="setSuggest('Finanzas corporativas — base contable, quiero aplicarlo a análisis de inversiones y family office')">📊 Finanzas corporativas</div>
-        <div class="pill" onclick="setSuggest('Psicología del comportamiento — curiosidad general, me llama el lado de toma de decisiones')">🧠 Psicología del comportamiento</div>
-        <div class="pill" onclick="setSuggest('Criptomonedas y blockchain — escéptico pero curioso, quiero entender si tiene valor real de inversión')">₿ Cripto y blockchain</div>
-      </div>
+    <div class="suggested-label">Temas sugeridos</div>
+    <div class="pills">
+      <div class="pill" onclick="setSuggest('Geopolítica de Medio Oriente','no sé mucho','entender por qué importa hoy, el ángulo económico y de inversiones')">🌍 Geopolítica de Medio Oriente</div>
+      <div class="pill" onclick="setSuggest('Cómo funciona la inteligencia artificial','algo he leído','impacto en negocios e inversiones, qué es real y qué es hype')">🤖 Cómo funciona la IA</div>
+      <div class="pill" onclick="setSuggest('La guerra fría','sé lo básico','entender las decisiones detrás y cómo explica el mundo de hoy')">🏛️ La guerra fría</div>
+      <div class="pill" onclick="setSuggest('Finanzas corporativas','base contable','análisis de inversiones y family office')">📊 Finanzas corporativas</div>
+      <div class="pill" onclick="setSuggest('Psicología del comportamiento humano','curiosidad general','toma de decisiones y sesgos cognitivos en negocios')">🧠 Psicología del comportamiento</div>
+      <div class="pill" onclick="setSuggest('Criptomonedas y blockchain','escéptico pero curioso','entender si tiene valor real de inversión')">₿ Cripto y blockchain</div>
     </div>
   </div>
 </div>
 
-<!-- CALIBRATION -->
-<div class="screen" id="screen-calib">
-  <div class="header">
-    <div class="logo">Hyper<span>U</span></div>
-    <button class="back-btn" onclick="showScreen('home')">← Volver</button>
-  </div>
-  <div class="calib-body">
-    <div class="h-avatar">H</div>
-    <div class="calib-bubble" id="calib-bubble">
-      <div class="typing-wrap"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
-    </div>
-    <textarea class="calib-input" id="calib-input" placeholder="Responde aquí..." rows="3"></textarea>
-    <button class="calib-send" id="calib-send" onclick="sendCalib()">Arrancar →</button>
+<!-- GENERATING -->
+<div class="screen" id="screen-generating">
+  <div class="header"><div class="logo">Hyper<span>U</span></div></div>
+  <div class="gen-body">
+    <div class="gen-avatar">H</div>
+    <div class="gen-msg" id="gen-msg">H está construyendo tu curso...</div>
+    <div class="gen-dots"><div class="gen-dot"></div><div class="gen-dot"></div><div class="gen-dot"></div></div>
+    <div class="gen-sub" id="gen-sub">Eligiendo el mejor hilo narrativo para este tema</div>
   </div>
 </div>
 
@@ -237,30 +376,47 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen" id="screen-curriculum">
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
-    <div style="display:flex;gap:8px">
-      <button class="back-btn" onclick="showScreen('home')">← Inicio</button>
-      <button class="back-btn" style="border-color:var(--accent);color:var(--accent)" onclick="startTest()">Test final →</button>
+    <div class="header-actions">
+      <div id="websearch-indicator" style="display:none;font-size:11px;color:var(--amber);border:0.5px solid var(--amber-mid);padding:4px 10px;border-radius:20px;background:var(--amber-light)">🔍 Web search activo</div>
+      <button class="btn-ghost" onclick="showScreen('home')">← Inicio</button>
+      <button class="btn-blue" onclick="startTest()">Test →</button>
     </div>
   </div>
   <div class="curriculum-body">
     <div class="sidebar">
-      <div class="sidebar-course-title" id="sidebar-title">Cargando...</div>
-      <div class="sidebar-meta" id="sidebar-meta"></div>
-      <div class="sidebar-label">Módulos</div>
-      <div class="module-list" id="module-list"></div>
-      <button class="sidebar-test-btn" onclick="startTest()">Ir al test final →</button>
+      <div class="sidebar-top">
+        <div class="sidebar-course-title" id="sidebar-title">...</div>
+        <div class="sidebar-meta" id="sidebar-meta"></div>
+        <div class="progress-wrap">
+          <div class="progress-top"><span>Progreso</span><span id="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="sidebar-mods">
+        <div class="sidebar-section-label">Módulos</div>
+        <div id="module-list"></div>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="sidebar-elo">
+          <div><div class="sidebar-elo-label">Score ELO</div><div class="sidebar-elo-num" id="sidebar-elo">0</div></div>
+          <div style="font-size:11px;color:var(--blue);opacity:0.7" id="sidebar-elo-delta"></div>
+        </div>
+        <button class="test-btn" onclick="startTest()">Ir al test final →</button>
+      </div>
     </div>
     <div class="lesson-area">
       <div class="lesson-content" id="lesson-content"></div>
-      <div class="commands-row">
-        <button class="cmd" onclick="sendCmd('más profundo')">+ profundo</button>
-        <button class="cmd" onclick="sendCmd('no entendí, explícame diferente')">no entendí</button>
-        <button class="cmd" onclick="sendCmd('dame otro ejemplo concreto')">ejemplo</button>
-        <button class="cmd" onclick="sendCmd('sigue al siguiente módulo')">sigue →</button>
-        <button class="cmd" onclick="sendCmd('resumen de lo visto hasta ahora')">resumen</button>
+      <div class="lesson-actions">
+        <button class="next-btn" id="next-btn" onclick="nextModule()">Siguiente módulo →</button>
+        <div class="cmds">
+          <button class="cmd" onclick="sendCmd('más profundo en este concepto')">+ profundo</button>
+          <button class="cmd" onclick="sendCmd('dame otro ejemplo concreto')">ejemplo</button>
+          <button class="cmd" onclick="sendCmd('resumen de lo visto hasta ahora en 3 líneas')">resumen</button>
+          <button class="cmd lost" onclick="iAmLost()">🆘 estoy perdido</button>
+        </div>
       </div>
       <div class="lesson-input-area">
-        <textarea class="lesson-input" id="lesson-input" placeholder="Pregunta algo o usa los comandos de arriba..." rows="1"></textarea>
+        <textarea class="lesson-input" id="lesson-input" placeholder="Pregúntale algo a H..." rows="1"></textarea>
         <button class="lesson-send" id="lesson-send" onclick="sendLesson()">→</button>
       </div>
     </div>
@@ -271,13 +427,18 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen" id="screen-test">
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
-    <button class="back-btn" onclick="showScreen('curriculum')">← Volver al curso</button>
+    <button class="btn-ghost" onclick="showScreen('curriculum')">← Volver al curso</button>
   </div>
   <div class="test-body">
     <div class="test-header">
       <div class="test-title">Escalera de conocimiento</div>
+      <div class="test-cycle" id="test-cycle">Ciclo 1</div>
       <div class="escalera" id="escalera"></div>
-      <div class="test-meta">Escalón actual: <span id="escalon-num">1</span> · Preguntas: <span id="q-count">0</span></div>
+      <div class="test-stats">
+        <div class="test-stat">Escalón: <span id="escalon-num">1</span></div>
+        <div class="test-stat">Resueltas: <span id="q-count">0</span></div>
+        <div class="test-stat">ELO actual: <span id="test-elo-display">0</span></div>
+      </div>
       <div class="fallos-row">
         <div class="fallo-dot" id="fallo-1"></div>
         <div class="fallo-dot" id="fallo-2"></div>
@@ -297,21 +458,48 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen" id="screen-result">
   <div class="header"><div class="logo">Hyper<span>U</span></div></div>
   <div class="result-body">
-    <div class="score-circle">
-      <div class="score-num" id="result-score">0</div>
-      <div class="score-max">/ 200</div>
+    <div class="result-elo">
+      <div class="result-elo-num" id="result-elo">0</div>
+      <div class="result-elo-delta" id="result-delta">+0</div>
     </div>
+    <div class="result-elo-label">Score ELO acumulado</div>
     <div class="result-status" id="result-status">EXPLORADOR</div>
-    <div class="result-status-sub" id="result-sub">Base construida. Sigue subiendo.</div>
-    <div class="result-breakdown">
-      <div class="breakdown-row"><span class="breakdown-label">Escalón más alto</span><span class="breakdown-val" id="br-escalon">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Modo de estudio</span><span class="breakdown-val" id="br-modo">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Bonus por modo</span><span class="breakdown-val" id="br-bonus">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Racha máxima</span><span class="breakdown-val" id="br-racha">—</span></div>
+    <div class="result-sub" id="result-sub">Base construida. Sigue subiendo.</div>
+
+    <div class="share-card">
+      <div class="share-card-top">
+        <div class="share-logo">HyperU</div>
+        <div class="share-score" id="share-score">0</div>
+      </div>
+      <div class="share-topic" id="share-topic">—</div>
+      <div class="share-status" id="share-status">—</div>
+      <button class="share-btn" onclick="shareScore()">Compartir mi score</button>
     </div>
+
+    <div class="aha-summary" id="aha-summary" style="display:none">
+      <div class="aha-summary-label">💡 Tus momentos aha</div>
+      <div id="aha-summary-content"></div>
+    </div>
+
+    <div class="adaptive-card" id="adaptive-card" style="display:none">
+      <div class="adaptive-label">Curso adaptivo recomendado</div>
+      <div class="adaptive-title" id="adaptive-title">—</div>
+      <div class="adaptive-desc" id="adaptive-desc">—</div>
+      <div class="adaptive-mods" id="adaptive-mods"></div>
+    </div>
+
+    <div class="result-breakdown">
+      <div class="breakdown-row"><span class="breakdown-label">Escalón máximo alcanzado</span><span class="breakdown-val" id="br-escalon">—</span></div>
+      <div class="breakdown-row"><span class="breakdown-label">Ciclo de aprendizaje</span><span class="breakdown-val" id="br-ciclo">—</span></div>
+      <div class="breakdown-row"><span class="breakdown-label">Modo de estudio</span><span class="breakdown-val" id="br-modo">—</span></div>
+      <div class="breakdown-row"><span class="breakdown-label">Racha máxima</span><span class="breakdown-val" id="br-racha">—</span></div>
+      <div class="breakdown-row"><span class="breakdown-label">Momentos aha</span><span class="breakdown-val" id="br-aha">—</span></div>
+    </div>
+
     <div class="result-actions">
       <button class="result-btn secondary" onclick="showScreen('home')">← Nuevo tema</button>
       <button class="result-btn primary" onclick="showScreen('curriculum')">Seguir estudiando</button>
+      <button class="result-btn green" id="adaptive-btn" style="display:none" onclick="startAdaptiveCourse()">Curso adaptivo →</button>
     </div>
   </div>
 </div>
@@ -319,302 +507,726 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 </div>
 
 <script>
-const SYSTEM_PROMPT = `Eres el tutor de HyperU. Tu nombre es H.
+const SYSTEM_PROMPT = `Eres H, el tutor de HyperU.
 
 IDENTIDAD: Eres el hermano mayor que todos quisieran tener — el que sabe de todo, te lo explica sin hacerte sentir idiota, y te suelta una verdad incómoda con una sonrisa. Sarcástico, humor negro, odias el relleno. Nunca sermones. Siempre directo. Contador de historias brillante. Lo abstracto no existe — todo tiene aplicación real.
 
-PERFIL DEL ESTUDIANTE: Aprende por storytelling y casos aplicados. Visual — necesita ver el concepto en acción antes de entenderlo en teoría. ADHD — se aburre rápido, máximo 3 ideas por bloque. Necesita el gancho primero. Humor y sarcasmo bienvenidos. Contexto natural: negocios, inversiones, Colombia, golf.
+PERFIL DEL ESTUDIANTE: Aprende por storytelling y casos aplicados. Visual — necesita ver el concepto en acción antes de la teoría. ADHD — se aburre rápido, máximo 3 ideas por bloque. Necesita el gancho primero. Humor y sarcasmo bienvenidos. Tono académico lo mata. Contexto natural: negocios, inversiones, familia, Colombia, golf, deportes en general.
 
 REGLAS ABSOLUTAS:
-1. Empieza SIEMPRE con el gancho — dato, historia, pregunta que genere curiosidad. NUNCA con definición.
+1. NUNCA empieces con una definición. Siempre con el gancho.
 2. Máximo 3 bloques de contenido por respuesta.
-3. Una analogía obligatoria por módulo — del mundo de negocios, dinero o Colombia.
-4. Termina cada módulo con resumen de una línea + pregunta que conecte al siguiente.
-5. Si se pierde, busca otro ángulo. Nunca repitas lo mismo más despacio.
-6. Usa **negritas** para conceptos clave. Usa *cursivas* para analogías.
-7. Responde siempre en español.
+3. Usa **negritas** para conceptos clave. Usa *cursivas* para analogías.
+4. Responde siempre en español.
+5. Si el estudiante se pierde, busca un ángulo completamente diferente. Nunca repitas lo mismo más despacio.
 
-FORMATO DE MÓDULO:
-🪝 [GANCHO — historia o dato sorprendente, máx 3 líneas]
-📚 [EL CONCEPTO — con caso real, máx 4 líneas]
-💡 [LA ANALOGÍA — conectada con negocios o vida real colombiana]
-→ [CIERRE — una línea de resumen + pregunta que abre el siguiente módulo]`;
+MODELO DE APRENDIZAJE — MÉTODO HBS:
+Cada módulo se construye alrededor de UN solo caso. El caso se revela en capas — no de golpe. Al final, el concepto y el caso son inseparables en la memoria.
 
-const TEST_SYSTEM = `Eres H, administrando el test final de HyperU sobre: "{TOPIC}".
+SELECCIÓN DEL CASO:
+- Prioridad 1: Caso real documentado y verificable
+- Prioridad 2: Caso ficticio bien fundamentado — siempre declarado explícitamente
+- Los casos entre módulos tienen hilo narrativo: mismo mundo, misma época, o misma cadena de causas
 
-ESCALERA (12 escalones):
+FORMATO DE MÓDULO — ESTRUCTURA EXACTA:
+
+📍 BRIEF DEL CASO (3 líneas máx):
+- El concepto que viene
+- Por qué importa
+- El caso que lo ilustrará
+
+🪝 GANCHO: La historia arranca en el momento más tenso. No desde el principio — desde el punto de máxima tensión. Máximo 3 líneas.
+
+📚 EL CONCEPTO: El caso se desarrolla y el concepto emerge de él naturalmente. Máximo 4 líneas.
+
+💡 LA ANALOGÍA: Conecta con negocios, inversiones, familia, Colombia, golf o deportes en general. Una sola. Poderosa.
+
+🔗 CONEXIÓN AL HILO: Una línea que conecta este caso con el módulo anterior y abre la puerta al siguiente.
+
+📎 FUENTES: Declara el origen:
+- "Documentado en [tipo de fuente: biografía, reporte oficial, paper académico]"
+- "Dato de [institución: FMI, Harvard Business Review, etc.]"
+- Si es ficción: "Caso ficticio basado en dinámicas documentadas de [industria/período]"
+- NUNCA inventes referencias específicas.
+
+→ CIERRE: Una línea de resumen + pregunta que abre curiosidad hacia el siguiente módulo.`;
+
+const TEST_SYSTEM = `Eres H, administrando el test de HyperU sobre: "{TOPIC}". Ciclo {CICLO}.
+
+ESCALERA INFINITA:
 - Escalones 1-3: Comprensión básica
 - Escalones 4-6: Aplicación en casos reales
 - Escalones 7-9: Análisis y conexión entre ideas
-- Escalones 10-12: Síntesis — enseñar o criticar el concepto
+- Escalones 10-12: Síntesis — enseñar o criticar
+- Escalones 13+: Dominio experto — cada nivel más profundo que el anterior. No hay techo.
 
-REGLAS: Presenta cada pregunta como caso real, NUNCA académica. Evalúa: CORRECTO, PARCIAL, o INCORRECTO. Feedback máx 2 líneas con tu estilo sarcástico. Responde en español.
+En el ciclo {CICLO}, las preguntas deben ser más profundas que en ciclos anteriores.
+Escalón base de este ciclo: {BASE_ESCALON} (las preguntas arrancan desde este nivel de dificultad).
+
+REGLAS:
+- Cada pregunta es un caso real, NUNCA pregunta académica
+- Evalúa con exactamente una de estas palabras: CORRECTO, PARCIAL, INCORRECTO
+- Feedback máx 2 líneas con tu estilo sarcástico
+- Responde en español
+
 Estado: Escalón {ESCALON}, Fallos consecutivos: {FALLOS}
 Genera la pregunta del escalón {ESCALON}. Inicia con "Escalón {ESCALON} 🎯"`;
 
-const GUIDE = {
-  nivel: '[tu nivel honesto — ej: no sé nada / sé lo básico / algo he leído]',
-  interes: '[por qué te interesa — ej: entender las noticias / aplicarlo en mi negocio]',
-  angulo: '[ángulo que más te llama — ej: las decisiones detrás / cómo aplica hoy]'
-};
+const ADAPTIVE_SYSTEM = `Eres H. El estudiante acaba de terminar un ciclo de test sobre "{TOPIC}".
+
+Resultados del test:
+- Escalón máximo alcanzado: {ESCALON}
+- Conceptos donde falló: {GAPS}
+- Ciclo número: {CICLO}
+- Score ELO actual: {ELO}
+
+Genera un curso adaptivo de siguiente nivel. Formato EXACTO:
+
+**[Título del curso adaptivo — que refleje el siguiente nivel]**
+*[Una línea: qué va a dominar ahora que no dominaba antes]*
+
+GAPS A REFORZAR:
+1. [Módulo para reforzar gap específico] — Caso: [caso sugerido]
+2. [Módulo para reforzar gap específico] — Caso: [caso sugerido]
+
+SIGUIENTE NIVEL:
+3. [Módulo que eleva lo que ya domina] — Caso: [caso sugerido]
+4. [Módulo de mayor profundidad] — Caso: [caso sugerido]
+5. [Módulo de síntesis avanzada] — Caso: [caso sugerido]
+
+Al final, una línea motivacional con tu estilo sarcástico sobre lo que viene.`;
 
 let state = {
-  topic:'', mode:'flash', modules:[], currentModule:0,
+  topic:'', nivel:'', angulo:'', mode:'flash',
+  webSearch: false,
+  modules:[], currentModule:0, completedModules:new Set(),
   lessonHistory:[], testHistory:[],
   escalon:1, fallosConsecutivos:0, rachaActual:0, maxRacha:0,
-  preguntasResueltas:0, testTerminado:false, maxEscalon:12
+  preguntasResueltas:0, testTerminado:false,
+  ciclo:1, baseEscalon:1,
+  gaps:[],
+  ahaMarkers:[],
+  eloScore:0, eloDelta:0,
+  adaptiveModules:[], adaptiveTitle:'', adaptiveDesc:'',
+  courseHistory:[]
 };
 
+// LOCALSTORAGE
+function saveState() {
+  try {
+    const save = {
+      eloScore: state.eloScore,
+      courseHistory: state.courseHistory,
+      ahaMarkers: state.ahaMarkers
+    };
+    localStorage.setItem('hyperu_state', JSON.stringify(save));
+  } catch(e){}
+}
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('hyperu_state') || '{}');
+    if(saved.eloScore) state.eloScore = saved.eloScore;
+    if(saved.courseHistory) state.courseHistory = saved.courseHistory;
+    if(saved.ahaMarkers) state.ahaMarkers = saved.ahaMarkers;
+    updateHomeElo();
+  } catch(e){}
+}
+
+function updateHomeElo() {
+  if(state.eloScore > 0) {
+    document.getElementById('elo-badge').style.display = 'flex';
+    document.getElementById('home-elo-score').textContent = state.eloScore;
+    const pills = document.getElementById('elo-history-pills');
+    pills.innerHTML = '';
+    state.courseHistory.slice(-5).forEach(c => {
+      const p = document.createElement('div');
+      p.className = 'elo-pill';
+      p.textContent = c.topic.substring(0,12) + (c.topic.length>12?'...':'');
+      p.title = c.topic + ' — ' + c.score + ' pts';
+      pills.appendChild(p);
+    });
+  }
+}
+
+const genMessages = [
+  ['H está calibrando tu nivel...','Analizando lo que ya sabes'],
+  ['Eligiendo el hilo narrativo...','Conectando los casos del curso'],
+  ['Diseñando el curriculum...','Seleccionando los mejores casos reales'],
+  ['Preparando el módulo 1...','Buscando el gancho perfecto'],
+];
+let genInterval;
+
 function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-'+name).classList.add('active');
   window.scrollTo(0,0);
 }
 
-function selectMode(el,mode) {
-  document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('selected'));
+function selectMode(el, mode) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   state.mode = mode;
 }
 
-function setSuggest(t) { document.getElementById('topic-input').value = t; }
-
-function insertGuide(field) {
-  const inp = document.getElementById('topic-input');
-  const txt = GUIDE[field];
-  if(inp.value.includes(txt)) return;
-  const cur = inp.value.trim();
-  inp.value = cur ? cur + ' ' + txt : txt;
-  inp.focus();
-  const start = inp.value.indexOf(txt);
-  inp.setSelectionRange(start, start + txt.length);
+function setSuggest(topic, nivel, angulo) {
+  document.getElementById('f-topic').value = topic;
+  document.getElementById('f-nivel').value = nivel;
+  document.getElementById('f-angulo').value = angulo;
 }
 
-function goToCalib() {
-  const t = document.getElementById('topic-input').value.trim();
-  if(!t){alert('Escribe un tema primero');return;}
-  state.topic = t;
+function toggleWebSearch() {
+  state.webSearch = !state.webSearch;
+  const toggle = document.getElementById('search-toggle');
+  toggle.classList.toggle('active', state.webSearch);
+}
+
+function startGenAnimation() {
+  let i = 0;
+  document.getElementById('gen-msg').textContent = genMessages[0][0];
+  document.getElementById('gen-sub').textContent = genMessages[0][1];
+  genInterval = setInterval(() => {
+    i = (i+1) % genMessages.length;
+    document.getElementById('gen-msg').textContent = genMessages[i][0];
+    document.getElementById('gen-sub').textContent = genMessages[i][1];
+  }, 2500);
+}
+
+function stopGenAnimation() { clearInterval(genInterval); }
+
+async function goGenerate() {
+  const topic = document.getElementById('f-topic').value.trim();
+  if(!topic){alert('Escribe el tema que quieres aprender');return;}
+  state.topic = topic;
+  state.nivel = document.getElementById('f-nivel').value.trim() || 'no especificado';
+  state.angulo = document.getElementById('f-angulo').value.trim() || 'no especificado';
   state.lessonHistory = [];
-  showScreen('calib');
-  loadCalibQuestion();
+  state.completedModules = new Set();
+  state.currentModule = 0;
+  state.ahaMarkers = [];
+  state.ciclo = 1;
+  state.baseEscalon = 1;
+  state.gaps = [];
+  document.getElementById('lesson-content').innerHTML = '';
+  document.getElementById('websearch-indicator').style.display = state.webSearch ? 'block' : 'none';
+  showScreen('generating');
+  startGenAnimation();
+  await generateCurriculum();
 }
 
 async function callClaude(messages, system) {
-  const res = await fetch('/api/chat', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({messages, system})
-  });
-  const data = await res.json();
-  return data.content?.[0]?.text || 'Error al conectar con H.';
+  try {
+    const body = { messages, system };
+    if(state.webSearch) body.webSearch = true;
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    return data.content?.[0]?.text || 'Error al conectar con H.';
+  } catch(e) {
+    return 'Error al conectar con H.';
+  }
 }
 
-function addTyping(container) {
+async function generateCurriculum(isAdaptive=false, adaptivePrompt='') {
+  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
+  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
+
+  let p;
+  if(isAdaptive && adaptivePrompt) {
+    p = adaptivePrompt;
+  } else {
+    p = `El estudiante quiere aprender sobre: "${state.topic}".
+Nivel actual: ${state.nivel}
+Interés y ángulo: ${state.angulo}
+Modo: ${mN[state.mode]} (${numMods} módulos por ciclo)
+Ciclo: ${state.ciclo}
+
+Primero elige el HILO NARRATIVO del curso — qué mundo, época o cadena de eventos conectará los casos.
+
+Luego genera el curriculum. Formato EXACTO:
+**[Título del curso — que dé curiosidad, no descriptivo]**
+*[Una línea: por qué este tema importa HOY]*
+*[El hilo narrativo del curso]*
+
+Módulos:
+1. [Nombre intrigante] — Caso: [título del caso]
+2. [Nombre intrigante] — Caso: [título del caso]
+[genera exactamente ${numMods} módulos]`;
+  }
+
+  const text = await callClaude([{role:'user',content:p}], SYSTEM_PROMPT);
+  stopGenAnimation();
+  parseCurriculum(text);
+  state.lessonHistory = [{role:'assistant',content:text}];
+  showScreen('curriculum');
+  await loadModule(0);
+}
+
+function parseCurriculum(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  let mods = [], title = state.topic;
+  lines.forEach(l => {
+    const s = l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
+    if(s.match(/^\d+\./)) {
+      const n = s.replace(/^\d+\.\s*/,'');
+      if(n) mods.push(n);
+    } else if(s.startsWith('#')) {
+      title = s.replace(/^#+\s*/,'');
+    }
+  });
+  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
+  if(!mods.length) { for(let i=1;i<=numMods;i++) mods.push('Módulo '+i); }
+  state.modules = mods;
+  const ml = {flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro ∞'};
+  document.getElementById('sidebar-title').textContent = title;
+  document.getElementById('sidebar-meta').textContent = ml[state.mode] + (state.ciclo>1?' · Ciclo '+state.ciclo:'') + ' · '+mods.length+' módulos';
+  renderModuleList();
+  updateProgress();
+  updateSidebarElo();
+}
+
+function renderModuleList() {
+  const list = document.getElementById('module-list');
+  list.innerHTML = '';
+  state.modules.forEach((m,i) => {
+    const d = document.createElement('div');
+    const isActive = i === state.currentModule;
+    const isCompleted = state.completedModules.has(i);
+    d.className = 'mod-item' + (isActive?' active':'') + (isCompleted?' completed':'');
+    d.onclick = () => loadModule(i);
+    d.innerHTML = `<span class="mod-num">${String(i+1).padStart(2,'0')}</span><span class="mod-name">${m}</span><div class="mod-check"></div>`;
+    list.appendChild(d);
+  });
+}
+
+function updateProgress() {
+  const pct = state.modules.length ? Math.round((state.completedModules.size/state.modules.length)*100) : 0;
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-pct').textContent = pct+'%';
+}
+
+function updateSidebarElo() {
+  document.getElementById('sidebar-elo').textContent = state.eloScore;
+  const delta = document.getElementById('sidebar-elo-delta');
+  delta.textContent = state.eloDelta > 0 ? '+'+state.eloDelta : '';
+}
+
+async function loadModule(idx) {
+  if(state.modules.length > 0 && idx !== state.currentModule) {
+    state.completedModules.add(state.currentModule);
+  }
+  state.currentModule = idx;
+  renderModuleList();
+  updateProgress();
+
+  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
+  const p = `Enseña el módulo ${idx+1}: "${state.modules[idx]}" del curso sobre "${state.topic}" en modo ${mN[state.mode]}.
+Ciclo ${state.ciclo}. Nivel del estudiante: ${state.nivel}. Interés: ${state.angulo}.
+${state.ciclo > 1 ? 'Este es un ciclo avanzado — el estudiante ya tiene base. Ve más profundo.' : ''}
+
+Sigue EXACTAMENTE la estructura:
+📍 BRIEF DEL CASO
+🪝 GANCHO
+📚 EL CONCEPTO
+💡 LA ANALOGÍA
+🔗 CONEXIÓN AL HILO
+📎 FUENTES
+→ CIERRE`;
+
+  const content = document.getElementById('lesson-content');
+  content.innerHTML = '';
+
+  const header = document.createElement('div');
+  header.className = 'mod-header';
+  header.innerHTML = `<div class="mod-header-cycle">${state.ciclo > 1 ? 'Ciclo '+state.ciclo+' · ' : ''}Módulo ${idx+1} de ${state.modules.length}</div><div class="mod-header-title">${state.modules[idx]}</div>`;
+  content.appendChild(header);
+
+  addTyping('lesson-content');
+  const text = await callClaude([...state.lessonHistory,{role:'user',content:p}], SYSTEM_PROMPT);
+  removeTyping('lesson-content');
+  state.lessonHistory.push({role:'user',content:p},{role:'assistant',content:text});
+  addMessage('lesson-content','h',text,true);
+
+  const nextBtn = document.getElementById('next-btn');
+  const isLast = idx >= state.modules.length-1;
+  if(isLast) {
+    nextBtn.textContent = 'Ir al test →';
+    nextBtn.className = 'next-btn test';
+    nextBtn.onclick = startTest;
+  } else {
+    nextBtn.textContent = 'Siguiente módulo →';
+    nextBtn.className = 'next-btn';
+    nextBtn.onclick = nextModule;
+  }
+}
+
+function nextModule() {
+  if(state.currentModule < state.modules.length-1) loadModule(state.currentModule+1);
+}
+
+function addTyping(cId) {
+  const c = document.getElementById(cId);
   const d = document.createElement('div');
-  d.className = 'h-row'; d.id = 'typing-'+container;
-  d.innerHTML = `<div class="h-avatar-sm">H</div><div class="typing-wrap"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-  const c = document.getElementById(container);
+  d.className = 'typing-row'; d.id = 'typing-'+cId;
+  d.innerHTML = `<div class="h-avatar-sm">H</div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
   c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
 
-function removeTyping(container) {
-  const t = document.getElementById('typing-'+container);
-  if(t) t.remove();
-}
+function removeTyping(cId) { const t=document.getElementById('typing-'+cId); if(t)t.remove(); }
 
 function fmt(text) {
-  return text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+  return text
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
     .replace(/\*(.*?)\*/g,'<em>$1</em>')
     .replace(/\n\n/g,'</p><p style="margin-top:10px">')
     .replace(/\n/g,'<br>');
 }
 
-function addMessage(containerId, role, text) {
-  const c = document.getElementById(containerId);
+let msgCounter = 0;
+function addMessage(cId, role, text, showAha=false) {
+  const c = document.getElementById(cId);
   const d = document.createElement('div');
+  const mid = 'msg-'+(++msgCounter);
   if(role==='h') {
-    d.className='h-row';
-    d.innerHTML=`<div class="h-avatar-sm">H</div><div class="message-bubble"><p>${fmt(text)}</p></div>`;
+    d.className = 'h-row';
+    const ahaBtn = showAha ? `<button class="aha-btn" id="aha-${mid}" onclick="markAha('${mid}',this)">💡 aha</button>` : '';
+    d.innerHTML = `<div class="h-avatar-sm">H</div><div class="msg-bubble" id="${mid}">${ahaBtn}<p>${fmt(text)}</p></div>`;
   } else {
-    d.className='user-row';
-    d.innerHTML=`<div class="user-bubble">${fmt(text)}</div>`;
+    d.className = 'user-row';
+    d.innerHTML = `<div class="user-bubble">${fmt(text)}</div>`;
   }
   c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
 
-async function loadCalibQuestion() {
-  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const p = `El estudiante quiere aprender sobre: "${state.topic}" en modo ${mN[state.mode]}. Ya dio contexto sobre su nivel e interés. Hazle UNA pregunta de calibración corta y específica con tu estilo sarcástico. Si no dio suficiente contexto, pregúntale: "¿Qué tanto sabes de [tema]? Dime en una frase — puede ser nada, algo, o más de lo que quisiera admitir." Máximo 3 líneas.`;
-  const text = await callClaude([{role:'user',content:p}], SYSTEM_PROMPT);
-  document.getElementById('calib-bubble').innerHTML = '<p>'+fmt(text)+'</p>';
-}
-
-async function sendCalib() {
-  const ans = document.getElementById('calib-input').value.trim();
-  if(!ans) return;
-  document.getElementById('calib-send').disabled = true;
-  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const p = `El estudiante dijo sobre su contexto: "${state.topic}". Respondió a tu pregunta: "${ans}". Genera el curriculum para el tema en modo ${mN[state.mode]}.
-
-Formato EXACTO:
-**[Título del curso — que dé curiosidad, no descriptivo]**
-*[Una línea: por qué este tema importa HOY]*
-
-Módulos:
-1. [Nombre intrigante]
-2. [Nombre intrigante]
-[Flash=3 módulos, Profundo=6, Maestro=10]
-
-Al final pregunta: "¿Arrancamos con el módulo 1?"`;
-  const text = await callClaude([{role:'user',content:p}], SYSTEM_PROMPT);
-  parseCurriculum(text);
-  state.lessonHistory = [{role:'assistant',content:text}];
-  showScreen('curriculum');
-  addMessage('lesson-content','h',text);
-  document.getElementById('calib-send').disabled = false;
-}
-
-function parseCurriculum(text) {
-  const lines = text.split('\n').filter(l=>l.trim());
-  let mods=[], title=state.topic;
-  lines.forEach(l=>{
-    const s=l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
-    if(s.match(/^\d+\./)){const n=s.replace(/^\d+\.\s*/,'');if(n)mods.push(n);}
-    else if(s.startsWith('#')){title=s.replace(/^#+\s*/,'');}
-  });
-  if(!mods.length){const n={flash:3,profundo:6,maestro:10}[state.mode];for(let i=1;i<=n;i++)mods.push('Módulo '+i);}
-  state.modules = mods;
-  const ml={flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro'};
-  document.getElementById('sidebar-title').textContent = title;
-  document.getElementById('sidebar-meta').textContent = ml[state.mode]+' · '+mods.length+' módulos';
-  const list = document.getElementById('module-list');
-  list.innerHTML='';
-  mods.forEach((m,i)=>{
-    const d=document.createElement('div');
-    d.className='module-item'+(i===0?' active':'');
-    d.onclick=()=>loadModule(i);
-    d.innerHTML=`<span class="module-num">${String(i+1).padStart(2,'0')}</span><span class="module-name">${m}</span>`;
-    list.appendChild(d);
-  });
-}
-
-async function loadModule(idx) {
-  state.currentModule = idx;
-  document.querySelectorAll('.module-item').forEach((m,i)=>m.classList.toggle('active',i===idx));
-  const mN={flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const p=`Enseña el módulo ${idx+1}: "${state.modules[idx]}" del curso sobre "${state.topic}" en modo ${mN[state.mode]}. Sigue EXACTAMENTE: 🪝 GANCHO / 📚 EL CONCEPTO / 💡 LA ANALOGÍA / → CIERRE`;
-  addTyping('lesson-content');
-  const text = await callClaude([...state.lessonHistory,{role:'user',content:p}], SYSTEM_PROMPT);
-  removeTyping('lesson-content');
-  state.lessonHistory.push({role:'user',content:p},{role:'assistant',content:text});
-  addMessage('lesson-content','u','Módulo '+(idx+1)+': '+state.modules[idx]);
-  addMessage('lesson-content','h',text);
+function markAha(mid, btn) {
+  btn.classList.toggle('marked');
+  if(btn.classList.contains('marked')) {
+    const bubble = document.getElementById(mid);
+    const text = bubble.innerText.replace('💡 aha','').trim().substring(0,120);
+    state.ahaMarkers.push({module: state.modules[state.currentModule], text});
+    btn.textContent = '💡 marcado';
+    saveState();
+  } else {
+    state.ahaMarkers = state.ahaMarkers.filter(a => !a.text.startsWith(document.getElementById(mid).innerText.substring(0,30)));
+    btn.textContent = '💡 aha';
+  }
 }
 
 async function sendLesson() {
-  const inp=document.getElementById('lesson-input');
-  const msg=inp.value.trim(); if(!msg)return;
-  inp.value='';
-  document.getElementById('lesson-send').disabled=true;
+  const inp = document.getElementById('lesson-input');
+  const msg = inp.value.trim(); if(!msg)return;
+  inp.value = '';
+  document.getElementById('lesson-send').disabled = true;
   addMessage('lesson-content','u',msg);
   state.lessonHistory.push({role:'user',content:msg});
   addTyping('lesson-content');
-  const text=await callClaude(state.lessonHistory,SYSTEM_PROMPT);
+  const text = await callClaude(state.lessonHistory, SYSTEM_PROMPT);
   removeTyping('lesson-content');
   state.lessonHistory.push({role:'assistant',content:text});
-  addMessage('lesson-content','h',text);
-  document.getElementById('lesson-send').disabled=false;
+  addMessage('lesson-content','h',text,true);
+  document.getElementById('lesson-send').disabled = false;
 }
 
-function sendCmd(c){document.getElementById('lesson-input').value=c;sendLesson();}
+function sendCmd(c) { document.getElementById('lesson-input').value=c; sendLesson(); }
 
-function buildEscalera(){
-  const d=document.getElementById('escalera'); d.innerHTML='';
-  for(let i=1;i<=state.maxEscalon;i++){
-    const e=document.createElement('div');
-    e.className='escalon'; e.id='esc-'+i;
-    e.style.height=(10+i*5)+'px';
+async function iAmLost() {
+  const msg = 'ESTOY PERDIDO. Empieza de cero con un ángulo completamente diferente. Si usaste historia, usa números. Si usaste números, usa una metáfora visual. Si usaste metáfora, usa un caso de la vida cotidiana. No menciones la explicación anterior.';
+  document.getElementById('lesson-input').value = msg;
+  await sendLesson();
+}
+
+// TEST
+function buildEscalera() {
+  const d = document.getElementById('escalera');
+  d.innerHTML = '';
+  const maxVisible = state.escalon + 6;
+  for(let i=1;i<=maxVisible;i++) {
+    const e = document.createElement('div');
+    e.className = 'escalon'; e.id = 'esc-'+i;
+    const h = Math.min(8+i*4, 60);
+    e.style.cssText = `width:16px;height:${h}px`;
+    if(i > 12) e.classList.add('beyond');
     d.appendChild(e);
   }
 }
 
-function updateEscalera(){
-  for(let i=1;i<=state.maxEscalon;i++){
-    const e=document.getElementById('esc-'+i); if(!e)continue;
-    e.className='escalon';
-    if(i<state.escalon)e.classList.add('done');
-    else if(i===state.escalon)e.classList.add('current');
+function updateEscalera() {
+  const maxVisible = state.escalon + 6;
+  for(let i=1;i<=maxVisible;i++) {
+    let e = document.getElementById('esc-'+i);
+    if(!e) {
+      e = document.createElement('div');
+      e.className = 'escalon'; e.id = 'esc-'+i;
+      const h = Math.min(8+i*4, 60);
+      e.style.cssText = `width:16px;height:${h}px`;
+      if(i > 12) e.classList.add('beyond');
+      document.getElementById('escalera').appendChild(e);
+    }
+    e.classList.remove('done','current');
+    if(i < state.escalon) e.classList.add('done');
+    else if(i === state.escalon) e.classList.add('current');
   }
-  document.getElementById('escalon-num').textContent=state.escalon;
-  document.getElementById('q-count').textContent=state.preguntasResueltas;
-  for(let i=1;i<=3;i++){document.getElementById('fallo-'+i).classList.toggle('active',i<=state.fallosConsecutivos);}
+  document.getElementById('escalon-num').textContent = state.escalon;
+  document.getElementById('q-count').textContent = state.preguntasResueltas;
+  document.getElementById('test-elo-display').textContent = state.eloScore;
+  for(let i=1;i<=3;i++) document.getElementById('fallo-'+i).classList.toggle('active',i<=state.fallosConsecutivos);
 }
 
-async function startTest(){
-  state.escalon=1;state.fallosConsecutivos=0;state.rachaActual=0;state.maxRacha=0;state.preguntasResueltas=0;state.testTerminado=false;state.testHistory=[];
-  document.getElementById('test-chat').innerHTML='';
+async function startTest() {
+  state.escalon = state.baseEscalon;
+  state.fallosConsecutivos = 0; state.rachaActual = 0; state.maxRacha = 0;
+  state.preguntasResueltas = 0; state.testTerminado = false; state.testHistory = [];
+  state.gaps = [];
+  document.getElementById('test-chat').innerHTML = '';
+  document.getElementById('test-cycle').textContent = 'Ciclo ' + state.ciclo;
   showScreen('test'); buildEscalera(); updateEscalera();
   await askTestQuestion();
 }
 
-async function askTestQuestion(){
-  const sys=TEST_SYSTEM.replace(/{TOPIC}/g,state.topic).replace(/{ESCALON}/g,state.escalon).replace('{FALLOS}',state.fallosConsecutivos);
+async function askTestQuestion() {
+  const sys = TEST_SYSTEM
+    .replace(/{TOPIC}/g, state.topic)
+    .replace(/{CICLO}/g, state.ciclo)
+    .replace(/{BASE_ESCALON}/g, state.baseEscalon)
+    .replace(/{ESCALON}/g, state.escalon)
+    .replace('{FALLOS}', state.fallosConsecutivos);
   addTyping('test-chat');
-  const msgs=state.testHistory.length?state.testHistory:[{role:'user',content:'Inicia el test'}];
-  const text=await callClaude(msgs,sys);
+  const msgs = state.testHistory.length ? state.testHistory : [{role:'user',content:'Inicia el test del ciclo '+state.ciclo}];
+  const text = await callClaude(msgs, sys);
   removeTyping('test-chat');
   state.testHistory.push({role:'assistant',content:text});
   addMessage('test-chat','h',text);
 }
 
-async function sendTest(){
-  if(state.testTerminado)return;
-  const inp=document.getElementById('test-input');
-  const ans=inp.value.trim(); if(!ans)return;
-  inp.value=''; document.getElementById('test-send').disabled=true;
+async function sendTest() {
+  if(state.testTerminado) return;
+  const inp = document.getElementById('test-input');
+  const ans = inp.value.trim(); if(!ans)return;
+  inp.value = ''; document.getElementById('test-send').disabled = true;
   addMessage('test-chat','u',ans);
   state.testHistory.push({role:'user',content:ans});
   state.preguntasResueltas++;
-  const sys=TEST_SYSTEM.replace(/{TOPIC}/g,state.topic).replace(/{ESCALON}/g,state.escalon).replace('{FALLOS}',state.fallosConsecutivos);
-  const evalP=`El estudiante respondió: "${ans}". Evalúa para escalón ${state.escalon} sobre "${state.topic}". Veredicto: CORRECTO, PARCIAL, o INCORRECTO. Feedback en máx 2 líneas con tu estilo.`;
+
+  const sys = TEST_SYSTEM
+    .replace(/{TOPIC}/g, state.topic)
+    .replace(/{CICLO}/g, state.ciclo)
+    .replace(/{BASE_ESCALON}/g, state.baseEscalon)
+    .replace(/{ESCALON}/g, state.escalon)
+    .replace('{FALLOS}', state.fallosConsecutivos);
+
+  const evalP = `El estudiante respondió: "${ans}". Evalúa para escalón ${state.escalon} del ciclo ${state.ciclo} sobre "${state.topic}". 
+Responde con exactamente una de estas palabras en la primera línea: CORRECTO, PARCIAL, o INCORRECTO.
+Luego feedback en máx 2 líneas con tu estilo.
+Si INCORRECTO o PARCIAL, añade al final: GAP: [concepto específico que falló en 5 palabras máx]`;
+
   addTyping('test-chat');
-  const text=await callClaude([...state.testHistory,{role:'user',content:evalP}],sys);
+  const text = await callClaude([...state.testHistory, {role:'user',content:evalP}], sys);
   removeTyping('test-chat');
   state.testHistory.push({role:'assistant',content:text});
   addMessage('test-chat','h',text);
-  const up=text.toUpperCase();
-  const ok=up.includes('CORRECTO')&&!up.includes('INCORRECTO')&&!up.includes('PARCIAL');
-  if(ok){state.fallosConsecutivos=0;state.rachaActual++;if(state.rachaActual>state.maxRacha)state.maxRacha=state.rachaActual;if(state.escalon<state.maxEscalon)state.escalon++;else{finishTest();return;}}
-  else{state.fallosConsecutivos++;state.rachaActual=0;if(state.fallosConsecutivos>=3){finishTest();document.getElementById('test-send').disabled=false;return;}}
+
+  const up = text.toUpperCase();
+  const ok = up.startsWith('CORRECTO') || up.includes('\nCORRECTO');
+  const parcial = up.startsWith('PARCIAL') || up.includes('\nPARCIAL');
+
+  // Extract gap
+  const gapMatch = text.match(/GAP:\s*(.+)/i);
+  if(gapMatch && !ok) state.gaps.push(gapMatch[1].trim());
+
+  if(ok && !parcial) {
+    state.fallosConsecutivos = 0;
+    state.rachaActual++;
+    if(state.rachaActual > state.maxRacha) state.maxRacha = state.rachaActual;
+    state.escalon++;
+  } else {
+    state.fallosConsecutivos++;
+    state.rachaActual = 0;
+    if(state.fallosConsecutivos >= 3) {
+      await finishTest();
+      document.getElementById('test-send').disabled = false;
+      return;
+    }
+  }
+
   updateEscalera();
-  document.getElementById('test-send').disabled=false;
-  if(!state.testTerminado)setTimeout(()=>askTestQuestion(),600);
+  document.getElementById('test-send').disabled = false;
+  if(!state.testTerminado) setTimeout(() => askTestQuestion(), 500);
 }
 
-function finishTest(){
-  state.testTerminado=true; updateEscalera();
-  const mb={flash:0,profundo:15,maestro:30}[state.mode];
-  const score=Math.min(200,Math.round((state.escalon-1)*12+mb+state.maxRacha*2));
-  const sts=[[160,'ARQUITECTO','Puedes construir sobre este conocimiento.'],[130,'ESTRATEGA','Dominas el tema. Puedes debatirlo.'],[110,'OPERADOR','Lo aplicas con seguridad.'],[90,'ANALISTA','Entiendes lo esencial.'],[0,'EXPLORADOR','Base construida. Sigue subiendo.']];
-  const [,st,sub]=sts.find(([n])=>score>=n);
-  const ml={flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro'};
-  setTimeout(()=>{
-    document.getElementById('result-score').textContent=score;
-    document.getElementById('result-status').textContent=st;
-    document.getElementById('result-sub').textContent=sub;
-    document.getElementById('br-escalon').textContent=(state.escalon-1)+' / 12';
-    document.getElementById('br-modo').textContent=ml[state.mode];
-    document.getElementById('br-bonus').textContent='+'+mb+' pts';
-    document.getElementById('br-racha').textContent=state.maxRacha+' correctas seguidas';
+async function finishTest() {
+  state.testTerminado = true;
+  updateEscalera();
+
+  // Calculate ELO delta
+  const mb = {flash:0,profundo:15,maestro:30}[state.mode];
+  const escalonReached = state.escalon - 1;
+  const cycleMult = state.ciclo;
+  const delta = Math.round((escalonReached * 8 + mb + state.maxRacha * 3) * (1 + (cycleMult-1)*0.2));
+  state.eloDelta = delta;
+  state.eloScore += delta;
+
+  // Update base for next cycle (maestro)
+  if(state.mode === 'maestro') {
+    state.baseEscalon = Math.max(1, escalonReached - 2);
+  }
+
+  const sts = [
+    [160,'ARQUITECTO','Puedes construir sobre este conocimiento.'],
+    [130,'ESTRATEGA','Dominas el tema. Puedes debatirlo.'],
+    [110,'OPERADOR','Lo aplicas con seguridad.'],
+    [90,'ANALISTA','Entiendes lo esencial.'],
+    [0,'EXPLORADOR','Base construida. Sigue subiendo.']
+  ];
+  const eloForStatus = Math.min(state.eloScore, 200);
+  const [,st,sub] = sts.find(([n]) => eloForStatus >= n) || sts[sts.length-1];
+
+  // Save to history
+  state.courseHistory.push({topic: state.topic, score: state.eloScore, ciclo: state.ciclo});
+  saveState();
+
+  // Generate adaptive course
+  const gapsText = state.gaps.length ? state.gaps.join(', ') : 'ninguno identificado';
+  const adaptivePromptText = ADAPTIVE_SYSTEM
+    .replace('{TOPIC}', state.topic)
+    .replace('{ESCALON}', escalonReached)
+    .replace('{GAPS}', gapsText)
+    .replace('{CICLO}', state.ciclo)
+    .replace('{ELO}', state.eloScore);
+
+  const adaptiveText = await callClaude([{role:'user',content:'Genera el curso adaptivo'}], adaptivePromptText);
+  parseAdaptive(adaptiveText);
+
+  const ml = {flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro'};
+  setTimeout(() => {
+    document.getElementById('result-elo').textContent = state.eloScore;
+    document.getElementById('result-delta').textContent = '+'+delta;
+    document.getElementById('result-status').textContent = st;
+    document.getElementById('result-sub').textContent = sub;
+    document.getElementById('share-score').textContent = state.eloScore;
+    document.getElementById('share-topic').textContent = state.topic;
+    document.getElementById('share-status').textContent = st + ' · Ciclo '+state.ciclo;
+    document.getElementById('br-escalon').textContent = escalonReached + (escalonReached>12?' 🔥':'') + ' / ∞';
+    document.getElementById('br-ciclo').textContent = 'Ciclo ' + state.ciclo;
+    document.getElementById('br-modo').textContent = ml[state.mode];
+    document.getElementById('br-racha').textContent = state.maxRacha + ' correctas seguidas';
+    document.getElementById('br-aha').textContent = state.ahaMarkers.length + ' momentos marcados';
+    updateSidebarElo();
+    updateHomeElo();
+
+    // AHA summary
+    if(state.ahaMarkers.length > 0) {
+      const ahaDiv = document.getElementById('aha-summary');
+      const ahaContent = document.getElementById('aha-summary-content');
+      ahaDiv.style.display = 'block';
+      ahaContent.innerHTML = state.ahaMarkers.map(a =>
+        `<div class="aha-item"><strong>${a.module}:</strong> ${a.text}</div>`
+      ).join('');
+    }
+
     showScreen('result');
-  },1500);
+  }, 1000);
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('topic-input').addEventListener('keydown',e=>{if(e.key==='Enter')goToCalib();});
-  document.getElementById('calib-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendCalib();}});
-  document.getElementById('lesson-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendLesson();}});
-  document.getElementById('test-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTest();}});
+function parseAdaptive(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  let title = 'Curso Adaptivo', mods = [], desc = '';
+  lines.forEach(l => {
+    const s = l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
+    if(s.match(/^\d+\./)) { const n=s.replace(/^\d+\.\s*/,''); if(n)mods.push(n); }
+    else if(!title || s.startsWith('**')) title = s.replace(/\*\*/g,'');
+    else if(s.startsWith('*') && !desc) desc = s.replace(/\*/g,'');
+  });
+  state.adaptiveModules = mods;
+  state.adaptiveTitle = title;
+  state.adaptiveDesc = desc;
+
+  if(mods.length > 0) {
+    document.getElementById('adaptive-card').style.display = 'block';
+    document.getElementById('adaptive-btn').style.display = 'block';
+    document.getElementById('adaptive-title').textContent = title;
+    document.getElementById('adaptive-desc').textContent = desc;
+    const modsDiv = document.getElementById('adaptive-mods');
+    modsDiv.innerHTML = '';
+    mods.slice(0,5).forEach((m,i) => {
+      const d = document.createElement('div');
+      d.className = 'adaptive-mod';
+      d.textContent = (i+1)+'. '+m;
+      modsDiv.appendChild(d);
+    });
+  }
+}
+
+async function startAdaptiveCourse() {
+  state.ciclo++;
+  state.lessonHistory = [];
+  state.completedModules = new Set();
+  state.currentModule = 0;
+  state.ahaMarkers = [];
+  document.getElementById('lesson-content').innerHTML = '';
+  showScreen('generating');
+  startGenAnimation();
+
+  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
+  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
+  const gapsText = state.gaps.length ? state.gaps.join(', ') : 'ninguno';
+
+  const p = `Genera el curriculum del curso adaptivo ciclo ${state.ciclo} sobre "${state.topic}".
+Nivel alcanzado en ciclo anterior: escalón ${state.escalon-1}.
+Gaps identificados: ${gapsText}.
+Score ELO: ${state.eloScore}.
+Modo: ${mN[state.mode]} (${numMods} módulos).
+
+Este es un ciclo avanzado. Los casos deben ser más complejos y profundos que el ciclo anterior.
+Refuerza los gaps pero principalmente eleva el nivel general.
+
+Formato EXACTO:
+**[Título del curso adaptivo ciclo ${state.ciclo}]**
+*[Por qué este nivel es diferente al anterior]*
+*[El nuevo hilo narrativo de este ciclo]*
+
+Módulos:
+1. [Nombre] — Caso: [caso]
+2. [Nombre] — Caso: [caso]
+[genera exactamente ${numMods} módulos]`;
+
+  await generateCurriculum(true, p);
+}
+
+function shareScore() {
+  const text = `Acabo de alcanzar ${state.eloScore} puntos en HyperU estudiando "${state.topic}" 🎓\nNivel: ${document.getElementById('result-status').textContent}\nCiclo ${state.ciclo} · #HyperU`;
+  if(navigator.share) {
+    navigator.share({title:'Mi score en HyperU', text}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(text).then(() => alert('Score copiado al portapapeles'));
+  }
+}
+
+// TEST message helper for test screen
+const originalAddMessage = addMessage;
+function addMessage(cId, role, text, showAha=false) {
+  const c = document.getElementById(cId);
+  if(!c) return;
+  const d = document.createElement('div');
+  const mid = 'msg-'+(++msgCounter);
+  if(role==='h') {
+    d.className = 'h-row';
+    const ahaBtn = showAha ? `<button class="aha-btn" id="aha-${mid}" onclick="markAha('${mid}',this)">💡 aha</button>` : '';
+    d.innerHTML = `<div class="h-avatar-sm">H</div><div class="msg-bubble" id="${mid}">${ahaBtn}<p>${fmt(text)}</p></div>`;
+  } else {
+    d.className = 'user-row';
+    d.innerHTML = `<div class="user-bubble">${fmt(text)}</div>`;
+  }
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  document.getElementById('f-topic').addEventListener('keydown', e => { if(e.key==='Enter') goGenerate(); });
+  document.getElementById('lesson-input').addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendLesson();} });
+  document.getElementById('test-input').addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTest();} });
 });
 </script>
 </body>
