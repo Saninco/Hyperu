@@ -536,25 +536,31 @@ FUENTES (solo en HBS):
 
 IMPORTANTE: Siempre usa las etiquetas [GANCHO][/GANCHO] etc. El sistema las necesita para renderizar correctamente.`;
 
-const TEST_SYS = `Eres H en el test final de HyperU sobre "{TOPIC}". Ciclo {CICLO}.
+const TEST_SYS_Q = `Eres H generando una pregunta de test sobre "{TOPIC}". Ciclo {CICLO}, escalón {ESC}.
 
-ESCALERA INFINITA:
-Escalones 1-4: selección múltiple. Presenta EXACTAMENTE 4 opciones así:
-A) opción uno
-B) opción dos
-C) opción tres
-D) opción cuatro
+MODO: {MODO}
 
-Escalones 5+: respuesta abierta — reflexión y análisis.
+Si MODO es MULTIPLE_CHOICE: genera una pregunta como caso real breve y presenta EXACTAMENTE 4 opciones:
+A) texto
+B) texto
+C) texto
+D) texto
+No añadas nada después de las opciones.
 
-Cada 3 preguntas aproximadamente incluye una de módulos anteriores marcada con [FLASHBACK] al inicio.
+Si MODO es ABIERTA: genera una pregunta de reflexión o análisis como caso real. Sin opciones.
 
-Al evaluar responde EXACTAMENTE así en la primera línea: CORRECTO o INCORRECTO
-Luego feedback en máx 2 líneas con tu estilo.
-Si INCORRECTO añade: GAP: [concepto en 5 palabras]
+{FLASHBACK_INST}
 
-Pregunta actual: escalón {ESC}, ciclo {CICLO}, fallos {FALLOS}.
-Genera la siguiente pregunta. Si es escalón 1-4 incluye las 4 opciones A B C D.
+Responde en español. Solo la pregunta y las opciones si aplica.`;
+
+const TEST_SYS_EVAL = `Eres H evaluando una respuesta sobre "{TOPIC}". Escalón {ESC}, ciclo {CICLO}.
+
+La respuesta del estudiante fue: "{ANS}"
+
+Primera línea de tu respuesta: exactamente CORRECTO o exactamente INCORRECTO (solo esa palabra).
+Luego: feedback en máx 2 líneas con tu estilo sarcástico.
+Si INCORRECTO: al final añade "GAP: [concepto específico en 5 palabras]"
+
 Responde en español.`;
 
 const ADAPTIVE_SYS = `Eres H. El estudiante terminó un ciclo sobre "{TOPIC}".
