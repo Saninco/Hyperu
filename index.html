@@ -59,6 +59,88 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 .hlevel-pills{display:flex;gap:4px;flex-wrap:wrap}
 .hlevel-pill{font-size:10px;padding:2px 8px;background:var(--blue-light);color:var(--blue);border-radius:10px}
 
+/* DIAGNOSTIC */
+.diag-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px;max-width:640px;margin:0 auto;width:100%;overflow-y:auto}
+.diag-intro{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px}
+.diag-intro-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px}
+.diag-intro-sub{font-size:13px;color:var(--text2);line-height:1.5}
+.diag-level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;margin-bottom:20px}
+.diag-level-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all 0.15s}
+.diag-level-card:hover,.diag-level-card.selected{border-color:var(--blue);background:var(--blue-light)}
+.diag-level-card.selected .diag-level-name{color:var(--blue)}
+.diag-level-icon{font-size:22px;margin-bottom:6px}
+.diag-level-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.diag-level-desc{font-size:11px;color:var(--text2);line-height:1.4}
+.diag-actions{display:flex;gap:8px;width:100%;margin-bottom:20px}
+.diag-btn-skip{flex:1;padding:11px;background:transparent;border:0.5px solid var(--border2);color:var(--text2);border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-btn-skip:hover{border-color:var(--text2);color:var(--text)}
+.diag-btn-start{flex:2;padding:11px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-btn-start:hover{background:#1a4a8a}
+.diag-chat{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:14px;min-height:200px}
+.diag-input-area{width:100%;display:flex;gap:7px}
+.diag-input{flex:1;padding:10px 13px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;min-height:46px;transition:border-color 0.15s}
+.diag-input:focus{border-color:var(--blue)}
+.diag-input::placeholder{color:var(--text3)}
+.diag-send{padding:10px 16px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-send:hover{background:#1a4a8a}
+.diag-send:disabled{opacity:0.4;cursor:not-allowed}
+.diag-mc{display:flex;flex-direction:column;gap:5px;width:100%}
+.diag-mc-btn{padding:9px 13px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;font-size:12px;color:var(--text);transition:all 0.15s;text-align:left;font-family:'Instrument Sans',sans-serif}
+.diag-mc-btn:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.diag-mc-btn.correct{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.diag-mc-btn.wrong{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
+.diag-progress{width:100%;margin-bottom:16px}
+.diag-progress-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:4px}
+.diag-progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.diag-progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.3s ease}
+.diag-result{width:100%;background:var(--blue-light);border:0.5px solid var(--blue-mid);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.diag-result-label{font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.diag-result-level{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--blue);margin-bottom:4px}
+.diag-result-desc{font-size:13px;color:var(--text2);line-height:1.5}
+.diag-result-btn{width:100%;margin-top:12px;padding:12px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-result-btn:hover{background:#1a4a8a}
+
+/* DIAGNOSTIC */
+.diag-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:24px 20px;max-width:620px;margin:0 auto;width:100%;overflow-y:auto}
+.diag-intro{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px}
+.diag-intro-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px}
+.diag-intro-sub{font-size:12px;color:var(--text2);line-height:1.5}
+.diag-level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;margin-bottom:16px}
+.diag-level-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.15s}
+.diag-level-card:hover,.diag-level-card.selected{border-color:var(--blue);background:var(--blue-light)}
+.diag-level-card.selected .diag-level-name{color:var(--blue)}
+.diag-level-icon{font-size:20px;margin-bottom:5px}
+.diag-level-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.diag-level-desc{font-size:11px;color:var(--text2)}
+.diag-actions{display:flex;gap:8px;width:100%;margin-bottom:16px}
+.diag-btn-skip{flex:1;padding:10px;background:transparent;border:0.5px solid var(--border2);color:var(--text2);border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s}
+.diag-btn-skip:hover{border-color:var(--text);color:var(--text)}
+.diag-btn-start{flex:2;padding:10px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s}
+.diag-btn-start:hover{background:#1a4a8a}
+.diag-progress{width:100%;margin-bottom:14px}
+.diag-progress-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:4px}
+.diag-progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.diag-progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.3s ease}
+.diag-chat{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;min-height:180px}
+.diag-mc{display:flex;flex-direction:column;gap:5px;width:100%;margin-bottom:10px}
+.diag-mc-btn{padding:9px 12px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;font-size:12px;color:var(--text);transition:all 0.15s;text-align:left;font-family:'Instrument Sans',sans-serif}
+.diag-mc-btn:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.diag-mc-btn.correct{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.diag-mc-btn.wrong{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
+.diag-input-area{width:100%;display:flex;gap:7px;margin-bottom:10px}
+.diag-input{flex:1;padding:9px 12px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;min-height:44px;transition:border-color 0.15s}
+.diag-input:focus{border-color:var(--blue)}
+.diag-input::placeholder{color:var(--text3)}
+.diag-send{padding:9px 14px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-send:hover{background:#1a4a8a}
+.diag-send:disabled{opacity:0.4;cursor:not-allowed}
+.diag-result{width:100%;background:var(--blue-light);border:0.5px solid var(--blue-mid);border-radius:var(--radius);padding:16px}
+.diag-result-label{font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.diag-result-level{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--blue);margin-bottom:6px}
+.diag-result-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:12px}
+.diag-result-btn{width:100%;padding:12px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.diag-result-btn:hover{background:#1a4a8a}
+
 /* CALIBRATION SCREEN */
 .calib-screen-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;max-width:600px;margin:0 auto;width:100%}
 .calib-screen-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;text-align:center}
@@ -435,6 +517,52 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
   </div>
 </div>
 
+<!-- DIAGNOSTIC -->
+<div class="screen" id="screen-diag">
+  <div class="header">
+    <div class="logo">Hyper<span>U</span></div>
+    <button class="btn-ghost" onclick="showScreen('home')">← volver</button>
+  </div>
+  <div class="diag-body">
+    <div class="diag-intro">
+      <div class="diag-intro-title">¿En qué nivel estás?</div>
+      <div class="diag-intro-sub">Dime dónde crees que estás y H te hace un test corto de 6 preguntas para encontrar tu nivel real. Sin juicios — solo para que el curso arranque exactamente donde lo necesitas.</div>
+    </div>
+    <div id="diag-level-section">
+      <div class="diag-level-grid">
+        <div class="diag-level-card selected" onclick="selectDiagLevel(this,'cero')"><div class="diag-level-icon">🌱</div><div class="diag-level-name">Desde cero</div><div class="diag-level-desc">No sé nada del tema</div></div>
+        <div class="diag-level-card" onclick="selectDiagLevel(this,'basico')"><div class="diag-level-icon">📖</div><div class="diag-level-name">Básico</div><div class="diag-level-desc">He oído el tema, sé lo general</div></div>
+        <div class="diag-level-card" onclick="selectDiagLevel(this,'intermedio')"><div class="diag-level-icon">🔬</div><div class="diag-level-name">Intermedio</div><div class="diag-level-desc">Conozco conceptos clave, tengo base</div></div>
+        <div class="diag-level-card" onclick="selectDiagLevel(this,'avanzado')"><div class="diag-level-icon">🎯</div><div class="diag-level-name">Avanzado</div><div class="diag-level-desc">Domino el tema, quiero ir más profundo</div></div>
+      </div>
+      <div class="diag-actions">
+        <button class="diag-btn-skip" onclick="skipDiag()">Saltar test → empezar ya</button>
+        <button class="diag-btn-start" onclick="startDiagTest()">Hacer el test de nivel →</button>
+      </div>
+    </div>
+    <div id="diag-test-section" style="display:none;width:100%">
+      <div class="diag-progress">
+        <div class="diag-progress-top"><span>Diagnóstico de nivel</span><span id="diag-q-label">Pregunta 1 de 6</span></div>
+        <div class="diag-progress-bar"><div class="diag-progress-fill" id="diag-progress-fill" style="width:0%"></div></div>
+      </div>
+      <div class="diag-chat" id="diag-chat"></div>
+      <div id="diag-mc-wrap"></div>
+      <div class="diag-input-area" id="diag-input-area" style="display:none">
+        <textarea class="diag-input" id="diag-input" placeholder="Tu respuesta..." rows="2"></textarea>
+        <button class="diag-send" id="diag-send" onclick="sendDiagAnswer()">→</button>
+      </div>
+    </div>
+    <div id="diag-result-section" style="display:none;width:100%">
+      <div class="diag-result">
+        <div class="diag-result-label">Tu nivel real según H</div>
+        <div class="diag-result-level" id="diag-result-level">—</div>
+        <div class="diag-result-desc" id="diag-result-desc">—</div>
+        <button class="diag-result-btn" onclick="goToCalibFromDiag()">Crear mi curso en este nivel →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CALIBRATION (energy + time) -->
 <div class="screen" id="screen-calib">
   <div class="header">
@@ -730,7 +858,7 @@ SIGUIENTE NIVEL:
 [Una línea motivacional con tu estilo sarcástico]`;
 
 let state = {
-  topic:'',nivel:'',angulo:'',mode:'flash',
+  topic:'',nivel:'',angulo:'',mode:'flash',diagLevel:'cero',diagHistory:[],diagQCount:0,diagMaxQ:6,diagCorrect:0,diagEscalon:1,
   energy:'alto',time:'30',webSearch:false,depth:2,
   method:'',modules:[],currentModule:0,completedModules:new Set(),
   lessonHistory:[],testHistory:[],
@@ -792,8 +920,123 @@ function goCalib(){
   state.topic=t;
   state.nivel=document.getElementById('f-nivel').value.trim()||'no especificado';
   state.angulo=document.getElementById('f-angulo').value.trim()||'no especificado';
-  showScreen('calib');
+  resetDiagUI();showScreen('diag');
 }
+
+function resetDiagUI(){
+  document.getElementById('diag-level-section').style.display='block';
+  document.getElementById('diag-test-section').style.display='none';
+  document.getElementById('diag-result-section').style.display='none';
+  document.getElementById('diag-chat').innerHTML='';
+  document.getElementById('diag-mc-wrap').innerHTML='';
+  state.diagLevel='cero';state.diagHistory=[];state.diagQCount=0;state.diagMaxQ=6;state.diagCorrect=0;state.diagEscalon=1;
+}
+function selectDiagLevel(el,level){document.querySelectorAll('.diag-level-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');state.diagLevel=level;}
+function skipDiag(){const lm={cero:1,basico:1,intermedio:2,avanzado:3};const em={cero:1,basico:1,intermedio:4,avanzado:7};state.ciclo=lm[state.diagLevel||'cero']||1;state.baseEscalon=em[state.diagLevel||'cero']||1;showScreen('calib');}
+function goToCalibFromDiag(){showScreen('calib');}
+
+const DIAG_SYS=`Eres H haciendo un test de diagnostico de nivel sobre "{TOPIC}" para alguien que se autocalificó como "{SELF_LEVEL}". Máximo {MAX_Q} preguntas. Escalones 1-3: selección múltiple A) B) C) D). Escalones 4+: respuesta abierta. Empieza en escalón {ESC_DIAG}. Evalúa con CORRECTO o INCORRECTO en primera línea. Feedback 1 línea con humor. Cuando termines escribe exactamente: DIAGNOSTICO_COMPLETO: [nivel: Principiante/Básico/Intermedio/Avanzado] [descripción breve]. Pregunta {Q_NUM} de {MAX_Q}. Responde en español.`;
+
+async function startDiagTest(){
+  document.getElementById('diag-level-section').style.display='none';
+  document.getElementById('diag-test-section').style.display='block';
+  state.diagHistory=[];state.diagQCount=0;state.diagCorrect=0;
+  const em={cero:1,basico:2,intermedio:4,avanzado:6};
+  state.diagEscalon=em[state.diagLevel]||1;
+  await askDiagQ();
+}
+
+function updateDiagProgress(){
+  const pct=Math.round((state.diagQCount/state.diagMaxQ)*100);
+  document.getElementById('diag-progress-fill').style.width=pct+'%';
+  document.getElementById('diag-q-label').textContent='Pregunta '+(state.diagQCount+1)+' de '+state.diagMaxQ;
+}
+
+async function askDiagQ(){
+  updateDiagProgress();
+  const isMC=state.diagEscalon<=3;
+  document.getElementById('diag-mc-wrap').innerHTML='';
+  document.getElementById('diag-input-area').style.display=isMC?'none':'flex';
+  const sys=DIAG_SYS.replace(/{TOPIC}/g,state.topic).replace('{SELF_LEVEL}',state.diagLevel).replace(/{MAX_Q}/g,state.diagMaxQ).replace('{Q_NUM}',state.diagQCount+1).replace('{ESC_DIAG}',state.diagEscalon);
+  addDiagTyping();
+  const msgs=state.diagHistory.length?state.diagHistory:[{role:'user',content:'Inicia el diagnóstico'}];
+  const text=await callClaude(msgs,sys);
+  removeDiagTyping();
+  state.diagHistory.push({role:'assistant',content:text});
+  addDiagMsg('h',text);
+  if(text.includes('DIAGNOSTICO_COMPLETO:')){showDiagResult(text);return;}
+  if(isMC){
+    const opts=[];text.split('\n').forEach(l=>{const m=l.match(/^([A-D])\)\s*(.+)/);if(m)opts.push({letter:m[1],text:m[2].trim()});});
+    if(opts.length>=2){renderDiagMC(opts);}else{document.getElementById('diag-input-area').style.display='flex';}
+  }
+}
+
+function renderDiagMC(opts){
+  const c=document.getElementById('diag-mc-wrap');c.innerHTML='';
+  const div=document.createElement('div');div.className='diag-mc';
+  opts.forEach(o=>{const btn=document.createElement('button');btn.className='diag-mc-btn';btn.textContent=o.letter+') '+o.text;btn.onclick=()=>handleDiagMC(o.letter,btn,div);div.appendChild(btn);});
+  c.appendChild(div);
+}
+
+async function handleDiagMC(letter,btn,container){
+  container.querySelectorAll('.diag-mc-btn').forEach(b=>b.disabled=true);
+  const sys=DIAG_SYS.replace(/{TOPIC}/g,state.topic).replace('{SELF_LEVEL}',state.diagLevel).replace(/{MAX_Q}/g,state.diagMaxQ).replace('{Q_NUM}',state.diagQCount+1).replace('{ESC_DIAG}',state.diagEscalon);
+  addDiagTyping();
+  const text=await callClaude([...state.diagHistory,{role:'user',content:'Elegí '+letter}],sys);
+  removeDiagTyping();
+  state.diagHistory.push({role:'user',content:'Elegí '+letter},{role:'assistant',content:text});
+  const ok=text.toUpperCase().split('\n')[0].includes('CORRECTO');
+  btn.classList.add(ok?'correct':'wrong');
+  addDiagMsg('h',text);
+  if(ok){state.diagCorrect++;state.diagEscalon++;}else if(state.diagEscalon>1){state.diagEscalon--;}
+  state.diagQCount++;
+  if(text.includes('DIAGNOSTICO_COMPLETO:')||state.diagQCount>=state.diagMaxQ){showDiagResult(text);return;}
+  setTimeout(()=>askDiagQ(),500);
+}
+
+async function sendDiagAnswer(){
+  const inp=document.getElementById('diag-input');const ans=inp.value.trim();if(!ans)return;
+  inp.value='';document.getElementById('diag-send').disabled=true;
+  addDiagMsg('u',ans);state.diagHistory.push({role:'user',content:ans});
+  const sys=DIAG_SYS.replace(/{TOPIC}/g,state.topic).replace('{SELF_LEVEL}',state.diagLevel).replace(/{MAX_Q}/g,state.diagMaxQ).replace('{Q_NUM}',state.diagQCount+1).replace('{ESC_DIAG}',state.diagEscalon);
+  addDiagTyping();
+  const text=await callClaude(state.diagHistory,sys);
+  removeDiagTyping();state.diagHistory.push({role:'assistant',content:text});
+  addDiagMsg('h',text);
+  const ok=text.toUpperCase().split('\n')[0].includes('CORRECTO');
+  if(ok){state.diagCorrect++;state.diagEscalon++;}else if(state.diagEscalon>1){state.diagEscalon--;}
+  state.diagQCount++;document.getElementById('diag-send').disabled=false;
+  if(text.includes('DIAGNOSTICO_COMPLETO:')||state.diagQCount>=state.diagMaxQ){showDiagResult(text);return;}
+  setTimeout(()=>askDiagQ(),500);
+}
+
+function showDiagResult(text){
+  document.getElementById('diag-test-section').style.display='none';
+  document.getElementById('diag-result-section').style.display='block';
+  const score=state.diagCorrect/Math.max(state.diagQCount,1);
+  let levelName,levelDesc,cicloEntry,escalerEntry;
+  if(score>=0.8||state.diagEscalon>=6){levelName='Avanzado';levelDesc='Tienes base sólida. El curso arranca en nivel avanzado.';cicloEntry=3;escalerEntry=7;}
+  else if(score>=0.55||state.diagEscalon>=4){levelName='Intermedio';levelDesc='Buena base. Arrancamos desde el nivel medio.';cicloEntry=2;escalerEntry=4;}
+  else if(score>=0.3||state.diagEscalon>=2){levelName='Básico';levelDesc='Tienes contexto. Empezamos desde los fundamentos con los mejores casos.';cicloEntry=1;escalerEntry=2;}
+  else{levelName='Principiante';levelDesc='Empezamos desde cero. Sin prisa, con los mejores casos.';cicloEntry=1;escalerEntry=1;}
+  state.ciclo=cicloEntry;state.baseEscalon=escalerEntry;state.nivel=levelName.toLowerCase();
+  document.getElementById('diag-result-level').textContent=levelName;
+  const extra=text.match(/DIAGNOSTICO_COMPLETO:[^\n]*/);
+  document.getElementById('diag-result-desc').textContent=levelDesc;
+  document.getElementById('diag-progress-fill').style.width='100%';
+  document.getElementById('diag-q-label').textContent='Diagnóstico completo ✓';
+}
+
+function addDiagMsg(role,text){
+  const c=document.getElementById('diag-chat');if(!c)return;
+  const d=document.createElement('div');
+  const clean=text.split('DIAGNOSTICO_COMPLETO:')[0];
+  if(role==='h'){d.className='h-row';d.innerHTML=`<div class="h-avatar-sm">H</div><div class="msg-bubble"><p>${fmt(clean)}</p></div>`;}
+  else{d.className='user-row';d.innerHTML=`<div class="user-bubble">${fmt(text)}</div>`;}
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function addDiagTyping(){const c=document.getElementById('diag-chat');if(!c)return;const d=document.createElement('div');d.className='typing-row';d.id='diag-typing';d.innerHTML=`<div class="h-avatar-sm">H</div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function removeDiagTyping(){const t=document.getElementById('diag-typing');if(t)t.remove();}
 
 async function goGenerate(){
   state.lessonHistory=[];state.completedModules=new Set();state.currentModule=0;
