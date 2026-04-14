@@ -581,7 +581,7 @@ let S = {
   ciclo:1, baseEsc:1, gaps:[],
   ahas:[], hlevel:0, hlevelDelta:0,
   courseHistory:[], adaptiveMods:[],
-  qSinceFlash:0
+  qSinceFlash:0, currentQ:''
 };
 
 const QMAX = {flash:5, profundo:8, maestro:12};
@@ -1020,46 +1020,49 @@ async function askTestQ(){
   if(S.testDone) return;
   const isMC = S.escalon <= 4;
   document.getElementById('mc-wrap').innerHTML = '';
-  document.getElementById('test-input-row').style.display = isMC ? 'none' : 'flex';
+  document.getElementById('test-input-row').style.display = 'none';
 
-  const sys = TEST_SYS
+  const isFlashback = S.qSinceFlash >= 3 && S.qDone > 0;
+  if(isFlashback) S.qSinceFlash = 0;
+
+  const sys = TEST_SYS_Q
     .replace(/{TOPIC}/g, S.topic)
     .replace(/{CICLO}/g, S.ciclo)
     .replace(/{ESC}/g, S.escalon)
-    .replace('{FALLOS}', S.fallos);
+    .replace('{MODO}', isMC ? 'MULTIPLE_CHOICE' : 'ABIERTA')
+    .replace('{FLASHBACK_INST}', isFlashback ? 'Esta es una pregunta FLASHBACK de un módulo anterior. Marca con [FLASHBACK] al inicio.' : '');
 
   addTestTyping();
-  const msgs = S.testHist.length ? S.testHist : [{role:'user',content:'Inicia el test ciclo '+S.ciclo}];
-  const text = await callH(msgs, sys);
+  const text = await callH([{role:'user',content:'Genera la pregunta'}], sys);
   removeTestTyping();
 
-  if(!text || text.includes('Error al conectar')) {
-    // Retry once
-    const text2 = await callH(msgs, sys);
-    if(!text2 || text2.includes('Error al conectar')) {
-      addTestMsg('h','H no pudo conectar. Intenta de nuevo.');
-      document.getElementById('test-input-row').style.display='flex';
+  if(!text || text.includes('Error al conectar')){
+    const text2 = await callH([{role:'user',content:'Genera la pregunta del test'}], sys);
+    if(!text2 || text2.includes('Error al conectar')){
+      addTestMsg('h', 'H no pudo conectar. Intenta de nuevo →');
+      document.getElementById('test-input-row').style.display = 'flex';
       return;
     }
-    processTestQuestion(text2, isMC, sys);
+    showTestQuestion(text2, isMC);
     return;
   }
-  processTestQuestion(text, isMC, sys);
+  showTestQuestion(text, isMC);
 }
 
-function processTestQuestion(text, isMC, sys){
-  S.testHist.push({role:'assistant',content:text});
-  addTestMsg('h', text);
+function showTestQuestion(text, isMC){
+  S.currentQ = text;
   S.qSinceFlash++;
+  addTestMsg('h', text);
 
   if(isMC){
     const opts = parseMC(text);
     if(opts.length >= 2){
-      renderMC(opts, sys);
-    } else {
-      document.getElementById('test-input-row').style.display='flex';
+      renderMC(opts);
+      return;
     }
   }
+  document.getElementById('test-input-row').style.display = 'flex';
+  document.getElementById('test-input').focus();
 }
 
 function parseMC(text){
@@ -1071,7 +1074,7 @@ function parseMC(text){
   return opts;
 }
 
-function renderMC(opts, sys){
+function renderMC(opts){
   const wrap = document.getElementById('mc-wrap');
   const div = document.createElement('div');
   div.className = 'mc-opts';
@@ -1079,29 +1082,38 @@ function renderMC(opts, sys){
     const btn = document.createElement('button');
     btn.className = 'mc-opt';
     btn.textContent = o.letter+') '+o.text;
-    btn.onclick = () => handleMC(o.letter, btn, div, sys);
+    btn.onclick = () => handleMC(o.letter, btn, div);
     div.appendChild(btn);
   });
   wrap.appendChild(div);
 }
 
-async function handleMC(letter, btn, container, sys){
+async function handleMC(letter, btn, container){
   container.querySelectorAll('.mc-opt').forEach(b=>b.disabled=true);
-  const evalMsg = `El estudiante eligió la opción ${letter}. Evalúa. Primera línea: CORRECTO o INCORRECTO. Feedback máx 2 líneas.`;
+
+  const evalSys = TEST_SYS_EVAL
+    .replace(/{TOPIC}/g, S.topic)
+    .replace(/{ESC}/g, S.escalon)
+    .replace(/{CICLO}/g, S.ciclo)
+    .replace('{ANS}', 'Opción '+letter);
+
   addTestTyping();
-  const text = await callH([...S.testHist, {role:'user',content:evalMsg}], sys);
+  const text = await callH([
+    {role:'user', content:'Pregunta: '+S.currentQ},
+    {role:'assistant', content:'Pregunta lista'},
+    {role:'user', content:'Mi respuesta es la opción '+letter}
+  ], evalSys);
   removeTestTyping();
 
-  if(!text || text.includes('Error')) {
+  if(!text || text.includes('Error')){
     container.querySelectorAll('.mc-opt').forEach(b=>b.disabled=false);
+    addTestMsg('h','Error de conexión. Toca una opción de nuevo.');
     return;
   }
 
-  S.testHist.push({role:'user',content:'Elegí '+letter},{role:'assistant',content:text});
-  const ok = text.toUpperCase().split('\n')[0].includes('CORRECTO');
+  const ok = text.toUpperCase().split('\n')[0].trim() === 'CORRECTO';
   btn.classList.add(ok?'correct':'wrong');
 
-  // Show feedback
   const fb = document.createElement('div');
   fb.className = 'test-feedback';
   fb.innerHTML = mdToHtml(text.split('\n').slice(1).join('\n').trim());
@@ -1116,27 +1128,29 @@ async function submitTest(){
   const ans = inp.value.trim(); if(!ans) return;
   inp.value = ''; document.getElementById('test-send').disabled = true;
   addTestMsg('u', ans);
-  S.testHist.push({role:'user',content:ans});
 
-  const sys = TEST_SYS
-    .replace(/{TOPIC}/g,S.topic).replace(/{CICLO}/g,S.ciclo)
-    .replace(/{ESC}/g,S.escalon).replace('{FALLOS}',S.fallos);
-
-  const evalMsg = `El estudiante respondió: "${ans}". Escalón ${S.escalon}. Evalúa. Primera línea exacta: CORRECTO o INCORRECTO. Feedback máx 2 líneas. Si falla: GAP: [concepto 5 palabras]`;
+  const evalSys = TEST_SYS_EVAL
+    .replace(/{TOPIC}/g, S.topic)
+    .replace(/{ESC}/g, S.escalon)
+    .replace(/{CICLO}/g, S.ciclo)
+    .replace('{ANS}', ans);
 
   addTestTyping();
-  const text = await callH([...S.testHist, {role:'user',content:evalMsg}], sys);
+  const text = await callH([
+    {role:'user', content:'Pregunta: '+S.currentQ},
+    {role:'assistant', content:'Pregunta lista'},
+    {role:'user', content:'Mi respuesta: '+ans}
+  ], evalSys);
   removeTestTyping();
 
-  if(!text || text.includes('Error')) {
+  if(!text || text.includes('Error')){
     document.getElementById('test-send').disabled = false;
     addTestMsg('h','Error de conexión. Intenta de nuevo.');
     return;
   }
 
-  S.testHist.push({role:'assistant',content:text});
   addTestMsg('h', text);
-  const ok = text.toUpperCase().split('\n')[0].includes('CORRECTO');
+  const ok = text.toUpperCase().split('\n')[0].trim() === 'CORRECTO';
   await processResult(text, ok);
   document.getElementById('test-send').disabled = false;
 }
