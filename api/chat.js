@@ -2,29 +2,21 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-  const { messages, system, webSearch } = req.body;
+  const { messages, system } = req.body;
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01'
-    };
-    if (webSearch) {
-      headers['anthropic-beta'] = 'web-search-2025-03-05';
-    }
-    const body = {
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1400,
-      system: system,
-      messages: messages
-    };
-    if (webSearch) {
-      body.tools = [{ type: 'web_search_20250305', name: 'web_search' }];
-    }
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers,
-      body: JSON.stringify(body)
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1400,
+        system: system,
+        messages: messages
+      })
     });
     const data = await response.json();
     const textContent = data.content?.find(c => c.type === 'text');
