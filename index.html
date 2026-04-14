@@ -15,7 +15,7 @@
   --green:#5b7a3d;--green-light:#f0f7eb;--green-mid:#c6ddb0;
   --amber:#d97706;--amber-light:#fffbeb;--amber-mid:#fde68a;
   --danger:#dc2626;--danger-light:#fef2f2;
-  --purple:#7c3aed;--purple-light:#f5f3ff;
+  --purple:#7c3aed;--purple-light:#f5f3ff;--purple-mid:#ddd6fe;
   --radius:12px;--radius-sm:8px;
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
@@ -26,258 +26,326 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* HEADER */
-.header{padding:16px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);background:var(--bg2);flex-shrink:0}
+.header{padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);background:var(--bg2);flex-shrink:0}
 .logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
 .logo span{color:var(--blue)}
-.header-actions{display:flex;gap:8px;align-items:center}
+.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .btn-ghost{background:none;border:0.5px solid var(--border2);color:var(--text2);padding:5px 12px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;transition:all 0.15s}
 .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
 .btn-blue{background:var(--blue);color:white;border:none;padding:6px 14px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s}
 .btn-blue:hover{background:#1a4a8a}
 .btn-blue:disabled{opacity:0.4;cursor:not-allowed}
-.btn-amber{background:var(--amber);color:white;border:none;padding:6px 14px;border-radius:20px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s}
-.btn-amber:hover{background:#b45309}
+.search-pill{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer;transition:all 0.15s;border:0.5px solid var(--border2);color:var(--text3);background:transparent}
+.search-pill.active{background:var(--amber-light);border-color:var(--amber);color:var(--amber)}
+.search-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all 0.15s}
+.search-pill.active .search-pill-dot{background:var(--amber)}
 
 /* HOME */
-.home-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 24px 32px;max-width:700px;margin:0 auto;width:100%}
-.home-eyebrow{font-size:11px;letter-spacing:3px;color:var(--blue);font-weight:500;margin-bottom:14px;text-transform:uppercase}
-.home-title{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:10px;text-align:center}
+.home-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:36px 20px 28px;max-width:680px;margin:0 auto;width:100%}
+.home-eyebrow{font-size:11px;letter-spacing:3px;color:var(--blue);font-weight:500;margin-bottom:12px;text-transform:uppercase}
+.home-title{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:10px;text-align:center}
 .home-title span{color:var(--blue)}
-.home-sub{color:var(--text2);text-align:center;max-width:400px;margin-bottom:32px;font-size:14px}
+.home-sub{color:var(--text2);text-align:center;max-width:380px;margin-bottom:28px;font-size:14px}
 
-/* ELO BADGE */
-.elo-badge{display:flex;align-items:center;gap:10px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:24px;width:100%}
-.elo-score{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--blue);letter-spacing:-1px}
-.elo-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
-.elo-status{font-size:13px;font-weight:500;color:var(--text)}
-.elo-divider{width:0.5px;height:36px;background:var(--border);margin:0 4px}
-.elo-history{flex:1;display:flex;flex-direction:column;gap:3px;overflow:hidden}
-.elo-history-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
-.elo-history-pills{display:flex;gap:4px;flex-wrap:wrap}
-.elo-pill{font-size:10px;padding:2px 8px;background:var(--blue-light);color:var(--blue);border-radius:10px;font-weight:500}
+/* H LEVEL BADGE */
+.hlevel-badge{display:flex;align-items:center;gap:12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:20px;width:100%}
+.hlevel-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--blue);letter-spacing:-1px;line-height:1}
+.hlevel-info{display:flex;flex-direction:column;gap:2px}
+.hlevel-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+.hlevel-status{font-size:13px;font-weight:500;color:var(--text)}
+.hlevel-divider{width:0.5px;height:36px;background:var(--border)}
+.hlevel-history{flex:1}
+.hlevel-history-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.hlevel-pills{display:flex;gap:4px;flex-wrap:wrap}
+.hlevel-pill{font-size:10px;padding:2px 8px;background:var(--blue-light);color:var(--blue);border-radius:10px}
 
-/* INPUTS */
-.calib-box{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
-.calib-box-label{font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;font-weight:500;margin-bottom:16px}
-.calib-field{margin-bottom:12px}
-.calib-field:last-of-type{margin-bottom:0}
-.calib-field-label{font-size:12px;font-weight:500;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:6px}
-.field-num{width:18px;height:18px;border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.field-input{width:100%;padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border-color 0.15s}
+/* CALIBRATION SCREEN */
+.calib-screen-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;max-width:600px;margin:0 auto;width:100%}
+.calib-screen-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;text-align:center}
+.calib-screen-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:28px}
+.energy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;margin-bottom:16px}
+.energy-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all 0.15s;text-align:center}
+.energy-card:hover,.energy-card.selected{border-color:var(--blue);background:var(--blue-light)}
+.energy-card.selected .energy-name{color:var(--blue)}
+.energy-icon{font-size:24px;margin-bottom:6px}
+.energy-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.energy-desc{font-size:11px;color:var(--text2)}
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-bottom:24px}
+.time-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px;cursor:pointer;transition:all 0.15s;text-align:center}
+.time-card:hover,.time-card.selected{border-color:var(--blue);background:var(--blue-light)}
+.time-card.selected .time-name{color:var(--blue)}
+.time-icon{font-size:16px;margin-bottom:3px}
+.time-name{font-size:12px;font-weight:500;color:var(--text)}
+.time-desc{font-size:10px;color:var(--text2)}
+
+/* TOPIC INPUT */
+.topic-hero{width:100%;margin-bottom:16px}
+.topic-input-wrap{position:relative;width:100%}
+.topic-input{width:100%;padding:16px 110px 16px 18px;border:0.5px solid var(--border2);border-radius:var(--radius);font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--text);background:var(--bg2);outline:none;transition:border-color 0.15s}
+.topic-input:focus{border-color:var(--blue)}
+.topic-input::placeholder{color:var(--text3)}
+.topic-go{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--blue);color:white;border:none;padding:9px 16px;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
+.topic-go:hover{background:#1a4a8a}
+
+/* EXPANDABLE FIELDS */
+.expand-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);cursor:pointer;margin-bottom:10px;padding:4px 0;transition:color 0.15s;user-select:none}
+.expand-toggle:hover{color:var(--blue)}
+.expand-toggle-icon{font-size:10px;transition:transform 0.2s}
+.expand-toggle.open .expand-toggle-icon{transform:rotate(90deg)}
+.expand-fields{display:none;flex-direction:column;gap:10px;margin-bottom:14px}
+.expand-fields.open{display:flex}
+.field-label{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.field-num{width:16px;height:16px;border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:9px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.field-input{width:100%;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;transition:border-color 0.15s}
 .field-input:focus{border-color:var(--blue)}
 .field-input::placeholder{color:var(--text3)}
 
-/* WEB SEARCH TOGGLE */
-.search-toggle{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm);margin-top:14px;cursor:pointer;border:0.5px solid var(--border);transition:all 0.15s}
-.search-toggle.active{background:var(--amber-light);border-color:var(--amber-mid)}
-.toggle-dot{width:32px;height:18px;border-radius:9px;background:var(--border2);position:relative;transition:all 0.2s;flex-shrink:0}
-.toggle-dot::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:white;top:2px;left:2px;transition:all 0.2s}
-.search-toggle.active .toggle-dot{background:var(--amber)}
-.search-toggle.active .toggle-dot::after{left:16px}
-.toggle-label{font-size:12px;color:var(--text2);flex:1}
-.search-toggle.active .toggle-label{color:var(--amber)}
-.toggle-icon{font-size:14px}
+/* SEARCH TOGGLE HOME */
+.search-toggle-home{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:14px;cursor:pointer;border:0.5px solid var(--border);transition:all 0.15s;width:100%}
+.search-toggle-home.active{background:var(--amber-light);border-color:var(--amber-mid)}
+.toggle-switch{width:28px;height:16px;border-radius:8px;background:var(--border2);position:relative;transition:all 0.2s;flex-shrink:0}
+.toggle-switch::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:white;top:2px;left:2px;transition:all 0.2s}
+.search-toggle-home.active .toggle-switch{background:var(--amber)}
+.search-toggle-home.active .toggle-switch::after{left:14px}
+.toggle-text{font-size:12px;color:var(--text2);flex:1}
+.search-toggle-home.active .toggle-text{color:var(--amber)}
 
-.calib-go{width:100%;margin-top:14px;padding:13px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.15s}
-.calib-go:hover{background:#1a4a8a}
-
-/* MODES */
-.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:24px}
-.mode-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px 12px;cursor:pointer;transition:all 0.2s}
+/* MODE GRID */
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-bottom:20px}
+.mode-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 10px;cursor:pointer;transition:all 0.2s}
 .mode-card:hover,.mode-card.selected{border-color:var(--blue);background:var(--blue-light)}
 .mode-card.selected .mode-name{color:var(--blue)}
-.mode-icon{font-size:20px;margin-bottom:8px;display:block}
-.mode-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:3px;color:var(--text)}
-.mode-desc{font-size:11px;color:var(--text2);line-height:1.4}
-.mode-tag{display:inline-block;font-size:10px;padding:2px 8px;background:var(--bg3);border:0.5px solid var(--border);border-radius:10px;color:var(--text3);margin-top:6px}
+.mode-icon{font-size:18px;margin-bottom:6px;display:block}
+.mode-name{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;margin-bottom:2px;color:var(--text)}
+.mode-desc{font-size:10px;color:var(--text2);line-height:1.4}
+.mode-tag{display:inline-block;font-size:9px;padding:2px 7px;background:var(--bg3);border:0.5px solid var(--border);border-radius:10px;color:var(--text3);margin-top:5px}
 
 /* PILLS */
 .suggested-label{font-size:10px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:8px;width:100%}
-.pills{display:flex;flex-wrap:wrap;gap:6px;width:100%}
-.pill{padding:6px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2);cursor:pointer;transition:all 0.15s}
+.pills{display:flex;flex-wrap:wrap;gap:5px;width:100%}
+.pill{padding:5px 11px;background:var(--bg2);border:0.5px solid var(--border);border-radius:20px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s}
 .pill:hover{border-color:var(--blue);color:var(--blue)}
 
 /* GENERATING */
-.gen-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px}
-.gen-avatar{width:60px;height:60px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:white}
-.gen-msg{font-size:16px;font-weight:500;color:var(--text);text-align:center}
-.gen-sub{font-size:13px;color:var(--text2);text-align:center}
-.gen-dots{display:flex;gap:6px}
-.gen-dot{width:8px;height:8px;border-radius:50%;background:var(--blue-mid);animation:genPulse 1.4s infinite}
+.gen-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px}
+.gen-avatar{width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:white}
+.gen-msg{font-size:15px;font-weight:500;color:var(--text);text-align:center}
+.gen-sub{font-size:12px;color:var(--text2);text-align:center}
+.gen-dots{display:flex;gap:5px}
+.gen-dot{width:7px;height:7px;border-radius:50%;background:var(--blue-mid);animation:genPulse 1.4s infinite}
 .gen-dot:nth-child(2){animation-delay:0.2s}
 .gen-dot:nth-child(3){animation-delay:0.4s}
 @keyframes genPulse{0%,80%,100%{opacity:0.3;transform:scale(0.8)}40%{opacity:1;transform:scale(1)}}
 
-/* CURRICULUM LAYOUT */
+/* CURRICULUM */
 .curriculum-body{flex:1;display:flex;overflow:hidden;min-height:0}
-.sidebar{width:256px;flex-shrink:0;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.sidebar-top{padding:16px;border-bottom:0.5px solid var(--border)}
-.sidebar-course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.3;margin-bottom:3px;color:var(--text)}
-.sidebar-meta{font-size:11px;color:var(--text2);margin-bottom:10px}
-.progress-wrap{margin-bottom:0}
-.progress-top{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px}
-.progress-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.sidebar{width:240px;flex-shrink:0;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-top{padding:14px;border-bottom:0.5px solid var(--border)}
+.sidebar-course-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.3;margin-bottom:2px;color:var(--text)}
+.sidebar-meta{font-size:10px;color:var(--text2);margin-bottom:10px}
+.sidebar-method{font-size:10px;padding:3px 8px;border-radius:10px;display:inline-block;margin-bottom:8px;font-weight:500}
+.method-hbs{background:var(--blue-light);color:var(--blue)}
+.method-cuento{background:var(--green-light);color:var(--green)}
+.method-documental{background:var(--purple-light);color:var(--purple)}
+.progress-top{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:3px}
+.progress-bar{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.4s ease}
-.sidebar-mods{flex:1;overflow-y:auto;padding:10px}
-.sidebar-section-label{font-size:9px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;padding:4px;margin-bottom:6px;margin-top:8px}
-.sidebar-section-label:first-child{margin-top:0}
-.mod-item{display:flex;gap:8px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;border:0.5px solid transparent;transition:all 0.15s;margin-bottom:2px;align-items:flex-start}
+.sidebar-mods{flex:1;overflow-y:auto;padding:8px}
+.mod-item{display:flex;gap:7px;padding:7px 9px;border-radius:var(--radius-sm);cursor:pointer;border:0.5px solid transparent;transition:all 0.15s;margin-bottom:2px;align-items:flex-start}
 .mod-item:hover{background:var(--bg3)}
 .mod-item.active{background:var(--blue-light);border-color:var(--blue-mid)}
-.mod-item.active .mod-num{color:var(--blue)}
-.mod-item.active .mod-name{color:var(--blue)}
+.mod-item.active .mod-num,.mod-item.active .mod-name{color:var(--blue)}
 .mod-item.completed .mod-check{display:flex}
-.mod-num{font-size:10px;font-weight:500;color:var(--text3);min-width:16px;margin-top:1px}
-.mod-name{font-size:12px;color:var(--text2);line-height:1.3;flex:1}
-.mod-check{display:none;width:14px;height:14px;border-radius:50%;background:var(--green-light);align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.mod-check::after{content:'✓';font-size:8px;color:var(--green)}
-.sidebar-bottom{padding:12px;border-top:0.5px solid var(--border);display:flex;flex-direction:column;gap:6px}
-.sidebar-elo{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--blue-light);border-radius:var(--radius-sm)}
-.sidebar-elo-num{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--blue)}
-.sidebar-elo-label{font-size:10px;color:var(--blue);opacity:0.7}
-.test-btn{width:100%;padding:9px;background:transparent;border:0.5px solid var(--blue);color:var(--blue);border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s}
+.mod-num{font-size:9px;font-weight:500;color:var(--text3);min-width:14px;margin-top:2px}
+.mod-name{font-size:11px;color:var(--text2);line-height:1.3;flex:1}
+.mod-check{display:none;width:12px;height:12px;border-radius:50%;background:var(--green-light);align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.mod-check::after{content:'✓';font-size:7px;color:var(--green)}
+.sidebar-bottom{padding:10px;border-top:0.5px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.hlevel-sidebar{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--blue-light);border-radius:var(--radius-sm)}
+.hlevel-sidebar-num{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--blue)}
+.hlevel-sidebar-info{text-align:right}
+.hlevel-sidebar-label{font-size:9px;color:var(--blue);opacity:0.7;text-transform:uppercase;letter-spacing:0.5px}
+.hlevel-sidebar-delta{font-size:11px;color:var(--green);font-weight:500}
+.test-btn{width:100%;padding:8px;background:transparent;border:0.5px solid var(--blue);color:var(--blue);border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:all 0.15s}
 .test-btn:hover{background:var(--blue);color:white}
+
+/* DEPTH SLIDER */
+.depth-row{padding:8px 14px;border-bottom:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.depth-label{font-size:11px;color:var(--text3);white-space:nowrap}
+.depth-slider{flex:1;height:3px;accent-color:var(--blue)}
+.depth-value{font-size:11px;color:var(--blue);font-weight:500;min-width:50px;text-align:right}
 
 /* LESSON */
 .lesson-area{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg);overflow:hidden}
-.lesson-content{flex:1;overflow-y:auto;padding:24px 32px;display:flex;flex-direction:column;gap:14px}
-.mod-header{padding-bottom:12px;border-bottom:0.5px solid var(--border);margin-bottom:4px}
-.mod-header-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
-.mod-header-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.lesson-content{flex:1;overflow-y:auto;padding:20px 28px;display:flex;flex-direction:column;gap:12px}
+.mod-header{padding-bottom:10px;border-bottom:0.5px solid var(--border);margin-bottom:2px}
+.mod-header-meta{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.mod-header-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
 
-/* BRIEF CARD */
-.brief-card{background:var(--amber-light);border:0.5px solid var(--amber-mid);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;line-height:1.6}
-.brief-card-label{font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:6px}
-.brief-card p{color:var(--text);margin-bottom:4px}
-.brief-card p:last-child{margin-bottom:0}
+/* MESSAGE SECTIONS */
+.h-row{display:flex;gap:9px;align-items:flex-start}
+.h-avatar-sm{width:26px;height:26px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:9px;color:white;flex-shrink:0;margin-top:2px}
+.msg-wrap{flex:1;display:flex;flex-direction:column;gap:6px}
 
-/* MESSAGES */
-.h-row{display:flex;gap:10px;align-items:flex-start}
-.h-avatar-sm{width:28px;height:28px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:10px;color:white;flex-shrink:0;margin-top:2px}
-.msg-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:14px 18px;flex:1;line-height:1.75;color:var(--text);font-size:13px;position:relative}
-.msg-bubble strong{color:var(--blue);font-weight:500}
-.msg-bubble em{color:var(--green);font-style:italic}
-.msg-bubble .source-tag{display:inline-block;font-size:10px;padding:3px 8px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:10px;color:var(--text3);margin-top:8px}
-.aha-btn{position:absolute;top:10px;right:10px;background:none;border:0.5px solid var(--border);border-radius:20px;padding:3px 8px;font-size:10px;color:var(--text3);cursor:pointer;transition:all 0.15s}
+/* SECTION CARDS */
+.section-gancho{background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px}
+.section-gancho-label{font-size:9px;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.section-concepto{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px}
+.section-concepto-label{font-size:9px;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.section-analogia{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px}
+.section-analogia-label{font-size:9px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.section-hilo{background:var(--purple-light);border-left:3px solid var(--purple);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:8px 14px}
+.section-hilo-label{font-size:9px;letter-spacing:1.5px;color:var(--purple);text-transform:uppercase;font-weight:500;margin-bottom:3px}
+.section-fuentes{padding:6px 10px;background:var(--bg3);border-radius:var(--radius-sm)}
+.section-fuentes-label{font-size:9px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;font-weight:500;margin-bottom:3px}
+.section-cierre{border-top:0.5px solid var(--border);padding-top:8px}
+.section-text{font-size:13px;line-height:1.7;color:var(--text)}
+.section-text strong{font-weight:500}
+.section-text em{font-style:italic}
+.section-gancho .section-text strong{color:var(--amber)}
+.section-concepto .section-text strong{color:var(--blue)}
+.section-analogia .section-text strong{color:var(--green)}
+.section-fuentes .section-text{color:var(--text3);font-size:11px}
+
+/* AHA BUTTON */
+.msg-actions{display:flex;gap:6px;justify-content:flex-end}
+.aha-btn{padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;font-size:10px;color:var(--text3);cursor:pointer;background:transparent;transition:all 0.15s;font-family:'Instrument Sans',sans-serif}
 .aha-btn:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-light)}
 .aha-btn.marked{border-color:var(--amber);color:var(--amber);background:var(--amber-light)}
+.audio-btn{padding:3px 10px;border:0.5px solid var(--border);border-radius:20px;font-size:10px;color:var(--text3);cursor:pointer;background:transparent;transition:all 0.15s;font-family:'Instrument Sans',sans-serif}
+.audio-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.audio-btn.playing{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+
+/* PLAIN MESSAGE */
+.msg-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;border-top-left-radius:3px;padding:12px 16px;font-size:13px;line-height:1.75;color:var(--text)}
+.msg-bubble strong{color:var(--blue);font-weight:500}
+.msg-bubble em{color:var(--green);font-style:italic}
 .user-row{display:flex;justify-content:flex-end}
-.user-bubble{background:var(--blue-light);border:0.5px solid var(--blue-mid);border-radius:14px;border-top-right-radius:4px;padding:10px 14px;max-width:75%;color:var(--text2);font-size:13px;line-height:1.6}
-.typing-row{display:flex;gap:10px;align-items:flex-start}
-.typing-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:12px 16px;display:flex;gap:5px;align-items:center}
+.user-bubble{background:var(--blue-light);border:0.5px solid var(--blue-mid);border-radius:12px;border-top-right-radius:3px;padding:9px 13px;max-width:75%;color:var(--text2);font-size:13px;line-height:1.6}
+.typing-row{display:flex;gap:9px;align-items:flex-start}
+.typing-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;border-top-left-radius:3px;padding:10px 14px;display:flex;gap:4px;align-items:center}
 .typing-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
 .typing-dot:nth-child(2){animation-delay:0.2s}
 .typing-dot:nth-child(3){animation-delay:0.4s}
 @keyframes blink{0%,80%,100%{opacity:0.3}40%{opacity:1}}
 
 /* LESSON ACTIONS */
-.lesson-actions{padding:10px 20px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0}
-.next-btn{padding:9px 18px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+.lesson-actions{padding:8px 16px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.next-btn{padding:8px 16px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
 .next-btn:hover{background:#1a4a8a}
-.next-btn.test{background:var(--green);border-color:var(--green)}
-.next-btn.test:hover{background:#3d5229}
-.cmds{display:flex;gap:5px;flex-wrap:wrap;flex:1}
-.cmd{padding:5px 10px;background:transparent;border:0.5px solid var(--border2);border-radius:20px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s;font-family:'Instrument Sans',sans-serif;white-space:nowrap}
+.next-btn.test-ready{background:var(--green)}
+.next-btn.test-ready:hover{background:#3d5229}
+.cmds{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.cmd{padding:5px 9px;background:transparent;border:0.5px solid var(--border2);border-radius:20px;font-size:11px;color:var(--text2);cursor:pointer;transition:all 0.15s;font-family:'Instrument Sans',sans-serif;white-space:nowrap}
 .cmd:hover{border-color:var(--blue);color:var(--blue)}
-.cmd.lost{border-color:var(--danger);color:var(--danger)}
-.cmd.lost:hover{background:var(--danger-light)}
-.lesson-input-area{padding:10px 20px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;gap:8px;flex-shrink:0}
-.lesson-input{flex:1;padding:9px 12px;background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:38px;max-height:100px}
+.cmd-lost{border-color:var(--danger)!important;color:var(--danger)!important}
+.cmd-lost:hover{background:var(--danger-light)!important}
+.lesson-input-row{padding:8px 16px;border-top:0.5px solid var(--border);background:var(--bg2);display:flex;gap:7px;flex-shrink:0}
+.lesson-input{flex:1;padding:8px 12px;background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:36px;max-height:90px}
 .lesson-input:focus{border-color:var(--blue)}
 .lesson-input::placeholder{color:var(--text3)}
-.lesson-send{padding:9px 14px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:all 0.15s;flex-shrink:0}
+.lesson-send{padding:8px 14px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:all 0.15s;flex-shrink:0}
 .lesson-send:hover{background:#1a4a8a}
 .lesson-send:disabled{opacity:0.4;cursor:not-allowed}
 
-/* AHA PANEL */
-.aha-panel{background:var(--amber-light);border-left:3px solid var(--amber);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-top:8px}
-.aha-panel-label{font-size:10px;color:var(--amber);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;font-weight:500}
-.aha-item{font-size:12px;color:var(--text);line-height:1.5;padding:4px 0;border-bottom:0.5px solid var(--amber-mid)}
-.aha-item:last-child{border-bottom:none}
-
 /* TEST */
-.test-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px;max-width:680px;margin:0 auto;width:100%;overflow-y:auto}
-.test-header{width:100%;margin-bottom:20px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:18px}
-.test-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px;margin-bottom:4px;color:var(--text)}
-.test-cycle{font-size:11px;color:var(--text3);margin-bottom:14px}
-.escalera{display:flex;gap:2px;align-items:flex-end;margin-bottom:10px;flex-wrap:wrap;gap:3px}
-.escalon{border-radius:3px;background:var(--border2);transition:all 0.3s;flex-shrink:0}
+.test-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px;max-width:660px;margin:0 auto;width:100%;overflow-y:auto}
+.test-header{width:100%;margin-bottom:16px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.test-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.test-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.5px;color:var(--text)}
+.test-cycle-badge{font-size:10px;padding:3px 8px;background:var(--blue-light);color:var(--blue);border-radius:10px;font-weight:500}
+.escalera-wrap{margin-bottom:8px;overflow-x:auto}
+.escalera{display:flex;gap:2px;align-items:flex-end;min-width:max-content}
+.escalon{border-radius:3px;background:var(--border2);transition:all 0.3s;flex-shrink:0;width:14px}
 .escalon.done{background:var(--blue)}
-.escalon.current{background:var(--blue);opacity:0.5;animation:pulse 1s infinite}
-.escalon.beyond{background:var(--purple);opacity:0.3}
+.escalon.current{background:var(--blue);opacity:0.6;animation:pulse 1s infinite}
+.escalon.flashback{background:var(--purple)}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:0.9}}
-.test-stats{display:flex;gap:16px;margin-bottom:8px}
-.test-stat{font-size:12px;color:var(--text2)}
-.test-stat span{color:var(--blue);font-weight:500}
-.fallos-row{display:flex;gap:5px;align-items:center}
-.fallo-dot{width:9px;height:9px;border-radius:50%;background:var(--border2);transition:all 0.3s}
+.test-stats{display:flex;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.test-stat{font-size:11px;color:var(--text2)}
+.test-stat b{color:var(--blue)}
+.fallos-row{display:flex;gap:4px;align-items:center}
+.fallo-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:all 0.3s}
 .fallo-dot.active{background:var(--danger)}
-.fallos-label{font-size:11px;color:var(--text3);margin-left:4px}
-.test-chat{width:100%;overflow-y:auto;margin-bottom:14px;display:flex;flex-direction:column;gap:12px;min-height:240px;max-height:340px}
-.test-input-area{width:100%;display:flex;gap:8px}
-.test-input{flex:1;padding:11px 14px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:14px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:50px}
+.fallos-label{font-size:10px;color:var(--text3);margin-left:3px}
+
+/* FLASHBACK BADGE */
+.flashback-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 9px;background:var(--purple-light);color:var(--purple);border-radius:10px;font-weight:500;margin-bottom:6px}
+
+/* MULTIPLE CHOICE */
+.mc-options{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:8px}
+.mc-option{padding:10px 14px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text);transition:all 0.15s;text-align:left;font-family:'Instrument Sans',sans-serif;line-height:1.4}
+.mc-option:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.mc-option.correct{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.mc-option.wrong{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
+.mc-option:disabled{cursor:not-allowed;opacity:0.6}
+
+.test-chat{width:100%;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px;min-height:200px;max-height:320px}
+.test-input-area{width:100%;display:flex;gap:7px}
+.test-input{flex:1;padding:10px 13px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--text);outline:none;resize:none;transition:border-color 0.15s;min-height:46px}
 .test-input:focus{border-color:var(--blue)}
 .test-input::placeholder{color:var(--text3)}
-.test-send{padding:11px 18px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s}
+.test-send{padding:10px 16px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s}
 .test-send:hover{background:#1a4a8a}
 .test-send:disabled{opacity:0.4;cursor:not-allowed}
 
 /* RESULT */
-.result-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;max-width:580px;margin:0 auto;width:100%;text-align:center;overflow-y:auto}
-.result-elo{display:flex;align-items:baseline;gap:8px;justify-content:center;margin-bottom:6px}
-.result-elo-num{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;color:var(--blue);letter-spacing:-3px;line-height:1}
-.result-elo-delta{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--green);letter-spacing:-0.5px}
-.result-elo-label{font-size:12px;color:var(--text3);margin-bottom:6px}
-.result-status{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-1px;margin-bottom:4px;color:var(--text)}
-.result-sub{color:var(--text2);margin-bottom:24px;font-size:13px}
-.result-breakdown{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left}
-.breakdown-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:13px}
-.breakdown-row:last-child{border-bottom:none}
-.breakdown-label{color:var(--text2)}
-.breakdown-val{font-weight:500;color:var(--text)}
+.result-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:28px 20px;max-width:560px;margin:0 auto;width:100%;text-align:center;overflow-y:auto}
+.result-hlevel{display:flex;flex-direction:column;align-items:center;margin-bottom:20px}
+.result-hlevel-row{display:flex;align-items:baseline;gap:8px;justify-content:center}
+.result-hlevel-num{font-family:'Syne',sans-serif;font-size:60px;font-weight:800;color:var(--blue);letter-spacing:-3px;line-height:1;animation:levelUp 0.6s ease}
+@keyframes levelUp{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+.result-hlevel-delta{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--green)}
+.result-hlevel-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.result-status{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.5px;margin-bottom:4px;color:var(--text)}
+.result-sub{color:var(--text2);margin-bottom:20px;font-size:13px}
 
-/* ADAPTIVE COURSE CARD */
-.adaptive-card{width:100%;background:var(--green-light);border:0.5px solid var(--green-mid);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left}
-.adaptive-label{font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;font-weight:500;margin-bottom:10px}
-.adaptive-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
-.adaptive-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px}
-.adaptive-mods{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
-.adaptive-mod{font-size:12px;color:var(--text);padding:6px 10px;background:var(--bg2);border-radius:var(--radius-sm);border:0.5px solid var(--border)}
+.share-card{width:100%;background:linear-gradient(135deg,var(--blue) 0%,#1a4a8a 100%);border-radius:var(--radius);padding:16px;margin-bottom:14px;text-align:left;color:white}
+.share-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.share-logo{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;opacity:0.6}
+.share-score{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1}
+.share-info{font-size:12px;opacity:0.75;margin-bottom:2px}
+.share-status-text{font-size:14px;font-weight:500}
+.share-btn{width:100%;padding:8px;background:rgba(255,255,255,0.15);border:0.5px solid rgba(255,255,255,0.3);color:white;border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;margin-top:10px;transition:all 0.15s}
+.share-btn:hover{background:rgba(255,255,255,0.25)}
 
-/* AHA SUMMARY */
-.aha-summary{width:100%;background:var(--amber-light);border:0.5px solid var(--amber-mid);border-radius:var(--radius);padding:14px;margin-bottom:16px;text-align:left}
-.aha-summary-label{font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.aha-result{width:100%;background:var(--amber-light);border:0.5px solid var(--amber-mid);border-radius:var(--radius);padding:14px;margin-bottom:12px;text-align:left}
+.aha-result-label{font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.aha-result-item{font-size:12px;color:var(--text);padding:5px 0;border-bottom:0.5px solid var(--amber-mid);line-height:1.5}
+.aha-result-item:last-child{border-bottom:none}
 
-.result-actions{display:flex;gap:8px;width:100%;flex-wrap:wrap}
-.result-btn{flex:1;min-width:120px;padding:12px;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.15s}
-.result-btn.primary{background:var(--blue);color:white;border:none}
-.result-btn.primary:hover{background:#1a4a8a}
-.result-btn.secondary{background:transparent;border:0.5px solid var(--border2);color:var(--text2)}
-.result-btn.secondary:hover{border-color:var(--text2);color:var(--text)}
-.result-btn.green{background:var(--green);color:white;border:none}
-.result-btn.green:hover{background:#3d5229}
+.adaptive-card{width:100%;background:var(--green-light);border:0.5px solid var(--green-mid);border-radius:var(--radius);padding:14px;margin-bottom:12px;text-align:left}
+.adaptive-label{font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.adaptive-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.adaptive-desc{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5}
+.adaptive-mod{font-size:12px;color:var(--text);padding:5px 9px;background:var(--bg2);border-radius:var(--radius-sm);border:0.5px solid var(--border);margin-bottom:4px}
 
-/* SHARE CARD */
-.share-card{width:100%;background:var(--blue);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:left;color:white}
-.share-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.share-logo{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;opacity:0.7}
-.share-score{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px}
-.share-topic{font-size:12px;opacity:0.7;margin-bottom:4px}
-.share-status{font-size:14px;font-weight:500}
-.share-btn{width:100%;padding:8px;background:rgba(255,255,255,0.2);border:0.5px solid rgba(255,255,255,0.3);color:white;border-radius:var(--radius-sm);font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;margin-top:10px;transition:all 0.15s}
-.share-btn:hover{background:rgba(255,255,255,0.3)}
+.result-breakdown{width:100%;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:14px;text-align:left}
+.br-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+.br-row:last-child{border-bottom:none}
+.br-label{color:var(--text2)}
+.br-val{font-weight:500;color:var(--text)}
 
-@media(max-width:640px){
-  .header{padding:12px 16px}
+.result-actions{display:flex;gap:7px;width:100%;flex-wrap:wrap}
+.res-btn{flex:1;min-width:100px;padding:11px;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:all 0.15s}
+.res-btn.primary{background:var(--blue);color:white;border:none}
+.res-btn.primary:hover{background:#1a4a8a}
+.res-btn.secondary{background:transparent;border:0.5px solid var(--border2);color:var(--text2)}
+.res-btn.secondary:hover{border-color:var(--text2);color:var(--text)}
+.res-btn.green{background:var(--green);color:white;border:none}
+.res-btn.green:hover{background:#3d5229}
+
+@media(max-width:600px){
+  .header{padding:10px 14px}
   .home-title{font-size:30px}
-  .home-body{padding:28px 16px 24px}
+  .home-body{padding:24px 14px 20px}
   .curriculum-body{flex-direction:column}
-  .sidebar{width:100%;border-right:none;border-bottom:0.5px solid var(--border);max-height:180px}
-  .sidebar-mods{flex-direction:row;overflow-x:auto;padding:8px}
-  .mod-item{min-width:110px;flex-shrink:0;margin-bottom:0;margin-right:4px}
-  .sidebar-section-label{display:none}
-  .lesson-content{padding:16px}
-  .lesson-actions{padding:8px 12px}
+  .sidebar{width:100%;border-right:none;border-bottom:0.5px solid var(--border);max-height:160px}
+  .sidebar-mods{flex-direction:row;overflow-x:auto;padding:6px;gap:4px;display:flex}
+  .mod-item{min-width:100px;flex-shrink:0;margin-bottom:0}
+  .lesson-content{padding:14px}
+  .lesson-actions{padding:6px 10px}
+  .depth-row{display:none}
 }
 </style>
 </head>
@@ -288,44 +356,50 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen active" id="screen-home">
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
-    <span style="font-size:12px;color:var(--text3)">Tu universidad personal</span>
+    <span style="font-size:11px;color:var(--text3)">Tu universidad personal</span>
   </div>
   <div class="home-body">
     <div class="home-eyebrow">powered by H</div>
     <div class="home-title">Aprende cualquier cosa.<br><span>En serio.</span></div>
-    <div class="home-sub">Cuéntale a H qué quieres aprender y desde dónde arrancas.</div>
+    <div class="home-sub">Cuéntale a H qué quieres aprender.</div>
 
-    <div class="elo-badge" id="elo-badge" style="display:none">
-      <div>
-        <div class="elo-label">Score maestro</div>
-        <div class="elo-score" id="home-elo-score">0</div>
+    <div class="hlevel-badge" id="hlevel-badge" style="display:none">
+      <div class="hlevel-info">
+        <div class="hlevel-label">H Level</div>
+        <div class="hlevel-num" id="home-hlevel">0</div>
       </div>
-      <div class="elo-divider"></div>
-      <div class="elo-history">
-        <div class="elo-history-label">Cursos completados</div>
-        <div class="elo-history-pills" id="elo-history-pills"></div>
+      <div class="hlevel-divider"></div>
+      <div class="hlevel-history">
+        <div class="hlevel-history-label">Cursos tomados</div>
+        <div class="hlevel-pills" id="hlevel-pills"></div>
       </div>
     </div>
 
-    <div class="calib-box">
-      <div class="calib-box-label">Dile a H sobre el tema</div>
-      <div class="calib-field">
-        <div class="calib-field-label"><span class="field-num">1</span>¿Qué quieres aprender?</div>
-        <input class="field-input" id="f-topic" placeholder="Ej: la guerra fría, geopolítica de Medio Oriente, IA generativa..." />
+    <div class="topic-hero">
+      <div class="topic-input-wrap">
+        <input class="topic-input" id="f-topic" placeholder="¿Qué quieres aprender hoy?" />
+        <button class="topic-go" onclick="goCalib()">→</button>
       </div>
-      <div class="calib-field">
-        <div class="calib-field-label"><span class="field-num">2</span>¿Qué tanto sabes del tema?</div>
+    </div>
+
+    <div class="expand-toggle" id="expand-toggle" onclick="toggleExpand()">
+      <span class="expand-toggle-icon">▶</span>
+      <span>Personalizar — nivel, interés y ángulo</span>
+    </div>
+    <div class="expand-fields" id="expand-fields">
+      <div>
+        <div class="field-label"><span class="field-num">2</span>¿Qué tanto sabes?</div>
         <input class="field-input" id="f-nivel" placeholder="Ej: no sé nada, sé lo básico, algo he leído..." />
       </div>
-      <div class="calib-field">
-        <div class="calib-field-label"><span class="field-num">3</span>¿Por qué te interesa y qué ángulo te llama?</div>
+      <div>
+        <div class="field-label"><span class="field-num">3</span>¿Por qué te interesa y qué ángulo te llama?</div>
         <input class="field-input" id="f-angulo" placeholder="Ej: entender las noticias, aplicarlo en inversiones, el lado humano..." />
       </div>
-      <div class="search-toggle" id="search-toggle" onclick="toggleWebSearch()">
-        <div class="toggle-dot"></div>
-        <div class="toggle-label">🔍 Búsqueda web — fuentes verificadas en tiempo real</div>
-      </div>
-      <button class="calib-go" onclick="goGenerate()">Crear mi curso →</button>
+    </div>
+
+    <div class="search-toggle-home" id="search-toggle-home" onclick="toggleWebSearch()">
+      <div class="toggle-switch"></div>
+      <div class="toggle-text">🔍 Web search — fuentes verificadas en tiempo real</div>
     </div>
 
     <div class="mode-grid">
@@ -333,31 +407,85 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
         <span class="mode-icon">⚡</span>
         <div class="mode-name">Flash</div>
         <div class="mode-desc">Lo esencial, rápido.</div>
-        <span class="mode-tag">3 módulos · 5 preg.</span>
+        <span class="mode-tag">3 mód · 5 preg.</span>
       </div>
       <div class="mode-card" onclick="selectMode(this,'profundo')">
         <span class="mode-icon">🔬</span>
         <div class="mode-name">Profundo</div>
-        <div class="mode-desc">Casos, estructura, analogías.</div>
-        <span class="mode-tag">6 módulos · 10 preg.</span>
+        <div class="mode-desc">Casos y estructura.</div>
+        <span class="mode-tag">6 mód · 10 preg.</span>
       </div>
       <div class="mode-card" onclick="selectMode(this,'maestro')">
         <span class="mode-icon">🎓</span>
         <div class="mode-name">Maestro</div>
-        <div class="mode-desc">Dominio infinito. Evoluciona.</div>
-        <span class="mode-tag">∞ módulos · test c/6</span>
+        <div class="mode-desc">Dominio infinito.</div>
+        <span class="mode-tag">∞ mód · test c/6</span>
       </div>
     </div>
 
     <div class="suggested-label">Temas sugeridos</div>
     <div class="pills">
-      <div class="pill" onclick="setSuggest('Geopolítica de Medio Oriente','no sé mucho','entender por qué importa hoy, el ángulo económico y de inversiones')">🌍 Geopolítica de Medio Oriente</div>
-      <div class="pill" onclick="setSuggest('Cómo funciona la inteligencia artificial','algo he leído','impacto en negocios e inversiones, qué es real y qué es hype')">🤖 Cómo funciona la IA</div>
-      <div class="pill" onclick="setSuggest('La guerra fría','sé lo básico','entender las decisiones detrás y cómo explica el mundo de hoy')">🏛️ La guerra fría</div>
-      <div class="pill" onclick="setSuggest('Finanzas corporativas','base contable','análisis de inversiones y family office')">📊 Finanzas corporativas</div>
-      <div class="pill" onclick="setSuggest('Psicología del comportamiento humano','curiosidad general','toma de decisiones y sesgos cognitivos en negocios')">🧠 Psicología del comportamiento</div>
-      <div class="pill" onclick="setSuggest('Criptomonedas y blockchain','escéptico pero curioso','entender si tiene valor real de inversión')">₿ Cripto y blockchain</div>
+      <div class="pill" onclick="setSuggest('Geopolítica de Medio Oriente','no sé mucho','entender por qué importa hoy')">🌍 Geopolítica</div>
+      <div class="pill" onclick="setSuggest('Cómo funciona la inteligencia artificial','algo he leído','impacto en negocios')">🤖 Cómo funciona la IA</div>
+      <div class="pill" onclick="setSuggest('La guerra fría','sé lo básico','entender las decisiones detrás')">🏛️ La guerra fría</div>
+      <div class="pill" onclick="setSuggest('Finanzas corporativas','base contable','análisis de inversiones')">📊 Finanzas</div>
+      <div class="pill" onclick="setSuggest('Psicología del comportamiento','curiosidad','toma de decisiones')">🧠 Psicología</div>
+      <div class="pill" onclick="setSuggest('Vacas','soy un niño de 5 años','me gustan porque hacen muu')">🐄 Vacas</div>
     </div>
+  </div>
+</div>
+
+<!-- CALIBRATION (energy + time) -->
+<div class="screen" id="screen-calib">
+  <div class="header">
+    <div class="logo">Hyper<span>U</span></div>
+    <button class="btn-ghost" onclick="showScreen('home')">← volver</button>
+  </div>
+  <div class="calib-screen-body">
+    <div class="calib-screen-title">Antes de arrancar</div>
+    <div class="calib-screen-sub">H ajusta la sesión según cómo estás hoy</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:12px;align-self:flex-start;width:100%">¿Cómo estás de energía?</div>
+    <div class="energy-grid">
+      <div class="energy-card selected" onclick="selectEnergy(this,'alto')" data-energy="alto">
+        <div class="energy-icon">⚡</div>
+        <div class="energy-name">Fresco</div>
+        <div class="energy-desc">Listo para profundizar</div>
+      </div>
+      <div class="energy-card" onclick="selectEnergy(this,'medio')" data-energy="medio">
+        <div class="energy-icon">☕</div>
+        <div class="energy-name">Normal</div>
+        <div class="energy-desc">Ritmo estándar</div>
+      </div>
+      <div class="energy-card" onclick="selectEnergy(this,'bajo')" data-energy="bajo">
+        <div class="energy-icon">🌙</div>
+        <div class="energy-name">Cansado</div>
+        <div class="energy-desc">Sesión ligera</div>
+      </div>
+      <div class="energy-card" onclick="selectEnergy(this,'movimiento')" data-energy="movimiento">
+        <div class="energy-icon">🚗</div>
+        <div class="energy-name">En movimiento</div>
+        <div class="energy-desc">Prefiero audio</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:10px;align-self:flex-start;width:100%">¿Cuánto tiempo tienes?</div>
+    <div class="time-grid">
+      <div class="time-card selected" onclick="selectTime(this,'15')" data-time="15">
+        <div class="time-icon">⚡</div>
+        <div class="time-name">15 min</div>
+        <div class="time-desc">Flash rápido</div>
+      </div>
+      <div class="time-card" onclick="selectTime(this,'30')" data-time="30">
+        <div class="time-icon">🕐</div>
+        <div class="time-name">30 min</div>
+        <div class="time-desc">Un módulo bueno</div>
+      </div>
+      <div class="time-card" onclick="selectTime(this,'60+')" data-time="60+">
+        <div class="time-icon">🎯</div>
+        <div class="time-name">60+ min</div>
+        <div class="time-desc">Sesión completa</div>
+      </div>
+    </div>
+    <button class="calib-go" style="width:100%;padding:13px;background:var(--blue);color:white;border:none;border-radius:var(--radius-sm);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;" onclick="goGenerate()">Arrancar →</button>
   </div>
 </div>
 
@@ -368,7 +496,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
     <div class="gen-avatar">H</div>
     <div class="gen-msg" id="gen-msg">H está construyendo tu curso...</div>
     <div class="gen-dots"><div class="gen-dot"></div><div class="gen-dot"></div><div class="gen-dot"></div></div>
-    <div class="gen-sub" id="gen-sub">Eligiendo el mejor hilo narrativo para este tema</div>
+    <div class="gen-sub" id="gen-sub">Eligiendo el mejor método para este tema</div>
   </div>
 </div>
 
@@ -377,7 +505,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
     <div class="header-actions">
-      <div id="websearch-indicator" style="display:none;font-size:11px;color:var(--amber);border:0.5px solid var(--amber-mid);padding:4px 10px;border-radius:20px;background:var(--amber-light)">🔍 Web search activo</div>
+      <div class="search-pill" id="search-pill-curr" onclick="toggleWebSearchCurr()">
+        <div class="search-pill-dot"></div>
+        <span>Web search</span>
+      </div>
       <button class="btn-ghost" onclick="showScreen('home')">← Inicio</button>
       <button class="btn-blue" onclick="startTest()">Test →</button>
     </div>
@@ -387,35 +518,36 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
       <div class="sidebar-top">
         <div class="sidebar-course-title" id="sidebar-title">...</div>
         <div class="sidebar-meta" id="sidebar-meta"></div>
-        <div class="progress-wrap">
-          <div class="progress-top"><span>Progreso</span><span id="progress-pct">0%</span></div>
-          <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-        </div>
+        <div class="sidebar-method" id="sidebar-method"></div>
+        <div class="progress-top"><span>Progreso</span><span id="progress-pct">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       </div>
-      <div class="sidebar-mods">
-        <div class="sidebar-section-label">Módulos</div>
-        <div id="module-list"></div>
-      </div>
+      <div class="sidebar-mods" id="module-list"></div>
       <div class="sidebar-bottom">
-        <div class="sidebar-elo">
-          <div><div class="sidebar-elo-label">Score ELO</div><div class="sidebar-elo-num" id="sidebar-elo">0</div></div>
-          <div style="font-size:11px;color:var(--blue);opacity:0.7" id="sidebar-elo-delta"></div>
+        <div class="hlevel-sidebar">
+          <div><div class="hlevel-sidebar-label">H Level</div><div class="hlevel-sidebar-num" id="sidebar-hlevel">0</div></div>
+          <div class="hlevel-sidebar-info"><div class="hlevel-sidebar-delta" id="sidebar-delta"></div></div>
         </div>
-        <button class="test-btn" onclick="startTest()">Ir al test final →</button>
+        <button class="test-btn" onclick="startTest()">Ir al test →</button>
       </div>
     </div>
     <div class="lesson-area">
+      <div class="depth-row">
+        <span class="depth-label">Profundidad:</span>
+        <input type="range" class="depth-slider" id="depth-slider" min="1" max="3" value="2" step="1" onchange="updateDepth(this.value)" />
+        <span class="depth-value" id="depth-value">Normal</span>
+      </div>
       <div class="lesson-content" id="lesson-content"></div>
       <div class="lesson-actions">
-        <button class="next-btn" id="next-btn" onclick="nextModule()">Siguiente módulo →</button>
+        <button class="next-btn" id="next-btn" onclick="nextModule()">Siguiente →</button>
         <div class="cmds">
           <button class="cmd" onclick="sendCmd('más profundo en este concepto')">+ profundo</button>
           <button class="cmd" onclick="sendCmd('dame otro ejemplo concreto')">ejemplo</button>
-          <button class="cmd" onclick="sendCmd('resumen de lo visto hasta ahora en 3 líneas')">resumen</button>
-          <button class="cmd lost" onclick="iAmLost()">🆘 estoy perdido</button>
+          <button class="cmd" onclick="sendCmd('resumen en 3 líneas')">resumen</button>
+          <button class="cmd cmd-lost" onclick="iAmLost()">🆘 perdido</button>
         </div>
       </div>
-      <div class="lesson-input-area">
+      <div class="lesson-input-row">
         <textarea class="lesson-input" id="lesson-input" placeholder="Pregúntale algo a H..." rows="1"></textarea>
         <button class="lesson-send" id="lesson-send" onclick="sendLesson()">→</button>
       </div>
@@ -427,17 +559,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen" id="screen-test">
   <div class="header">
     <div class="logo">Hyper<span>U</span></div>
-    <button class="btn-ghost" onclick="showScreen('curriculum')">← Volver al curso</button>
+    <button class="btn-ghost" onclick="showScreen('curriculum')">← Curso</button>
   </div>
   <div class="test-body">
     <div class="test-header">
-      <div class="test-title">Escalera de conocimiento</div>
-      <div class="test-cycle" id="test-cycle">Ciclo 1</div>
-      <div class="escalera" id="escalera"></div>
+      <div class="test-title-row">
+        <div class="test-title">Escalera de conocimiento</div>
+        <div class="test-cycle-badge" id="test-cycle-badge">Ciclo 1</div>
+      </div>
+      <div class="escalera-wrap"><div class="escalera" id="escalera"></div></div>
       <div class="test-stats">
-        <div class="test-stat">Escalón: <span id="escalon-num">1</span></div>
-        <div class="test-stat">Resueltas: <span id="q-count">0</span></div>
-        <div class="test-stat">ELO actual: <span id="test-elo-display">0</span></div>
+        <div class="test-stat">Escalón: <b id="escalon-num">1</b></div>
+        <div class="test-stat">Resueltas: <b id="q-count">0</b></div>
+        <div class="test-stat">H Level: <b id="test-hlevel">0</b></div>
       </div>
       <div class="fallos-row">
         <div class="fallo-dot" id="fallo-1"></div>
@@ -447,7 +581,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
       </div>
     </div>
     <div class="test-chat" id="test-chat"></div>
-    <div class="test-input-area">
+    <div id="mc-container"></div>
+    <div class="test-input-area" id="test-input-area">
       <textarea class="test-input" id="test-input" placeholder="Tu respuesta..." rows="2"></textarea>
       <button class="test-send" id="test-send" onclick="sendTest()">→</button>
     </div>
@@ -458,48 +593,50 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Instru
 <div class="screen" id="screen-result">
   <div class="header"><div class="logo">Hyper<span>U</span></div></div>
   <div class="result-body">
-    <div class="result-elo">
-      <div class="result-elo-num" id="result-elo">0</div>
-      <div class="result-elo-delta" id="result-delta">+0</div>
+    <div class="result-hlevel">
+      <div class="result-hlevel-row">
+        <div class="result-hlevel-num" id="result-hlevel">0</div>
+        <div class="result-hlevel-delta" id="result-delta">+0</div>
+      </div>
+      <div class="result-hlevel-label">H Level</div>
     </div>
-    <div class="result-elo-label">Score ELO acumulado</div>
     <div class="result-status" id="result-status">EXPLORADOR</div>
     <div class="result-sub" id="result-sub">Base construida. Sigue subiendo.</div>
 
     <div class="share-card">
-      <div class="share-card-top">
+      <div class="share-top">
         <div class="share-logo">HyperU</div>
         <div class="share-score" id="share-score">0</div>
       </div>
-      <div class="share-topic" id="share-topic">—</div>
-      <div class="share-status" id="share-status">—</div>
-      <button class="share-btn" onclick="shareScore()">Compartir mi score</button>
+      <div class="share-info" id="share-topic">—</div>
+      <div class="share-status-text" id="share-status">—</div>
+      <button class="share-btn" onclick="shareScore()">📤 Compartir mi H Level</button>
     </div>
 
-    <div class="aha-summary" id="aha-summary" style="display:none">
-      <div class="aha-summary-label">💡 Tus momentos aha</div>
-      <div id="aha-summary-content"></div>
+    <div class="aha-result" id="aha-result" style="display:none">
+      <div class="aha-result-label">💡 Tus momentos aha</div>
+      <div id="aha-result-content"></div>
     </div>
 
     <div class="adaptive-card" id="adaptive-card" style="display:none">
-      <div class="adaptive-label">Curso adaptivo recomendado</div>
+      <div class="adaptive-label">🎯 Curso adaptivo recomendado</div>
       <div class="adaptive-title" id="adaptive-title">—</div>
       <div class="adaptive-desc" id="adaptive-desc">—</div>
-      <div class="adaptive-mods" id="adaptive-mods"></div>
+      <div id="adaptive-mods"></div>
     </div>
 
     <div class="result-breakdown">
-      <div class="breakdown-row"><span class="breakdown-label">Escalón máximo alcanzado</span><span class="breakdown-val" id="br-escalon">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Ciclo de aprendizaje</span><span class="breakdown-val" id="br-ciclo">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Modo de estudio</span><span class="breakdown-val" id="br-modo">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Racha máxima</span><span class="breakdown-val" id="br-racha">—</span></div>
-      <div class="breakdown-row"><span class="breakdown-label">Momentos aha</span><span class="breakdown-val" id="br-aha">—</span></div>
+      <div class="br-row"><span class="br-label">Escalón máximo</span><span class="br-val" id="br-escalon">—</span></div>
+      <div class="br-row"><span class="br-label">Ciclo</span><span class="br-val" id="br-ciclo">—</span></div>
+      <div class="br-row"><span class="br-label">Modo</span><span class="br-val" id="br-modo">—</span></div>
+      <div class="br-row"><span class="br-label">Racha máxima</span><span class="br-val" id="br-racha">—</span></div>
+      <div class="br-row"><span class="br-label">Momentos aha</span><span class="br-val" id="br-aha">—</span></div>
     </div>
 
     <div class="result-actions">
-      <button class="result-btn secondary" onclick="showScreen('home')">← Nuevo tema</button>
-      <button class="result-btn primary" onclick="showScreen('curriculum')">Seguir estudiando</button>
-      <button class="result-btn green" id="adaptive-btn" style="display:none" onclick="startAdaptiveCourse()">Curso adaptivo →</button>
+      <button class="res-btn secondary" onclick="showScreen('home')">← Nuevo tema</button>
+      <button class="res-btn primary" onclick="showScreen('curriculum')">Seguir estudiando</button>
+      <button class="res-btn green" id="adaptive-btn" style="display:none" onclick="startAdaptiveCourse()">Curso adaptivo →</button>
     </div>
   </div>
 </div>
@@ -511,722 +648,620 @@ const SYSTEM_PROMPT = `Eres H, el tutor de HyperU.
 
 IDENTIDAD: Eres el hermano mayor que todos quisieran tener — el que sabe de todo, te lo explica sin hacerte sentir idiota, y te suelta una verdad incómoda con una sonrisa. Sarcástico, humor negro, odias el relleno. Nunca sermones. Siempre directo. Contador de historias brillante. Lo abstracto no existe — todo tiene aplicación real.
 
-PERFIL DEL ESTUDIANTE: Aprende por storytelling y casos aplicados. Visual — necesita ver el concepto en acción antes de la teoría. ADHD — se aburre rápido, máximo 3 ideas por bloque. Necesita el gancho primero. Humor y sarcasmo bienvenidos. Tono académico lo mata. Contexto natural: negocios, inversiones, familia, Colombia, golf, deportes en general.
+PERFIL DEL ESTUDIANTE: Aprende por storytelling y casos aplicados. Visual. ADHD — máximo 3 ideas por bloque. Necesita el gancho primero. Humor y sarcasmo bienvenidos. Contexto: negocios, inversiones, deportes en general, Colombia.
 
 REGLAS ABSOLUTAS:
-1. NUNCA empieces con una definición. Siempre con el gancho.
-2. Máximo 3 bloques de contenido por respuesta.
-3. Usa **negritas** para conceptos clave. Usa *cursivas* para analogías.
+1. NUNCA empieces con definición. Siempre con el gancho.
+2. Máximo 3 bloques por respuesta.
+3. **negritas** para conceptos clave. *cursivas* para analogías.
 4. Responde siempre en español.
-5. Si el estudiante se pierde, busca un ángulo completamente diferente. Nunca repitas lo mismo más despacio.
+5. Si el estudiante se pierde, ángulo completamente diferente.
 
-MODELO DE APRENDIZAJE — MÉTODO HBS:
-Cada módulo se construye alrededor de UN solo caso. El caso se revela en capas — no de golpe. Al final, el concepto y el caso son inseparables en la memoria.
+TRES MÉTODOS DE ENSEÑANZA — H elige el correcto según el tema:
 
-SELECCIÓN DEL CASO:
-- Prioridad 1: Caso real documentado y verificable
-- Prioridad 2: Caso ficticio bien fundamentado — siempre declarado explícitamente
-- Los casos entre módulos tienen hilo narrativo: mismo mundo, misma época, o misma cadena de causas
+MÉTODO HBS (para temas complejos, estratégicos, históricos, de negocios):
+Un caso real por módulo. Se revela en capas. Hilo narrativo entre módulos.
+Estructura: 📍BRIEF → 🪝GANCHO → 📚CONCEPTO → 💡ANALOGÍA → 🔗HILO → 📎FUENTES → →CIERRE
 
-FORMATO DE MÓDULO — ESTRUCTURA EXACTA:
+MÉTODO EL CUENTO (para curiosidad pura, principiantes, niños, temas simples):
+Un personaje protagonista. El conocimiento emerge como solución a su problema. Lenguaje simple. Final memorable.
+Estructura: 🌱PERSONAJE Y SU MUNDO → ❓EL PROBLEMA → 🔍EL DESCUBRIMIENTO → 💥MOMENTO AHA → 🔄LA CONEXIÓN
 
-📍 BRIEF DEL CASO (3 líneas máx):
-- El concepto que viene
-- Por qué importa
-- El caso que lo ilustrará
+MÉTODO EL DOCUMENTAL (para temas científicos, filosóficos, sociales — cuando el estudiante quiere formar criterio):
+H nunca da la respuesta directamente. Hace preguntas que guían al estudiante a construir la conclusión.
+Estructura: 🎬PREGUNTA IMPOSIBLE → 🔭EVIDENCIA 1 → 🔭EVIDENCIA 2 → 🤔PREGUNTA SOCRÁTICA → 💡CONSTRUCCIÓN → 🌍IMPLICACIÓN
 
-🪝 GANCHO: La historia arranca en el momento más tenso. No desde el principio — desde el punto de máxima tensión. Máximo 3 líneas.
+SELECCIÓN DEL MÉTODO:
+- Tema de negocios/estrategia/historia compleja/inversiones → HBS siempre
+- Curiosidad pura/niños/principiante absoluto/tema simple → EL CUENTO
+- Filosófico/científico/social/"quiero entender por qué" → EL DOCUMENTAL
+- Nivel declarado "soy un niño" o similar → EL CUENTO independiente del tema
 
-📚 EL CONCEPTO: El caso se desarrolla y el concepto emerge de él naturalmente. Máximo 4 líneas.
+H SIEMPRE declara el método al inicio: "Para este tema voy a usar [MÉTODO] porque [razón en una línea]."
 
-💡 LA ANALOGÍA: Conecta con negocios, inversiones, familia, Colombia, golf o deportes en general. Una sola. Poderosa.
+FUENTES (en todos los métodos):
+- Caso real: "Documentado en [tipo de fuente]"
+- Dato: "Según [institución]"  
+- Ficción: "Caso ficticio basado en dinámicas documentadas de [área]"
+- NUNCA inventar referencias específicas.
 
-🔗 CONEXIÓN AL HILO: Una línea que conecta este caso con el módulo anterior y abre la puerta al siguiente.
+AJUSTE POR ENERGÍA Y TIEMPO:
+- Energía alta + 60min: profundidad máxima, casos complejos
+- Energía normal + 30min: ritmo estándar
+- Energía baja + 15min: lo esencial, casos simples, más humor
+- En movimiento: narración más fluida, menos estructura visual, apto para audio`;
 
-📎 FUENTES: Declara el origen:
-- "Documentado en [tipo de fuente: biografía, reporte oficial, paper académico]"
-- "Dato de [institución: FMI, Harvard Business Review, etc.]"
-- Si es ficción: "Caso ficticio basado en dinámicas documentadas de [industria/período]"
-- NUNCA inventes referencias específicas.
+const TEST_SYSTEM = `Eres H administrando el test de HyperU sobre: "{TOPIC}". Ciclo {CICLO}.
 
-→ CIERRE: Una línea de resumen + pregunta que abre curiosidad hacia el siguiente módulo.`;
+ESCALERA INFINITA — las preguntas suben de complejidad sin techo:
+- Escalones 1-4: SELECCIÓN MÚLTIPLE — presenta exactamente 4 opciones marcadas A) B) C) D). Una sola correcta.
+- Escalones 5+: RESPUESTA ABIERTA — reflexión, análisis, síntesis. El estudiante escribe libremente.
 
-const TEST_SYSTEM = `Eres H, administrando el test de HyperU sobre: "{TOPIC}". Ciclo {CICLO}.
-
-ESCALERA INFINITA:
-- Escalones 1-3: Comprensión básica
-- Escalones 4-6: Aplicación en casos reales
-- Escalones 7-9: Análisis y conexión entre ideas
-- Escalones 10-12: Síntesis — enseñar o criticar
-- Escalones 13+: Dominio experto — cada nivel más profundo que el anterior. No hay techo.
-
-En el ciclo {CICLO}, las preguntas deben ser más profundas que en ciclos anteriores.
-Escalón base de este ciclo: {BASE_ESCALON} (las preguntas arrancan desde este nivel de dificultad).
+FLASHBACKS: Cada 3 preguntas aproximadamente, inserta una pregunta de un módulo anterior del curso para medir retención. Márcala claramente con "📼 FLASHBACK —" al inicio.
 
 REGLAS:
-- Cada pregunta es un caso real, NUNCA pregunta académica
-- Evalúa con exactamente una de estas palabras: CORRECTO, PARCIAL, INCORRECTO
-- Feedback máx 2 líneas con tu estilo sarcástico
+- Preguntas como casos reales, NUNCA académicas
+- Para selección múltiple: incluye exactamente A) B) C) D) en líneas separadas
+- Evalúa con exactamente: CORRECTO, PARCIAL, o INCORRECTO en la primera línea
+- Feedback máx 2 líneas con tu estilo
+- Si INCORRECTO o PARCIAL: añade "GAP: [concepto en 5 palabras]"
 - Responde en español
+- Ciclo {CICLO}: preguntas más profundas que ciclos anteriores
 
-Estado: Escalón {ESCALON}, Fallos consecutivos: {FALLOS}
-Genera la pregunta del escalón {ESCALON}. Inicia con "Escalón {ESCALON} 🎯"`;
+Estado: Escalón {ESCALON}, Fallos: {FALLOS}
+Genera pregunta del escalón {ESCALON}. Si es 1-4, incluye opciones A B C D.`;
 
-const ADAPTIVE_SYSTEM = `Eres H. El estudiante acaba de terminar un ciclo de test sobre "{TOPIC}".
+const ADAPTIVE_SYSTEM = `Eres H. El estudiante terminó un ciclo sobre "{TOPIC}".
+Escalón máximo: {ESCALON}. Gaps: {GAPS}. Ciclo: {CICLO}. H Level: {HLEVEL}.
 
-Resultados del test:
-- Escalón máximo alcanzado: {ESCALON}
-- Conceptos donde falló: {GAPS}
-- Ciclo número: {CICLO}
-- Score ELO actual: {ELO}
-
-Genera un curso adaptivo de siguiente nivel. Formato EXACTO:
-
-**[Título del curso adaptivo — que refleje el siguiente nivel]**
-*[Una línea: qué va a dominar ahora que no dominaba antes]*
+Genera curso adaptivo. Formato EXACTO:
+**[Título del curso adaptivo]**
+*[Qué va a dominar ahora]*
 
 GAPS A REFORZAR:
-1. [Módulo para reforzar gap específico] — Caso: [caso sugerido]
-2. [Módulo para reforzar gap específico] — Caso: [caso sugerido]
+1. [Módulo] — Caso: [caso]
+2. [Módulo] — Caso: [caso]
 
 SIGUIENTE NIVEL:
-3. [Módulo que eleva lo que ya domina] — Caso: [caso sugerido]
-4. [Módulo de mayor profundidad] — Caso: [caso sugerido]
-5. [Módulo de síntesis avanzada] — Caso: [caso sugerido]
+3. [Módulo más profundo] — Caso: [caso]
+4. [Módulo avanzado] — Caso: [caso]
+5. [Módulo síntesis] — Caso: [caso]
 
-Al final, una línea motivacional con tu estilo sarcástico sobre lo que viene.`;
+[Una línea motivacional con tu estilo sarcástico]`;
 
 let state = {
-  topic:'', nivel:'', angulo:'', mode:'flash',
-  webSearch: false,
-  modules:[], currentModule:0, completedModules:new Set(),
-  lessonHistory:[], testHistory:[],
-  escalon:1, fallosConsecutivos:0, rachaActual:0, maxRacha:0,
-  preguntasResueltas:0, testTerminado:false,
-  ciclo:1, baseEscalon:1,
-  gaps:[],
-  ahaMarkers:[],
-  eloScore:0, eloDelta:0,
-  adaptiveModules:[], adaptiveTitle:'', adaptiveDesc:'',
-  courseHistory:[]
+  topic:'',nivel:'',angulo:'',mode:'flash',
+  energy:'alto',time:'30',webSearch:false,depth:2,
+  method:'',modules:[],currentModule:0,completedModules:new Set(),
+  lessonHistory:[],testHistory:[],
+  escalon:1,fallosConsecutivos:0,rachaActual:0,maxRacha:0,
+  preguntasResueltas:0,testTerminado:false,
+  ciclo:1,baseEscalon:1,gaps:[],ahaMarkers:[],
+  hlevel:0,hlevelDelta:0,adaptiveModules:[],
+  courseHistory:[],questionsSinceFlashback:0,
+  currentAudio:null
 };
 
-// LOCALSTORAGE
-function saveState() {
-  try {
-    const save = {
-      eloScore: state.eloScore,
-      courseHistory: state.courseHistory,
-      ahaMarkers: state.ahaMarkers
-    };
-    localStorage.setItem('hyperu_state', JSON.stringify(save));
-  } catch(e){}
+function saveState(){
+  try{localStorage.setItem('hyperu_v4',JSON.stringify({hlevel:state.hlevel,courseHistory:state.courseHistory}));}catch(e){}
 }
-
-function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('hyperu_state') || '{}');
-    if(saved.eloScore) state.eloScore = saved.eloScore;
-    if(saved.courseHistory) state.courseHistory = saved.courseHistory;
-    if(saved.ahaMarkers) state.ahaMarkers = saved.ahaMarkers;
-    updateHomeElo();
-  } catch(e){}
+function loadState(){
+  try{
+    const s=JSON.parse(localStorage.getItem('hyperu_v4')||'{}');
+    if(s.hlevel)state.hlevel=s.hlevel;
+    if(s.courseHistory)state.courseHistory=s.courseHistory;
+    updateHomeHLevel();
+  }catch(e){}
 }
-
-function updateHomeElo() {
-  if(state.eloScore > 0) {
-    document.getElementById('elo-badge').style.display = 'flex';
-    document.getElementById('home-elo-score').textContent = state.eloScore;
-    const pills = document.getElementById('elo-history-pills');
-    pills.innerHTML = '';
-    state.courseHistory.slice(-5).forEach(c => {
-      const p = document.createElement('div');
-      p.className = 'elo-pill';
-      p.textContent = c.topic.substring(0,12) + (c.topic.length>12?'...':'');
-      p.title = c.topic + ' — ' + c.score + ' pts';
+function updateHomeHLevel(){
+  if(state.hlevel>0){
+    document.getElementById('hlevel-badge').style.display='flex';
+    document.getElementById('home-hlevel').textContent=state.hlevel;
+    const pills=document.getElementById('hlevel-pills');
+    pills.innerHTML='';
+    state.courseHistory.slice(-4).forEach(c=>{
+      const p=document.createElement('div');
+      p.className='hlevel-pill';
+      p.textContent=c.topic.substring(0,14)+(c.topic.length>14?'...':'');
       pills.appendChild(p);
     });
   }
 }
 
-const genMessages = [
-  ['H está calibrando tu nivel...','Analizando lo que ya sabes'],
-  ['Eligiendo el hilo narrativo...','Conectando los casos del curso'],
-  ['Diseñando el curriculum...','Seleccionando los mejores casos reales'],
-  ['Preparando el módulo 1...','Buscando el gancho perfecto'],
+const genMsgs=[
+  ['H está analizando tu tema...','Eligiendo el mejor método de enseñanza'],
+  ['Construyendo el hilo narrativo...','Conectando los casos del curso'],
+  ['Seleccionando casos reales...','Buscando historias que enganchan'],
+  ['Preparando el módulo 1...','Afinando el gancho perfecto'],
 ];
 let genInterval;
 
-function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-'+name).classList.add('active');
-  window.scrollTo(0,0);
+function showScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+n).classList.add('active');window.scrollTo(0,0);}
+function selectMode(el,m){document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');state.mode=m;}
+function selectEnergy(el,e){document.querySelectorAll('.energy-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');state.energy=e;}
+function selectTime(el,t){document.querySelectorAll('.time-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');state.time=t;}
+function setSuggest(t,n,a){document.getElementById('f-topic').value=t;document.getElementById('f-nivel').value=n;document.getElementById('f-angulo').value=a;}
+function toggleExpand(){const t=document.getElementById('expand-toggle');const f=document.getElementById('expand-fields');t.classList.toggle('open');f.classList.toggle('open');}
+function toggleWebSearch(){state.webSearch=!state.webSearch;document.getElementById('search-toggle-home').classList.toggle('active',state.webSearch);}
+function toggleWebSearchCurr(){state.webSearch=!state.webSearch;document.getElementById('search-pill-curr').classList.toggle('active',state.webSearch);}
+function updateDepth(v){const labels={1:'Superficial',2:'Normal',3:'Profundo'};document.getElementById('depth-value').textContent=labels[v];state.depth=parseInt(v);}
+
+function goCalib(){
+  const t=document.getElementById('f-topic').value.trim();
+  if(!t){alert('Escribe el tema que quieres aprender');return;}
+  state.topic=t;
+  state.nivel=document.getElementById('f-nivel').value.trim()||'no especificado';
+  state.angulo=document.getElementById('f-angulo').value.trim()||'no especificado';
+  showScreen('calib');
 }
 
-function selectMode(el, mode) {
-  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  state.mode = mode;
-}
-
-function setSuggest(topic, nivel, angulo) {
-  document.getElementById('f-topic').value = topic;
-  document.getElementById('f-nivel').value = nivel;
-  document.getElementById('f-angulo').value = angulo;
-}
-
-function toggleWebSearch() {
-  state.webSearch = !state.webSearch;
-  const toggle = document.getElementById('search-toggle');
-  toggle.classList.toggle('active', state.webSearch);
-}
-
-function startGenAnimation() {
-  let i = 0;
-  document.getElementById('gen-msg').textContent = genMessages[0][0];
-  document.getElementById('gen-sub').textContent = genMessages[0][1];
-  genInterval = setInterval(() => {
-    i = (i+1) % genMessages.length;
-    document.getElementById('gen-msg').textContent = genMessages[i][0];
-    document.getElementById('gen-sub').textContent = genMessages[i][1];
-  }, 2500);
-}
-
-function stopGenAnimation() { clearInterval(genInterval); }
-
-async function goGenerate() {
-  const topic = document.getElementById('f-topic').value.trim();
-  if(!topic){alert('Escribe el tema que quieres aprender');return;}
-  state.topic = topic;
-  state.nivel = document.getElementById('f-nivel').value.trim() || 'no especificado';
-  state.angulo = document.getElementById('f-angulo').value.trim() || 'no especificado';
-  state.lessonHistory = [];
-  state.completedModules = new Set();
-  state.currentModule = 0;
-  state.ahaMarkers = [];
-  state.ciclo = 1;
-  state.baseEscalon = 1;
-  state.gaps = [];
-  document.getElementById('lesson-content').innerHTML = '';
-  document.getElementById('websearch-indicator').style.display = state.webSearch ? 'block' : 'none';
+async function goGenerate(){
+  state.lessonHistory=[];state.completedModules=new Set();state.currentModule=0;
+  state.ahaMarkers=[];state.ciclo=1;state.baseEscalon=1;state.gaps=[];
+  state.questionsSinceFlashback=0;
+  document.getElementById('lesson-content').innerHTML='';
+  document.getElementById('search-pill-curr').classList.toggle('active',state.webSearch);
   showScreen('generating');
-  startGenAnimation();
+  let i=0;
+  document.getElementById('gen-msg').textContent=genMsgs[0][0];
+  document.getElementById('gen-sub').textContent=genMsgs[0][1];
+  genInterval=setInterval(()=>{i=(i+1)%genMsgs.length;document.getElementById('gen-msg').textContent=genMsgs[i][0];document.getElementById('gen-sub').textContent=genMsgs[i][1];},2200);
   await generateCurriculum();
 }
 
-async function callClaude(messages, system) {
-  try {
-    const body = { messages, system };
-    if(state.webSearch) body.webSearch = true;
-    const res = await fetch('/api/chat', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    return data.content?.[0]?.text || 'Error al conectar con H.';
-  } catch(e) {
-    return 'Error al conectar con H.';
-  }
+async function callClaude(messages,system){
+  try{
+    const body={messages,system,webSearch:state.webSearch};
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await res.json();
+    return data.content?.[0]?.text||'Error al conectar con H.';
+  }catch(e){return 'Error al conectar con H.';}
 }
 
-async function generateCurriculum(isAdaptive=false, adaptivePrompt='') {
-  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
+async function generateCurriculum(isAdaptive=false,adaptiveP=''){
+  const mN={flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
+  const numMods={flash:3,profundo:6,maestro:6}[state.mode];
+  const depthLabel={1:'superficial — lo esencial únicamente',2:'normal — balance entre amplitud y profundidad',3:'profundo — máximo detalle y complejidad'}[state.depth];
+  const energyCtx={alto:'estudiante con alta energía, puede manejar contenido denso',medio:'energía normal',bajo:'energía baja — sesión ligera, más humor, menos densidad',movimiento:'en movimiento — preferir audio y narrativa fluida'}[state.energy];
+  const timeCtx={15:'solo 15 minutos disponibles — ir directo al punto',30:'30 minutos — un módulo bien desarrollado','+60':'más de 60 minutos — sesión completa'}[state.time]||state.time+' minutos';
 
-  let p;
-  if(isAdaptive && adaptivePrompt) {
-    p = adaptivePrompt;
-  } else {
-    p = `El estudiante quiere aprender sobre: "${state.topic}".
-Nivel actual: ${state.nivel}
+  const p=isAdaptive?adaptiveP:`Vas a crear un curso sobre: "${state.topic}".
+Nivel del estudiante: ${state.nivel}
 Interés y ángulo: ${state.angulo}
 Modo: ${mN[state.mode]} (${numMods} módulos por ciclo)
+Profundidad solicitada: ${depthLabel}
+Estado del estudiante: ${energyCtx}, tiene ${timeCtx}.
 Ciclo: ${state.ciclo}
 
-Primero elige el HILO NARRATIVO del curso — qué mundo, época o cadena de eventos conectará los casos.
+PASO 1: Determina qué MÉTODO usar (HBS, EL CUENTO, o EL DOCUMENTAL) y explica por qué en una línea.
+PASO 2: Elige el hilo narrativo del curso.
+PASO 3: Genera el curriculum.
 
-Luego genera el curriculum. Formato EXACTO:
-**[Título del curso — que dé curiosidad, no descriptivo]**
-*[Una línea: por qué este tema importa HOY]*
+Formato EXACTO:
+MÉTODO: [HBS/EL CUENTO/EL DOCUMENTAL] — [razón en una línea]
+
+**[Título del curso — que dé curiosidad]**
+*[Por qué este tema importa HOY]*
 *[El hilo narrativo del curso]*
 
 Módulos:
-1. [Nombre intrigante] — Caso: [título del caso]
-2. [Nombre intrigante] — Caso: [título del caso]
-[genera exactamente ${numMods} módulos]`;
-  }
+1. [Nombre intrigante] — Caso: [caso]
+2. [Nombre intrigante] — Caso: [caso]
+[exactamente ${numMods} módulos]`;
 
-  const text = await callClaude([{role:'user',content:p}], SYSTEM_PROMPT);
-  stopGenAnimation();
+  const text=await callClaude([{role:'user',content:p}],SYSTEM_PROMPT);
+  clearInterval(genInterval);
   parseCurriculum(text);
-  state.lessonHistory = [{role:'assistant',content:text}];
+  state.lessonHistory=[{role:'assistant',content:text}];
   showScreen('curriculum');
   await loadModule(0);
 }
 
-function parseCurriculum(text) {
-  const lines = text.split('\n').filter(l => l.trim());
-  let mods = [], title = state.topic;
-  lines.forEach(l => {
-    const s = l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
-    if(s.match(/^\d+\./)) {
-      const n = s.replace(/^\d+\.\s*/,'');
-      if(n) mods.push(n);
-    } else if(s.startsWith('#')) {
-      title = s.replace(/^#+\s*/,'');
-    }
+function parseCurriculum(text){
+  const lines=text.split('\n').filter(l=>l.trim());
+  let mods=[],title=state.topic,method='HBS';
+  lines.forEach(l=>{
+    const s=l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
+    if(s.startsWith('MÉTODO:')){const m=s.match(/MÉTODO:\s*(HBS|EL CUENTO|EL DOCUMENTAL)/i);if(m)method=m[1].toUpperCase();}
+    if(s.match(/^\d+\./)){const n=s.replace(/^\d+\.\s*/,'');if(n)mods.push(n);}
+    else if(s.startsWith('#')){title=s.replace(/^#+\s*/,'');}
   });
-  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
-  if(!mods.length) { for(let i=1;i<=numMods;i++) mods.push('Módulo '+i); }
-  state.modules = mods;
-  const ml = {flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro ∞'};
-  document.getElementById('sidebar-title').textContent = title;
-  document.getElementById('sidebar-meta').textContent = ml[state.mode] + (state.ciclo>1?' · Ciclo '+state.ciclo:'') + ' · '+mods.length+' módulos';
-  renderModuleList();
-  updateProgress();
-  updateSidebarElo();
+  const numMods={flash:3,profundo:6,maestro:6}[state.mode];
+  if(!mods.length){for(let i=1;i<=numMods;i++)mods.push('Módulo '+i);}
+  state.modules=mods;
+  state.method=method;
+  const ml={flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro ∞'};
+  const methodLabels={'HBS':'📋 Método HBS','EL CUENTO':'📖 El Cuento','EL DOCUMENTAL':'🎬 El Documental'};
+  const methodClasses={'HBS':'method-hbs','EL CUENTO':'method-cuento','EL DOCUMENTAL':'method-documental'};
+  document.getElementById('sidebar-title').textContent=title;
+  document.getElementById('sidebar-meta').textContent=ml[state.mode]+(state.ciclo>1?' · Ciclo '+state.ciclo:'')+' · '+mods.length+' mód';
+  const methodEl=document.getElementById('sidebar-method');
+  methodEl.textContent=methodLabels[method]||method;
+  methodEl.className='sidebar-method '+(methodClasses[method]||'method-hbs');
+  renderModuleList();updateProgress();updateSidebarHLevel();
 }
 
-function renderModuleList() {
-  const list = document.getElementById('module-list');
-  list.innerHTML = '';
-  state.modules.forEach((m,i) => {
-    const d = document.createElement('div');
-    const isActive = i === state.currentModule;
-    const isCompleted = state.completedModules.has(i);
-    d.className = 'mod-item' + (isActive?' active':'') + (isCompleted?' completed':'');
-    d.onclick = () => loadModule(i);
-    d.innerHTML = `<span class="mod-num">${String(i+1).padStart(2,'0')}</span><span class="mod-name">${m}</span><div class="mod-check"></div>`;
+function renderModuleList(){
+  const list=document.getElementById('module-list');list.innerHTML='';
+  state.modules.forEach((m,i)=>{
+    const d=document.createElement('div');
+    d.className='mod-item'+(i===state.currentModule?' active':'')+(state.completedModules.has(i)?' completed':'');
+    d.onclick=()=>loadModule(i);
+    d.innerHTML=`<span class="mod-num">${String(i+1).padStart(2,'0')}</span><span class="mod-name">${m}</span><div class="mod-check"></div>`;
     list.appendChild(d);
   });
 }
+function updateProgress(){const pct=state.modules.length?Math.round((state.completedModules.size/state.modules.length)*100):0;document.getElementById('progress-fill').style.width=pct+'%';document.getElementById('progress-pct').textContent=pct+'%';}
+function updateSidebarHLevel(){document.getElementById('sidebar-hlevel').textContent=state.hlevel;document.getElementById('sidebar-delta').textContent=state.hlevelDelta>0?'+'+state.hlevelDelta:'';}
 
-function updateProgress() {
-  const pct = state.modules.length ? Math.round((state.completedModules.size/state.modules.length)*100) : 0;
-  document.getElementById('progress-fill').style.width = pct+'%';
-  document.getElementById('progress-pct').textContent = pct+'%';
-}
-
-function updateSidebarElo() {
-  document.getElementById('sidebar-elo').textContent = state.eloScore;
-  const delta = document.getElementById('sidebar-elo-delta');
-  delta.textContent = state.eloDelta > 0 ? '+'+state.eloDelta : '';
-}
-
-async function loadModule(idx) {
-  if(state.modules.length > 0 && idx !== state.currentModule) {
-    state.completedModules.add(state.currentModule);
+function parseModuleIntoSections(text){
+  const sections={};
+  const patterns=[
+    {key:'brief',markers:['📍']},
+    {key:'gancho',markers:['🪝']},
+    {key:'concepto',markers:['📚']},
+    {key:'analogia',markers:['💡']},
+    {key:'hilo',markers:['🔗']},
+    {key:'fuentes',markers:['📎']},
+    {key:'cierre',markers:['→']},
+    {key:'personaje',markers:['🌱']},
+    {key:'problema',markers:['❓']},
+    {key:'descubrimiento',markers:['🔍']},
+    {key:'ahamoment',markers:['💥']},
+    {key:'conexion',markers:['🔄']},
+    {key:'pregunta',markers:['🎬']},
+    {key:'evidencia1',markers:['🔭 EV']},
+    {key:'evidencia2',markers:['🔭']},
+    {key:'socratica',markers:['🤔']},
+    {key:'construccion',markers:['💡 CON']},
+    {key:'implicacion',markers:['🌍']},
+  ];
+  const lines=text.split('\n');
+  let currentKey=null,currentText=[];
+  for(const line of lines){
+    let matched=false;
+    for(const p of patterns){
+      if(p.markers.some(m=>line.trim().startsWith(m))){
+        if(currentKey)sections[currentKey]=(sections[currentKey]||'')+currentText.join('\n').trim()+'\n';
+        currentKey=p.key;currentText=[line.replace(/^[^\s]+\s*/,'').replace(/^(BRIEF|GANCHO|CONCEPTO|ANALOGÍA|ANALOGIA|HILO|FUENTES|CIERRE|PERSONAJE|PROBLEMA|DESCUBRIMIENTO|AHA|CONEXIÓN|CONEXION|PREGUNTA|EVIDENCIA|SOCRÁTICA|SOCRATICA|CONSTRUCCIÓN|CONSTRUCCION|IMPLICACIÓN|IMPLICACION)[:\s]*/i,'')];matched=true;break;
+      }
+    }
+    if(!matched&&currentKey)currentText.push(line);
   }
-  state.currentModule = idx;
-  renderModuleList();
-  updateProgress();
+  if(currentKey)sections[currentKey]=(sections[currentKey]||'')+currentText.join('\n').trim();
+  return sections;
+}
 
-  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const p = `Enseña el módulo ${idx+1}: "${state.modules[idx]}" del curso sobre "${state.topic}" en modo ${mN[state.mode]}.
-Ciclo ${state.ciclo}. Nivel del estudiante: ${state.nivel}. Interés: ${state.angulo}.
-${state.ciclo > 1 ? 'Este es un ciclo avanzado — el estudiante ya tiene base. Ve más profundo.' : ''}
-
-Sigue EXACTAMENTE la estructura:
-📍 BRIEF DEL CASO
-🪝 GANCHO
-📚 EL CONCEPTO
-💡 LA ANALOGÍA
-🔗 CONEXIÓN AL HILO
-📎 FUENTES
-→ CIERRE`;
-
-  const content = document.getElementById('lesson-content');
-  content.innerHTML = '';
-
-  const header = document.createElement('div');
-  header.className = 'mod-header';
-  header.innerHTML = `<div class="mod-header-cycle">${state.ciclo > 1 ? 'Ciclo '+state.ciclo+' · ' : ''}Módulo ${idx+1} de ${state.modules.length}</div><div class="mod-header-title">${state.modules[idx]}</div>`;
+async function loadModule(idx){
+  if(state.modules.length>0&&idx!==state.currentModule)state.completedModules.add(state.currentModule);
+  state.currentModule=idx;renderModuleList();updateProgress();
+  const depthLabel={1:'superficial — lo esencial',2:'normal',3:'profundo — máximo detalle'}[state.depth];
+  const energyCtx={alto:'alta energía',medio:'energía normal',bajo:'energía baja — ligero y con humor',movimiento:'en movimiento — narrativa fluida para audio'}[state.energy];
+  const p=`Enseña el módulo ${idx+1}: "${state.modules[idx]}" sobre "${state.topic}".
+Método: ${state.method}. Ciclo ${state.ciclo}. Profundidad: ${depthLabel}. Estado: ${energyCtx}.
+${state.ciclo>1?'Ciclo avanzado — más profundo que el ciclo anterior.':''}
+Sigue EXACTAMENTE la estructura del método ${state.method}.`;
+  const content=document.getElementById('lesson-content');content.innerHTML='';
+  const header=document.createElement('div');
+  header.className='mod-header';
+  header.innerHTML=`<div class="mod-header-meta">${state.ciclo>1?'Ciclo '+state.ciclo+' · ':''}Módulo ${idx+1} de ${state.modules.length}</div><div class="mod-header-title">${state.modules[idx]}</div>`;
   content.appendChild(header);
-
   addTyping('lesson-content');
-  const text = await callClaude([...state.lessonHistory,{role:'user',content:p}], SYSTEM_PROMPT);
+  const text=await callClaude([...state.lessonHistory,{role:'user',content:p}],SYSTEM_PROMPT);
   removeTyping('lesson-content');
   state.lessonHistory.push({role:'user',content:p},{role:'assistant',content:text});
-  addMessage('lesson-content','h',text,true);
-
-  const nextBtn = document.getElementById('next-btn');
-  const isLast = idx >= state.modules.length-1;
-  if(isLast) {
-    nextBtn.textContent = 'Ir al test →';
-    nextBtn.className = 'next-btn test';
-    nextBtn.onclick = startTest;
-  } else {
-    nextBtn.textContent = 'Siguiente módulo →';
-    nextBtn.className = 'next-btn';
-    nextBtn.onclick = nextModule;
-  }
+  addStructuredMessage(text);
+  const nextBtn=document.getElementById('next-btn');
+  if(idx>=state.modules.length-1){nextBtn.textContent='Ir al test →';nextBtn.className='next-btn test-ready';nextBtn.onclick=startTest;}
+  else{nextBtn.textContent='Siguiente →';nextBtn.className='next-btn';nextBtn.onclick=nextModule;}
 }
 
-function nextModule() {
-  if(state.currentModule < state.modules.length-1) loadModule(state.currentModule+1);
+function addStructuredMessage(text){
+  const content=document.getElementById('lesson-content');
+  const sections=parseModuleIntoSections(text);
+  const msgId='msg-'+Date.now();
+  const wrapper=document.createElement('div');
+  wrapper.className='h-row';
+  const avatar=document.createElement('div');
+  avatar.className='h-avatar-sm';avatar.textContent='H';
+  const msgWrap=document.createElement('div');
+  msgWrap.className='msg-wrap';
+  const sectionDefs=[
+    {key:'brief',label:'Brief del caso',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'gancho',label:'🪝 Gancho',cls:'section-gancho',labelCls:'section-gancho-label'},
+    {key:'concepto',label:'📚 El concepto',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'analogia',label:'💡 La analogía',cls:'section-analogia',labelCls:'section-analogia-label'},
+    {key:'hilo',label:'🔗 Hilo',cls:'section-hilo',labelCls:'section-hilo-label'},
+    {key:'fuentes',label:'📎 Fuentes',cls:'section-fuentes',labelCls:'section-fuentes-label'},
+    {key:'cierre',label:'→ Cierre',cls:'section-cierre',labelCls:''},
+    {key:'personaje',label:'🌱 Personaje',cls:'section-gancho',labelCls:'section-gancho-label'},
+    {key:'problema',label:'❓ El problema',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'descubrimiento',label:'🔍 El descubrimiento',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'ahamoment',label:'💥 Momento aha',cls:'section-analogia',labelCls:'section-analogia-label'},
+    {key:'conexion',label:'🔄 La conexión',cls:'section-hilo',labelCls:'section-hilo-label'},
+    {key:'pregunta',label:'🎬 La pregunta',cls:'section-gancho',labelCls:'section-gancho-label'},
+    {key:'evidencia1',label:'🔭 Evidencia',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'evidencia2',label:'🔭 Evidencia 2',cls:'section-concepto',labelCls:'section-concepto-label'},
+    {key:'socratica',label:'🤔 Tu turno',cls:'section-analogia',labelCls:'section-analogia-label'},
+    {key:'construccion',label:'💡 La construcción',cls:'section-hilo',labelCls:'section-hilo-label'},
+    {key:'implicacion',label:'🌍 La implicación',cls:'section-hilo',labelCls:'section-hilo-label'},
+  ];
+  let hasSection=false;
+  sectionDefs.forEach(def=>{
+    if(sections[def.key]&&sections[def.key].trim()){
+      hasSection=true;
+      const div=document.createElement('div');
+      div.className=def.cls;
+      if(def.labelCls){const lbl=document.createElement('div');lbl.className=def.labelCls;lbl.textContent=def.label;div.appendChild(lbl);}
+      const p=document.createElement('div');p.className='section-text';p.innerHTML=fmt(sections[def.key]);div.appendChild(p);
+      msgWrap.appendChild(div);
+    }
+  });
+  if(!hasSection){const bubble=document.createElement('div');bubble.className='msg-bubble';bubble.innerHTML='<p>'+fmt(text)+'</p>';msgWrap.appendChild(bubble);}
+  const actions=document.createElement('div');actions.className='msg-actions';
+  const ahaBtn=document.createElement('button');ahaBtn.className='aha-btn';ahaBtn.textContent='💡 aha';
+  ahaBtn.onclick=()=>markAha(text,ahaBtn);
+  const audioBtn=document.createElement('button');audioBtn.className='audio-btn';audioBtn.textContent='🔊 escuchar';
+  audioBtn.onclick=()=>speakText(text,audioBtn);
+  actions.appendChild(ahaBtn);actions.appendChild(audioBtn);
+  msgWrap.appendChild(actions);
+  wrapper.appendChild(avatar);wrapper.appendChild(msgWrap);
+  content.appendChild(wrapper);content.scrollTop=content.scrollHeight;
 }
 
-function addTyping(cId) {
-  const c = document.getElementById(cId);
-  const d = document.createElement('div');
-  d.className = 'typing-row'; d.id = 'typing-'+cId;
-  d.innerHTML = `<div class="h-avatar-sm">H</div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
+function speakText(text,btn){
+  if(state.currentAudio){window.speechSynthesis.cancel();if(btn.classList.contains('playing')){btn.textContent='🔊 escuchar';btn.classList.remove('playing');state.currentAudio=null;return;}}
+  const clean=text.replace(/[🪝📚💡🔗📎→🌱❓🔍💥🔄🎬🔭🤔🌍📍]/g,'').replace(/\*\*/g,'').replace(/\*/g,'');
+  const utterance=new SpeechSynthesisUtterance(clean);
+  utterance.lang='es-ES';utterance.rate=0.95;
+  utterance.onend=()=>{btn.textContent='🔊 escuchar';btn.classList.remove('playing');state.currentAudio=null;};
+  btn.textContent='⏹ detener';btn.classList.add('playing');
+  state.currentAudio=utterance;window.speechSynthesis.speak(utterance);
 }
 
-function removeTyping(cId) { const t=document.getElementById('typing-'+cId); if(t)t.remove(); }
-
-function fmt(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,'<em>$1</em>')
-    .replace(/\n\n/g,'</p><p style="margin-top:10px">')
-    .replace(/\n/g,'<br>');
-}
-
-let msgCounter = 0;
-function addMessage(cId, role, text, showAha=false) {
-  const c = document.getElementById(cId);
-  const d = document.createElement('div');
-  const mid = 'msg-'+(++msgCounter);
-  if(role==='h') {
-    d.className = 'h-row';
-    const ahaBtn = showAha ? `<button class="aha-btn" id="aha-${mid}" onclick="markAha('${mid}',this)">💡 aha</button>` : '';
-    d.innerHTML = `<div class="h-avatar-sm">H</div><div class="msg-bubble" id="${mid}">${ahaBtn}<p>${fmt(text)}</p></div>`;
-  } else {
-    d.className = 'user-row';
-    d.innerHTML = `<div class="user-bubble">${fmt(text)}</div>`;
-  }
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
-}
-
-function markAha(mid, btn) {
+function markAha(text,btn){
   btn.classList.toggle('marked');
-  if(btn.classList.contains('marked')) {
-    const bubble = document.getElementById(mid);
-    const text = bubble.innerText.replace('💡 aha','').trim().substring(0,120);
-    state.ahaMarkers.push({module: state.modules[state.currentModule], text});
-    btn.textContent = '💡 marcado';
-    saveState();
-  } else {
-    state.ahaMarkers = state.ahaMarkers.filter(a => !a.text.startsWith(document.getElementById(mid).innerText.substring(0,30)));
-    btn.textContent = '💡 aha';
+  if(btn.classList.contains('marked')){
+    state.ahaMarkers.push({module:state.modules[state.currentModule],text:text.substring(0,100)});
+    btn.textContent='💡 marcado';
+  }else{
+    state.ahaMarkers.pop();btn.textContent='💡 aha';
   }
 }
 
-async function sendLesson() {
-  const inp = document.getElementById('lesson-input');
-  const msg = inp.value.trim(); if(!msg)return;
-  inp.value = '';
-  document.getElementById('lesson-send').disabled = true;
-  addMessage('lesson-content','u',msg);
-  state.lessonHistory.push({role:'user',content:msg});
+let msgCounter=0;
+function addMessage(cId,role,text){
+  const c=document.getElementById(cId);if(!c)return;
+  const d=document.createElement('div');
+  if(role==='h'){d.className='h-row';d.innerHTML=`<div class="h-avatar-sm">H</div><div class="msg-bubble"><p>${fmt(text)}</p></div>`;}
+  else{d.className='user-row';d.innerHTML=`<div class="user-bubble">${fmt(text)}</div>`;}
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+
+function addTyping(cId){const c=document.getElementById(cId);if(!c)return;const d=document.createElement('div');d.className='typing-row';d.id='typing-'+cId;d.innerHTML=`<div class="h-avatar-sm">H</div><div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function removeTyping(cId){const t=document.getElementById('typing-'+cId);if(t)t.remove();}
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p style="margin-top:8px">').replace(/\n/g,'<br>');}
+
+function nextModule(){if(state.currentModule<state.modules.length-1)loadModule(state.currentModule+1);}
+
+async function sendLesson(){
+  const inp=document.getElementById('lesson-input');const msg=inp.value.trim();if(!msg)return;
+  inp.value='';document.getElementById('lesson-send').disabled=true;
+  addMessage('lesson-content','u',msg);state.lessonHistory.push({role:'user',content:msg});
   addTyping('lesson-content');
-  const text = await callClaude(state.lessonHistory, SYSTEM_PROMPT);
-  removeTyping('lesson-content');
-  state.lessonHistory.push({role:'assistant',content:text});
-  addMessage('lesson-content','h',text,true);
-  document.getElementById('lesson-send').disabled = false;
+  const text=await callClaude(state.lessonHistory,SYSTEM_PROMPT);
+  removeTyping('lesson-content');state.lessonHistory.push({role:'assistant',content:text});
+  addStructuredMessage(text);document.getElementById('lesson-send').disabled=false;
 }
-
-function sendCmd(c) { document.getElementById('lesson-input').value=c; sendLesson(); }
-
-async function iAmLost() {
-  const msg = 'ESTOY PERDIDO. Empieza de cero con un ángulo completamente diferente. Si usaste historia, usa números. Si usaste números, usa una metáfora visual. Si usaste metáfora, usa un caso de la vida cotidiana. No menciones la explicación anterior.';
-  document.getElementById('lesson-input').value = msg;
-  await sendLesson();
-}
+function sendCmd(c){document.getElementById('lesson-input').value=c;sendLesson();}
+async function iAmLost(){document.getElementById('lesson-input').value='ESTOY PERDIDO. Usa un ángulo completamente diferente. Si usaste historia usa números. Si usaste números usa metáfora visual. Si usaste metáfora usa caso cotidiano. Empieza de cero.';await sendLesson();}
 
 // TEST
-function buildEscalera() {
-  const d = document.getElementById('escalera');
-  d.innerHTML = '';
-  const maxVisible = state.escalon + 6;
-  for(let i=1;i<=maxVisible;i++) {
-    const e = document.createElement('div');
-    e.className = 'escalon'; e.id = 'esc-'+i;
-    const h = Math.min(8+i*4, 60);
-    e.style.cssText = `width:16px;height:${h}px`;
-    if(i > 12) e.classList.add('beyond');
-    d.appendChild(e);
+function buildEscalera(){
+  const d=document.getElementById('escalera');d.innerHTML='';
+  const max=Math.max(state.escalon+8,14);
+  for(let i=1;i<=max;i++){const e=document.createElement('div');e.className='escalon';e.id='esc-'+i;const h=Math.min(6+i*4,64);e.style.cssText=`width:14px;height:${h}px`;d.appendChild(e);}
+}
+function updateEscalera(){
+  const max=Math.max(state.escalon+8,14);
+  for(let i=1;i<=max;i++){
+    let e=document.getElementById('esc-'+i);
+    if(!e){e=document.createElement('div');e.className='escalon';e.id='esc-'+i;const h=Math.min(6+i*4,64);e.style.cssText=`width:14px;height:${h}px`;document.getElementById('escalera').appendChild(e);}
+    e.className='escalon';
+    if(i<state.escalon)e.classList.add('done');
+    else if(i===state.escalon)e.classList.add('current');
   }
+  document.getElementById('escalon-num').textContent=state.escalon;
+  document.getElementById('q-count').textContent=state.preguntasResueltas;
+  document.getElementById('test-hlevel').textContent=state.hlevel;
+  for(let i=1;i<=3;i++)document.getElementById('fallo-'+i).classList.toggle('active',i<=state.fallosConsecutivos);
 }
 
-function updateEscalera() {
-  const maxVisible = state.escalon + 6;
-  for(let i=1;i<=maxVisible;i++) {
-    let e = document.getElementById('esc-'+i);
-    if(!e) {
-      e = document.createElement('div');
-      e.className = 'escalon'; e.id = 'esc-'+i;
-      const h = Math.min(8+i*4, 60);
-      e.style.cssText = `width:16px;height:${h}px`;
-      if(i > 12) e.classList.add('beyond');
-      document.getElementById('escalera').appendChild(e);
-    }
-    e.classList.remove('done','current');
-    if(i < state.escalon) e.classList.add('done');
-    else if(i === state.escalon) e.classList.add('current');
-  }
-  document.getElementById('escalon-num').textContent = state.escalon;
-  document.getElementById('q-count').textContent = state.preguntasResueltas;
-  document.getElementById('test-elo-display').textContent = state.eloScore;
-  for(let i=1;i<=3;i++) document.getElementById('fallo-'+i).classList.toggle('active',i<=state.fallosConsecutivos);
-}
+let currentMCOptions=[];
+let isMultipleChoice=false;
 
-async function startTest() {
-  state.escalon = state.baseEscalon;
-  state.fallosConsecutivos = 0; state.rachaActual = 0; state.maxRacha = 0;
-  state.preguntasResueltas = 0; state.testTerminado = false; state.testHistory = [];
-  state.gaps = [];
-  document.getElementById('test-chat').innerHTML = '';
-  document.getElementById('test-cycle').textContent = 'Ciclo ' + state.ciclo;
-  showScreen('test'); buildEscalera(); updateEscalera();
+async function startTest(){
+  state.escalon=state.baseEscalon;state.fallosConsecutivos=0;state.rachaActual=0;state.maxRacha=0;
+  state.preguntasResueltas=0;state.testTerminado=false;state.testHistory=[];state.gaps=[];
+  state.questionsSinceFlashback=0;
+  document.getElementById('test-chat').innerHTML='';
+  document.getElementById('mc-container').innerHTML='';
+  document.getElementById('test-cycle-badge').textContent='Ciclo '+state.ciclo;
+  showScreen('test');buildEscalera();updateEscalera();
   await askTestQuestion();
 }
 
-async function askTestQuestion() {
-  const sys = TEST_SYSTEM
-    .replace(/{TOPIC}/g, state.topic)
-    .replace(/{CICLO}/g, state.ciclo)
-    .replace(/{BASE_ESCALON}/g, state.baseEscalon)
-    .replace(/{ESCALON}/g, state.escalon)
-    .replace('{FALLOS}', state.fallosConsecutivos);
+function showTestInput(show){document.getElementById('test-input-area').style.display=show?'flex':'none';}
+
+async function askTestQuestion(){
+  isMultipleChoice=state.escalon<=4;
+  document.getElementById('mc-container').innerHTML='';
+  showTestInput(!isMultipleChoice);
+  const sys=TEST_SYSTEM.replace(/{TOPIC}/g,state.topic).replace(/{CICLO}/g,state.ciclo).replace(/{ESCALON}/g,state.escalon).replace('{FALLOS}',state.fallosConsecutivos);
   addTyping('test-chat');
-  const msgs = state.testHistory.length ? state.testHistory : [{role:'user',content:'Inicia el test del ciclo '+state.ciclo}];
-  const text = await callClaude(msgs, sys);
+  const msgs=state.testHistory.length?state.testHistory:[{role:'user',content:'Inicia el test ciclo '+state.ciclo}];
+  const text=await callClaude(msgs,sys);
   removeTyping('test-chat');
   state.testHistory.push({role:'assistant',content:text});
-  addMessage('test-chat','h',text);
-}
-
-async function sendTest() {
-  if(state.testTerminado) return;
-  const inp = document.getElementById('test-input');
-  const ans = inp.value.trim(); if(!ans)return;
-  inp.value = ''; document.getElementById('test-send').disabled = true;
-  addMessage('test-chat','u',ans);
-  state.testHistory.push({role:'user',content:ans});
-  state.preguntasResueltas++;
-
-  const sys = TEST_SYSTEM
-    .replace(/{TOPIC}/g, state.topic)
-    .replace(/{CICLO}/g, state.ciclo)
-    .replace(/{BASE_ESCALON}/g, state.baseEscalon)
-    .replace(/{ESCALON}/g, state.escalon)
-    .replace('{FALLOS}', state.fallosConsecutivos);
-
-  const evalP = `El estudiante respondió: "${ans}". Evalúa para escalón ${state.escalon} del ciclo ${state.ciclo} sobre "${state.topic}". 
-Responde con exactamente una de estas palabras en la primera línea: CORRECTO, PARCIAL, o INCORRECTO.
-Luego feedback en máx 2 líneas con tu estilo.
-Si INCORRECTO o PARCIAL, añade al final: GAP: [concepto específico que falló en 5 palabras máx]`;
-
-  addTyping('test-chat');
-  const text = await callClaude([...state.testHistory, {role:'user',content:evalP}], sys);
-  removeTyping('test-chat');
-  state.testHistory.push({role:'assistant',content:text});
-  addMessage('test-chat','h',text);
-
-  const up = text.toUpperCase();
-  const ok = up.startsWith('CORRECTO') || up.includes('\nCORRECTO');
-  const parcial = up.startsWith('PARCIAL') || up.includes('\nPARCIAL');
-
-  // Extract gap
-  const gapMatch = text.match(/GAP:\s*(.+)/i);
-  if(gapMatch && !ok) state.gaps.push(gapMatch[1].trim());
-
-  if(ok && !parcial) {
-    state.fallosConsecutivos = 0;
-    state.rachaActual++;
-    if(state.rachaActual > state.maxRacha) state.maxRacha = state.rachaActual;
-    state.escalon++;
-  } else {
-    state.fallosConsecutivos++;
-    state.rachaActual = 0;
-    if(state.fallosConsecutivos >= 3) {
-      await finishTest();
-      document.getElementById('test-send').disabled = false;
-      return;
-    }
+  const isFlashback=text.includes('📼 FLASHBACK');
+  if(isFlashback){
+    const badge=document.createElement('div');badge.className='flashback-badge';badge.textContent='📼 Flashback — probando retención';
+    document.getElementById('test-chat').appendChild(badge);
   }
-
-  updateEscalera();
-  document.getElementById('test-send').disabled = false;
-  if(!state.testTerminado) setTimeout(() => askTestQuestion(), 500);
-}
-
-async function finishTest() {
-  state.testTerminado = true;
-  updateEscalera();
-
-  // Calculate ELO delta
-  const mb = {flash:0,profundo:15,maestro:30}[state.mode];
-  const escalonReached = state.escalon - 1;
-  const cycleMult = state.ciclo;
-  const delta = Math.round((escalonReached * 8 + mb + state.maxRacha * 3) * (1 + (cycleMult-1)*0.2));
-  state.eloDelta = delta;
-  state.eloScore += delta;
-
-  // Update base for next cycle (maestro)
-  if(state.mode === 'maestro') {
-    state.baseEscalon = Math.max(1, escalonReached - 2);
+  addMessage('test-chat','h',text);
+  if(isMultipleChoice){
+    const opts=parseMultipleChoice(text);
+    if(opts.length>=2)renderMCOptions(opts);
+    else showTestInput(true);
   }
-
-  const sts = [
-    [160,'ARQUITECTO','Puedes construir sobre este conocimiento.'],
-    [130,'ESTRATEGA','Dominas el tema. Puedes debatirlo.'],
-    [110,'OPERADOR','Lo aplicas con seguridad.'],
-    [90,'ANALISTA','Entiendes lo esencial.'],
-    [0,'EXPLORADOR','Base construida. Sigue subiendo.']
-  ];
-  const eloForStatus = Math.min(state.eloScore, 200);
-  const [,st,sub] = sts.find(([n]) => eloForStatus >= n) || sts[sts.length-1];
-
-  // Save to history
-  state.courseHistory.push({topic: state.topic, score: state.eloScore, ciclo: state.ciclo});
-  saveState();
-
-  // Generate adaptive course
-  const gapsText = state.gaps.length ? state.gaps.join(', ') : 'ninguno identificado';
-  const adaptivePromptText = ADAPTIVE_SYSTEM
-    .replace('{TOPIC}', state.topic)
-    .replace('{ESCALON}', escalonReached)
-    .replace('{GAPS}', gapsText)
-    .replace('{CICLO}', state.ciclo)
-    .replace('{ELO}', state.eloScore);
-
-  const adaptiveText = await callClaude([{role:'user',content:'Genera el curso adaptivo'}], adaptivePromptText);
-  parseAdaptive(adaptiveText);
-
-  const ml = {flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro'};
-  setTimeout(() => {
-    document.getElementById('result-elo').textContent = state.eloScore;
-    document.getElementById('result-delta').textContent = '+'+delta;
-    document.getElementById('result-status').textContent = st;
-    document.getElementById('result-sub').textContent = sub;
-    document.getElementById('share-score').textContent = state.eloScore;
-    document.getElementById('share-topic').textContent = state.topic;
-    document.getElementById('share-status').textContent = st + ' · Ciclo '+state.ciclo;
-    document.getElementById('br-escalon').textContent = escalonReached + (escalonReached>12?' 🔥':'') + ' / ∞';
-    document.getElementById('br-ciclo').textContent = 'Ciclo ' + state.ciclo;
-    document.getElementById('br-modo').textContent = ml[state.mode];
-    document.getElementById('br-racha').textContent = state.maxRacha + ' correctas seguidas';
-    document.getElementById('br-aha').textContent = state.ahaMarkers.length + ' momentos marcados';
-    updateSidebarElo();
-    updateHomeElo();
-
-    // AHA summary
-    if(state.ahaMarkers.length > 0) {
-      const ahaDiv = document.getElementById('aha-summary');
-      const ahaContent = document.getElementById('aha-summary-content');
-      ahaDiv.style.display = 'block';
-      ahaContent.innerHTML = state.ahaMarkers.map(a =>
-        `<div class="aha-item"><strong>${a.module}:</strong> ${a.text}</div>`
-      ).join('');
-    }
-
-    showScreen('result');
-  }, 1000);
+  state.questionsSinceFlashback++;
 }
 
-function parseAdaptive(text) {
-  const lines = text.split('\n').filter(l => l.trim());
-  let title = 'Curso Adaptivo', mods = [], desc = '';
-  lines.forEach(l => {
-    const s = l.replace(/\*\*/g,'').replace(/\*/g,'').trim();
-    if(s.match(/^\d+\./)) { const n=s.replace(/^\d+\.\s*/,''); if(n)mods.push(n); }
-    else if(!title || s.startsWith('**')) title = s.replace(/\*\*/g,'');
-    else if(s.startsWith('*') && !desc) desc = s.replace(/\*/g,'');
+function parseMultipleChoice(text){
+  const opts=[];const lines=text.split('\n');
+  for(const line of lines){const m=line.match(/^([A-D])\)\s*(.+)/);if(m)opts.push({letter:m[1],text:m[2].trim()});}
+  return opts;
+}
+
+function renderMCOptions(opts){
+  const c=document.getElementById('mc-container');c.innerHTML='';
+  const div=document.createElement('div');div.className='mc-options';
+  opts.forEach(o=>{
+    const btn=document.createElement('button');btn.className='mc-option';
+    btn.textContent=o.letter+') '+o.text;
+    btn.onclick=()=>handleMCSelect(o.letter,btn,opts,div);
+    div.appendChild(btn);
   });
-  state.adaptiveModules = mods;
-  state.adaptiveTitle = title;
-  state.adaptiveDesc = desc;
+  c.appendChild(div);
+}
 
-  if(mods.length > 0) {
-    document.getElementById('adaptive-card').style.display = 'block';
-    document.getElementById('adaptive-btn').style.display = 'block';
-    document.getElementById('adaptive-title').textContent = title;
-    document.getElementById('adaptive-desc').textContent = desc;
-    const modsDiv = document.getElementById('adaptive-mods');
-    modsDiv.innerHTML = '';
-    mods.slice(0,5).forEach((m,i) => {
-      const d = document.createElement('div');
-      d.className = 'adaptive-mod';
-      d.textContent = (i+1)+'. '+m;
-      modsDiv.appendChild(d);
-    });
+async function handleMCSelect(letter,btn,opts,container){
+  container.querySelectorAll('.mc-option').forEach(b=>b.disabled=true);
+  const sys=TEST_SYSTEM.replace(/{TOPIC}/g,state.topic).replace(/{CICLO}/g,state.ciclo).replace(/{ESCALON}/g,state.escalon).replace('{FALLOS}',state.fallosConsecutivos);
+  const evalP=`El estudiante eligió la opción ${letter} en el escalón ${state.escalon}. Evalúa. Primera línea: CORRECTO, PARCIAL, o INCORRECTO. Feedback máx 2 líneas.`;
+  addTyping('test-chat');
+  const text=await callClaude([...state.testHistory,{role:'user',content:'Elegí '+letter}],sys);
+  removeTyping('test-chat');
+  state.testHistory.push({role:'user',content:'Elegí '+letter},{role:'assistant',content:text});
+  const up=text.toUpperCase();
+  const ok=up.startsWith('CORRECTO')||up.split('\n')[0].includes('CORRECTO');
+  btn.classList.add(ok?'correct':'wrong');
+  addMessage('test-chat','h',text);
+  await processTestResult(text,ok);
+}
+
+async function sendTest(){
+  if(state.testTerminado)return;
+  const inp=document.getElementById('test-input');const ans=inp.value.trim();if(!ans)return;
+  inp.value='';document.getElementById('test-send').disabled=true;
+  addMessage('test-chat','u',ans);state.testHistory.push({role:'user',content:ans});state.preguntasResueltas++;
+  const sys=TEST_SYSTEM.replace(/{TOPIC}/g,state.topic).replace(/{CICLO}/g,state.ciclo).replace(/{ESCALON}/g,state.escalon).replace('{FALLOS}',state.fallosConsecutivos);
+  const evalP=`El estudiante respondió: "${ans}". Escalón ${state.escalon}. Evalúa. Primera línea exacta: CORRECTO, PARCIAL, o INCORRECTO. Feedback máx 2 líneas. Si falla añade: GAP: [concepto 5 palabras]`;
+  addTyping('test-chat');
+  const text=await callClaude([...state.testHistory,{role:'user',content:evalP}],sys);
+  removeTyping('test-chat');state.testHistory.push({role:'assistant',content:text});
+  addMessage('test-chat','h',text);
+  const up=text.toUpperCase();const ok=up.startsWith('CORRECTO')||up.split('\n')[0].includes('CORRECTO');
+  await processTestResult(text,ok);
+  document.getElementById('test-send').disabled=false;
+}
+
+async function processTestResult(text,ok){
+  const up=text.toUpperCase();const parcial=up.includes('PARCIAL');
+  const gapMatch=text.match(/GAP:\s*(.+)/i);if(gapMatch&&!ok)state.gaps.push(gapMatch[1].trim());
+  if(ok&&!parcial){state.fallosConsecutivos=0;state.rachaActual++;if(state.rachaActual>state.maxRacha)state.maxRacha=state.rachaActual;state.escalon++;}
+  else{state.fallosConsecutivos++;state.rachaActual=0;if(state.fallosConsecutivos>=3){await finishTest();return;}}
+  updateEscalera();state.preguntasResueltas++;
+  if(!state.testTerminado)setTimeout(()=>askTestQuestion(),500);
+}
+
+async function finishTest(){
+  state.testTerminado=true;updateEscalera();
+  const mb={flash:0,profundo:15,maestro:30}[state.mode];
+  const esc=state.escalon-1;
+  const delta=Math.round((esc*8+mb+state.maxRacha*3)*(1+(state.ciclo-1)*0.2));
+  state.hlevelDelta=delta;state.hlevel+=delta;
+  if(state.mode==='maestro')state.baseEscalon=Math.max(1,esc-2);
+  const sts=[[160,'ARQUITECTO','Puedes construir sobre este conocimiento.'],[130,'ESTRATEGA','Dominas el tema. Puedes debatirlo.'],[110,'OPERADOR','Lo aplicas con seguridad.'],[90,'ANALISTA','Entiendes lo esencial.'],[0,'EXPLORADOR','Base construida. Sigue subiendo.']];
+  const eloS=Math.min(state.hlevel,200);const [,st,sub]=sts.find(([n])=>eloS>=n)||sts[sts.length-1];
+  state.courseHistory.push({topic:state.topic,score:state.hlevel,ciclo:state.ciclo});saveState();
+  const gapsText=state.gaps.length?state.gaps.join(', '):'ninguno identificado';
+  const adaptiveP=ADAPTIVE_SYSTEM.replace('{TOPIC}',state.topic).replace('{ESCALON}',esc).replace('{GAPS}',gapsText).replace('{CICLO}',state.ciclo).replace('{HLEVEL}',state.hlevel);
+  const adaptiveText=await callClaude([{role:'user',content:'Genera el curso adaptivo'}],adaptiveP);
+  parseAdaptive(adaptiveText);
+  const ml={flash:'⚡ Flash',profundo:'🔬 Profundo',maestro:'🎓 Maestro'};
+  setTimeout(()=>{
+    document.getElementById('result-hlevel').textContent=state.hlevel;
+    document.getElementById('result-delta').textContent='+'+delta;
+    document.getElementById('result-status').textContent=st;
+    document.getElementById('result-sub').textContent=sub;
+    document.getElementById('share-score').textContent=state.hlevel;
+    document.getElementById('share-topic').textContent=state.topic;
+    document.getElementById('share-status').textContent=st+' · Ciclo '+state.ciclo;
+    document.getElementById('br-escalon').textContent=esc+(esc>12?' 🔥':'')+' / ∞';
+    document.getElementById('br-ciclo').textContent='Ciclo '+state.ciclo;
+    document.getElementById('br-modo').textContent=ml[state.mode];
+    document.getElementById('br-racha').textContent=state.maxRacha+' correctas seguidas';
+    document.getElementById('br-aha').textContent=state.ahaMarkers.length+' momentos';
+    updateSidebarHLevel();updateHomeHLevel();
+    if(state.ahaMarkers.length>0){
+      const ar=document.getElementById('aha-result');ar.style.display='block';
+      document.getElementById('aha-result-content').innerHTML=state.ahaMarkers.map(a=>`<div class="aha-result-item"><strong>${a.module}:</strong> ${a.text.substring(0,80)}...</div>`).join('');
+    }
+    showScreen('result');
+  },800);
+}
+
+function parseAdaptive(text){
+  const lines=text.split('\n').filter(l=>l.trim());let title='Curso Adaptivo',mods=[],desc='';
+  lines.forEach(l=>{const s=l.replace(/\*\*/g,'').replace(/\*/g,'').trim();if(s.match(/^\d+\./)){const n=s.replace(/^\d+\.\s*/,'');if(n)mods.push(n);}else if(s.startsWith('**')||(!title.includes(' ')&&s.length>5))title=s;else if(s.startsWith('*')&&!desc)desc=s;});
+  state.adaptiveModules=mods;
+  if(mods.length>0){
+    document.getElementById('adaptive-card').style.display='block';
+    document.getElementById('adaptive-btn').style.display='block';
+    document.getElementById('adaptive-title').textContent=title;
+    document.getElementById('adaptive-desc').textContent=desc;
+    const md=document.getElementById('adaptive-mods');md.innerHTML='';
+    mods.slice(0,5).forEach((m,i)=>{const d=document.createElement('div');d.className='adaptive-mod';d.textContent=(i+1)+'. '+m;md.appendChild(d);});
   }
 }
 
-async function startAdaptiveCourse() {
-  state.ciclo++;
-  state.lessonHistory = [];
-  state.completedModules = new Set();
-  state.currentModule = 0;
-  state.ahaMarkers = [];
-  document.getElementById('lesson-content').innerHTML = '';
+async function startAdaptiveCourse(){
+  state.ciclo++;state.lessonHistory=[];state.completedModules=new Set();state.currentModule=0;state.ahaMarkers=[];
+  document.getElementById('lesson-content').innerHTML='';
   showScreen('generating');
-  startGenAnimation();
+  let i=0;document.getElementById('gen-msg').textContent=genMsgs[0][0];document.getElementById('gen-sub').textContent=genMsgs[0][1];
+  genInterval=setInterval(()=>{i=(i+1)%genMsgs.length;document.getElementById('gen-msg').textContent=genMsgs[i][0];document.getElementById('gen-sub').textContent=genMsgs[i][1];},2200);
+  const numMods={flash:3,profundo:6,maestro:6}[state.mode];
+  const gapsText=state.gaps.length?state.gaps.join(', '):'ninguno';
+  const p=`Genera curriculum adaptivo ciclo ${state.ciclo} sobre "${state.topic}".
+Escalón anterior: ${state.escalon-1}. Gaps: ${gapsText}. H Level: ${state.hlevel}.
+Modo: ${state.mode} (${numMods} módulos). Más profundo que el ciclo anterior.
 
-  const mN = {flash:'Flash',profundo:'Profundo',maestro:'Maestro'};
-  const numMods = {flash:3,profundo:6,maestro:6}[state.mode];
-  const gapsText = state.gaps.length ? state.gaps.join(', ') : 'ninguno';
+MÉTODO: [elige el mejor para este nivel avanzado]
 
-  const p = `Genera el curriculum del curso adaptivo ciclo ${state.ciclo} sobre "${state.topic}".
-Nivel alcanzado en ciclo anterior: escalón ${state.escalon-1}.
-Gaps identificados: ${gapsText}.
-Score ELO: ${state.eloScore}.
-Modo: ${mN[state.mode]} (${numMods} módulos).
-
-Este es un ciclo avanzado. Los casos deben ser más complejos y profundos que el ciclo anterior.
-Refuerza los gaps pero principalmente eleva el nivel general.
-
-Formato EXACTO:
-**[Título del curso adaptivo ciclo ${state.ciclo}]**
-*[Por qué este nivel es diferente al anterior]*
-*[El nuevo hilo narrativo de este ciclo]*
+**[Título ciclo ${state.ciclo}]**
+*[Por qué este nivel es diferente]*
+*[Nuevo hilo narrativo]*
 
 Módulos:
 1. [Nombre] — Caso: [caso]
-2. [Nombre] — Caso: [caso]
-[genera exactamente ${numMods} módulos]`;
-
-  await generateCurriculum(true, p);
+[exactamente ${numMods} módulos]`;
+  await generateCurriculum(true,p);
 }
 
-function shareScore() {
-  const text = `Acabo de alcanzar ${state.eloScore} puntos en HyperU estudiando "${state.topic}" 🎓\nNivel: ${document.getElementById('result-status').textContent}\nCiclo ${state.ciclo} · #HyperU`;
-  if(navigator.share) {
-    navigator.share({title:'Mi score en HyperU', text}).catch(()=>{});
-  } else {
-    navigator.clipboard.writeText(text).then(() => alert('Score copiado al portapapeles'));
-  }
+function shareScore(){
+  const text=`Alcancé H Level ${state.hlevel} en HyperU estudiando "${state.topic}" 🎓\nNivel: ${document.getElementById('result-status').textContent}\nCiclo ${state.ciclo} · #HyperU`;
+  if(navigator.share){navigator.share({title:'Mi H Level en HyperU',text}).catch(()=>{});}
+  else{navigator.clipboard.writeText(text).then(()=>alert('Score copiado al portapapeles')).catch(()=>alert(text));}
 }
 
-// TEST message helper for test screen
-const originalAddMessage = addMessage;
-function addMessage(cId, role, text, showAha=false) {
-  const c = document.getElementById(cId);
-  if(!c) return;
-  const d = document.createElement('div');
-  const mid = 'msg-'+(++msgCounter);
-  if(role==='h') {
-    d.className = 'h-row';
-    const ahaBtn = showAha ? `<button class="aha-btn" id="aha-${mid}" onclick="markAha('${mid}',this)">💡 aha</button>` : '';
-    d.innerHTML = `<div class="h-avatar-sm">H</div><div class="msg-bubble" id="${mid}">${ahaBtn}<p>${fmt(text)}</p></div>`;
-  } else {
-    d.className = 'user-row';
-    d.innerHTML = `<div class="user-bubble">${fmt(text)}</div>`;
-  }
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',()=>{
   loadState();
-  document.getElementById('f-topic').addEventListener('keydown', e => { if(e.key==='Enter') goGenerate(); });
-  document.getElementById('lesson-input').addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendLesson();} });
-  document.getElementById('test-input').addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTest();} });
+  document.getElementById('f-topic').addEventListener('keydown',e=>{if(e.key==='Enter')goCalib();});
+  document.getElementById('lesson-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendLesson();}});
+  document.getElementById('test-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendTest();}});
+  if(state.energy==='movimiento'){document.getElementById('depth-slider').value=1;updateDepth(1);}
 });
 </script>
 </body>
